@@ -13,17 +13,20 @@ Functional Requirements:
 
 
 Non-Functional Requirements:
+
     1.	Authentication using JWT tokens.
     2.	Authorization for accessing saved QR codes and user-specific features.
 
 
 Technology Stack: 
+
     1.  Frontend: Angular.js
     2.  Backend: Python 3.11 with Flask
     3.  Database: MySQL
 
 
-Setup Step
+Setup Step:
+
     1.	git clone ____ (paste git repo https link)
     2.	Install python 3.11
     3.	python -m venv venv
@@ -31,7 +34,8 @@ Setup Step
     5.	git checkout -b ____ (branch name)
 
  
-References
+References:
+
     1.	For Git/GitHub – 
         a.	https://youtu.be/cn8l5bXhTBM?si=5VbjlfbdbAwmSDUO
         b.	https://youtu.be/k5D37W6h56o?si=F57C_thMym5P0Krr
