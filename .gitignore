@@ -3,5 +3,8 @@ venv/
 
 node_modules/
 .vscode/
-.angular/
 package-lock.json
+
+.angular/
+.angular/cache/
+.angular/cache/19.2.1/
