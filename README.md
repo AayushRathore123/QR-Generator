@@ -1,4 +1,5 @@
 Functional Requirements:
+
     1.	Users can register for an account.
     2.	Users can log in and log out securely.
     3.	Users can generate QR codes using: 
