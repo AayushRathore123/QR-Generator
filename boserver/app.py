@@ -1,6 +1,7 @@
-from flask import Flask
+from flask_app import app
 
-app = Flask(__name__)
+
+app.config.from_object("config.Config")
 
 @app.route("/")
 def hello_world():
@@ -8,4 +9,5 @@ def hello_world():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    print("Starting Application")
+    app.run(debug=True, host= app.config["HOST"], port= app.config["PORT"])
