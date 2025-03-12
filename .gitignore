@@ -1,5 +1,12 @@
 .idea/
 venv/
+node_modules/
+.vscode/
+package-lock.json
+
+.angular/
+.angular/cache/
+.angular/cache/19.2.1/
 boserver/config.py
 boserver/__pycache__
 neon_user_pwd_qr_generator_db.txt
