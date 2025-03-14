@@ -14,14 +14,17 @@ export class RegisterComponent {
   submitted = false;
   showpassword = false;
   showconfirmpassword = false;
-
+gender:any =[{id:1,text:'Select Gender'},{id:2,text:"Female"},{id:3,text:"Male"},{id:4,text:"Other"}]
   constructor(private fb: FormBuilder, private router: Router) { }
   // constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private _toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.maxLength(5)]],
-      fullname: ['', [Validators.required, Validators.maxLength(50)]],
+      firstname: ['', [Validators.required, Validators.maxLength(50)]],
+      lastname: ['', [Validators.required, Validators.maxLength(50)]],
+      dob: [''],
+      gender: [''],
       confirmpassword: ['', [Validators.required, Validators.maxLength(50)]],
       password: ['', [Validators.required, Validators.maxLength(50)]]
     });
