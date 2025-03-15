@@ -1,11 +1,13 @@
-from flask import Flask
+from boserver.app_routes import app
 
-app = Flask(__name__)
+app.config.from_object("config.Config")
 
+# Method 1 - To make API Calls
 @app.route("/")
 def hello_world():
-    return "<p>Hello, World!</p>"
+    return "<p>Welcome to QR Generator!</p>"
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    print("Starting Application")
+    app.run(debug=True, host= app.config["HOST"], port= app.config["PORT"])
