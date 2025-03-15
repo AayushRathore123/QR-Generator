@@ -8,7 +8,7 @@
             <div class="col-lg-6">
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <div class="row">
-                        <!-- Username -->
+                    <!-- Username -->
                         <div class="col-md-6 mb-3">
                             <label class="form-label" for="username">Username<span style="color: red;">*</span></label>
                             <span class="text-danger" *ngIf="(submitted) && loginForm.get('username').errors?.required">
@@ -19,37 +19,43 @@
                                 class="form-control border border-dark rounded-3" placeholder="Username"
                                 appDisableCutCopyPaste>
                         </div>
-                        <!-- Firstname -->
+                        <!-- First Name -->
                         <div class="col-md-6 mb-3">
-                            <label class="form-label" for="firstname">Firstname<span style="color: red;">*</span></label>
+                            <label class="form-label" for="firstname">First Name<span style="color: red;">*</span></label>
                             <span class="text-danger" *ngIf="(submitted) && loginForm.get('firstname').errors?.required">
                                 Firstname is required*</span>
                             <span class="text-danger" *ngIf="(submitted) && loginForm.get('firstname').errors?.maxlength">
                                 Maxlength is 50*</span>
                             <input type="text" id="firstname" formControlName="firstname"
-                                class="form-control border border-dark rounded-3" placeholder="Firstname"
+                                class="form-control border border-dark rounded-3" placeholder="First Name"
                                 appDisableCutCopyPaste>
                         </div>
+                        
                     </div>
 
                     <div class="row">
-                        <!-- Lastname -->
+                        <!-- Last Name -->
                         <div class="col-md-6 mb-3">
-                            <label class="form-label" for="lastname">Lastname<span style="color: red;">*</span></label>
+                            <label class="form-label" for="lastname">Last Name<span style="color: red;">*</span></label>
                             <span class="text-danger" *ngIf="(submitted) && loginForm.get('lastname').errors?.required">
                                 Lastname is required*</span>
                             <span class="text-danger" *ngIf="(submitted) && loginForm.get('lastname').errors?.maxlength">
                                 Maxlength is 50*</span>
                             <input type="text" id="lastname" formControlName="lastname"
-                                class="form-control border border-dark rounded-3" placeholder="Lastname"
+                                class="form-control border border-dark rounded-3" placeholder="Last Name"
                                 appDisableCutCopyPaste>
                         </div>
-                        <!-- Gender -->
+                        <!-- Gender Dropdown -->
                         <div class="col-md-6 mb-3">
                             <label class="form-label" for="gender">Gender</label>
-                            <select name="gender" id="gender" class="form-control border border-dark rounded-3">
-                                <option *ngFor="let gen of gender" [value]="gen.text">{{ gen.text }}</option>
-                            </select>
+                            <div class="dropdown-container">
+                                <select name="gender" id="gender" class="form-control border border-dark rounded-3">
+                                    <option *ngFor="let gen of gender" [value]="gen.text">{{ gen.text }}</option>
+                                </select>
+                                <span class="dropdown-icon">
+                                    <i class="fa-solid fa-caret-down"></i>
+                                </span>
+                            </div>
                         </div>
                     </div>
 
@@ -67,41 +73,36 @@
                                 Password is required*</span>
                             <span class="text-danger" *ngIf="(submitted) && loginForm.get('password').errors?.maxlength">
                                 Maxlength is 50*</span>
-                            <div class="input-group">
+                            <div class="input-group position-relative">
                                 <input [type]="showpassword ? 'text' : 'password'" id="password"
                                     formControlName="password" placeholder="Password"
                                     class="form-control border border-dark rounded-3" appDisableCutCopyPaste>
-                                <span class="input-group-text border border-dark"
+                                <span class="input-group-text"
                                     (click)="seepassword(showpassword, 'password')">
                                     <i class="fa-solid fa-eye"></i>
                                 </span>
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
-                        <!-- Confirm Password -->
-                        <div class="col-md-6 mb-3">
+                         <!-- Confirm Password -->
+                         <div class="col-md-6 mb-3">
                             <label class="form-label" for="confirmpassword">Confirm Password<span style="color: red;">*</span></label>
                             <span class="text-danger" *ngIf="(submitted) && loginForm.get('confirmpassword').errors?.required">
                                 Password is required*</span>
                             <span class="text-danger" *ngIf="(submitted) && loginForm.get('confirmpassword').errors?.maxlength">
                                 Maxlength is 50*</span>
-                            <div class="input-group">
+                            <div class="input-group position-relative">
                                 <input [type]="showconfirmpassword ? 'text' : 'password'" id="confirmpassword"
                                     formControlName="confirmpassword" placeholder="Confirm Password"
                                     class="form-control border border-dark rounded-3" appDisableCutCopyPaste>
-                                <span class="input-group-text border border-dark"
+                                <span class="input-group-text"
                                     (click)="seepassword(showconfirmpassword, 'confirmpassword')">
                                     <i class="fa-solid fa-eye"></i>
                                 </span>
                             </div>
                         </div>
                     </div>
-
-                    <!-- <div class="d-flex justify-content-between align-items-center">
-                        <a href="#!" class="text-body">Forgot password?</a>
-                    </div> -->
 
                     <div class="text-center mt-4">
                         <button type="submit" class="btn btn-primary px-4">Register</button>

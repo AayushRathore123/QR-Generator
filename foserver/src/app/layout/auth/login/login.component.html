@@ -1,57 +1,55 @@
 <section class="vh-100 d-flex justify-content-center align-items-center">
-   <div class="container">
-       <div class="row justify-content-center">
-           <div class="col-lg-5">
-               <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-                   class="img-fluid d-block mx-auto" alt="Sample image">
-           </div>
-           <div class="col-lg-6">
-               <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                   <div class="mb-3">
-                       <label class="form-label" for="username">Username<span style="color: red;">*</span></label>
-                       <span class="text-danger" *ngIf="submitted && loginForm.get('username').errors?.required">
-                        Username is required*
-                    </span>
-                    <span class="text-danger" *ngIf="submitted && loginForm.get('username').errors?.maxlength">
-                        Max length is 5*
-                    </span>
-                       <input type="text" id="username" formControlName="username"
-                           class="form-control border border-dark rounded-3" placeholder="Username"
-                           appDisableCutCopyPaste>
-                      
-                   </div>
+    <div class="container">
+        <div class="row justify-content-center align-items-center h-100">
+            <!-- Image Column (Moves Up) -->
+            <div class="col-lg-5 d-flex justify-content-center align-self-start mt-n5">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                    class="img-fluid" alt="Sample image">
+            </div>
 
-                   <div class="mb-3">
-                       <label class="form-label" for="password">Password<span style="color: red;">*</span></label>
-                       <span class="text-danger" *ngIf="submitted && loginForm.get('password').errors?.required">
-                        Password is required*
-                    </span>
-                    <span class="text-danger" *ngIf="submitted && loginForm.get('password').errors?.maxlength">
-                        Max length is 50*
-                    </span>
-                       <div class="input-group">
-                           <input [type]="showpassword ? 'text' : 'password'" id="password"
-                               formControlName="password" placeholder="Password"
-                               class="form-control border border-dark rounded-3" appDisableCutCopyPaste>
-                           <span class="input-group-text border border-dark"
-                               (click)="seepassword(showpassword)">
-                               <i class="fa-solid fa-eye"></i>
-                           </span>
-                       </div>
-                       
-                   </div>
+            <!-- Form Column -->
+            <div class="col-lg-6">
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <div class="mb-3">
+                        <label class="form-label" for="username">Username<span style="color: red;">*</span></label>
+                        <span class="text-danger" *ngIf="submitted && loginForm.get('username').errors?.required">
+                            Username is required*
+                        </span>
+                        <span class="text-danger" *ngIf="submitted && loginForm.get('username').errors?.maxlength">
+                            Max length is 5*
+                        </span>
+                        <input type="text" id="username" formControlName="username"
+                            class="form-control border border-dark rounded-3" placeholder="Username"
+                            appDisableCutCopyPaste>
+                    </div>
 
-                   <!-- <div class="d-flex justify-content-between align-items-center">
-                       <a href="#!" class="text-body">Forgot password?</a>
-                   </div> -->
-                   <div class="text-center mt-4">
-                       <button type="submit" class="btn btn-primary px-4">Login</button>
-                       <p class="small fw-bold mt-2">Don't have an account? 
-                           <a href="/register" class="link-danger">Register</a>
-                       </p>
-                   </div>
-               </form>
-           </div>
-       </div>
-   </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="password">Password<span style="color: red;">*</span></label>
+                        <span class="text-danger" *ngIf="submitted && loginForm.get('password').errors?.required">
+                            Password is required*
+                        </span>
+                        <span class="text-danger" *ngIf="submitted && loginForm.get('password').errors?.maxlength">
+                            Max length is 50*
+                        </span>
+                        <div class="input-group position-relative">
+                            <input [type]="showpassword ? 'text' : 'password'" id="password"
+                                formControlName="password" placeholder="Password"
+                                class="form-control border border-dark rounded-3" appDisableCutCopyPaste>
+                            <span class="input-group-text"
+                                (click)="seepassword(showpassword)">
+                                <i class="fa-solid fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary px-4">Login</button>
+                        <p class="small fw-bold mt-2">Don't have an account?
+                            <a href="/register" class="link-danger">Register</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </section>
