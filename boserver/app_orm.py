@@ -22,11 +22,19 @@ class TableUser(Base):
     create_datetime = Column(DateTime, onupdate=func.now(), default=func.now())
     lastchange_datetime = Column(DateTime, default=func.now())
 
+
+class TableUserDetails(Base):
+    __tablename__ = 'user_details'
+    id = Column(Integer, primary_key=True)
+    create_datetime = Column(DateTime, onupdate=func.now(), default=func.now())
+    lastchange_datetime = Column(DateTime, default=func.now())
+
+
 # Automatically reflects all columns from the database.
 Base.prepare(autoload_with=db_engine)
 
 # Testing DB Connection
 # result = session.query(TableUser).all()
 # print(TableUser.__table__.columns.keys())
-# for r in result:
-#     print(r.password)
+# for res in result:
+#     print(res.password)

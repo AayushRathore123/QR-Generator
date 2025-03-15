@@ -10,3 +10,4 @@ package-lock.json
 boserver/config.py
 boserver/__pycache__
 neon_user_pwd_qr_generator_db.txt
+qr_generator.egg-info/
