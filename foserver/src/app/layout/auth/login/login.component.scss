@@ -26,3 +26,11 @@ input:focus {
   cursor: pointer;
 }
 
+.input-group {
+  position: relative;
+}
+
+.input-group-text {
+  cursor: pointer;
+  z-index: 10;
+}

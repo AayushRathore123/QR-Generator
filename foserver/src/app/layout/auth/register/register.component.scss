@@ -31,13 +31,20 @@ input:focus {
 
 .dropdown-container select {
     appearance: none;
-    padding-right: 40px; /* Space for dropdown icon */
+    padding-right: 40px; 
 }
-
 .dropdown-icon {
     position: absolute;
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
-    pointer-events: none; /* Prevent click on the icon */
+    pointer-events: none;
 }
+.input-group {
+    position: relative;
+  }
+  
+  .input-group-text {
+    cursor: pointer;
+    z-index: 10;
+  }

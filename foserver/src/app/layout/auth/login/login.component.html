@@ -12,13 +12,11 @@
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <div class="mb-3">
                         <label class="form-label" for="username">Username<span style="color: red;">*</span></label>
-                        <span class="text-danger" *ngIf="submitted && loginForm.get('username').errors?.required">
-                            Username is required*
-                        </span>
-                        <span class="text-danger" *ngIf="submitted && loginForm.get('username').errors?.maxlength">
-                            Max length is 5*
-                        </span>
-                        <input type="text" id="username" formControlName="username"
+                        <span class="text-danger" *ngIf="submitted && loginForm.get('username')?.errors?.['required']">
+                            Username is required*</span>
+                        <span class="text-danger" *ngIf="submitted && loginForm.get('username')?.errors?.['pattern']">
+                            Not an email*</span>
+                    <input type="text" id="username" formControlName="username"
                             class="form-control border border-dark rounded-3" placeholder="Username"
                             appDisableCutCopyPaste>
                     </div>
@@ -31,15 +29,17 @@
                         <span class="text-danger" *ngIf="submitted && loginForm.get('password').errors?.maxlength">
                             Max length is 50*
                         </span>
-                        <div class="input-group position-relative">
+                        <div class="input-group">
                             <input [type]="showpassword ? 'text' : 'password'" id="password"
-                                formControlName="password" placeholder="Password"
-                                class="form-control border border-dark rounded-3" appDisableCutCopyPaste>
+                              formControlName="password" placeholder="Password"
+                              class="form-control border border-dark rounded-end"
+                              appDisableCutCopyPaste>
                             <span class="input-group-text"
-                                (click)="seepassword(showpassword)">
-                                <i class="fa-solid fa-eye"></i>
+                              (click)="seepassword(showpassword)"
+                              style="cursor: pointer;">
+                              <i class="fa-solid fa-eye"></i>
                             </span>
-                        </div>
+                          </div>                          
                     </div>
 
                     <div class="text-center mt-4">
