@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DisableCutCopyPasteDirective } from '../../../shared/directives/disablecopypaste/disable-cut-copy-paste.directive';
+import { EncryptDecryptService } from '../../../shared/services/encrypt-decrypt/encrypt-decrypt.service';
+import { AuthService } from '../../../shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,11 +18,11 @@ export class LoginComponent {
   showpassword = false;
 
   // constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private _toastr: ToastrService) { }
-  constructor(private fb: FormBuilder,private router: Router){}
+  constructor(private fb: FormBuilder,private router: Router, private encryptdecryptservice: EncryptDecryptService, private _authService: AuthService){}
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
-      password: ['', [Validators.required, Validators.maxLength(50)]]
+      username:['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      password: ['']
     });
   }
 
@@ -39,8 +41,24 @@ export class LoginComponent {
   onSubmit(): void {
     console.log('loginform', this.loginForm)
     if (this.loginForm.valid) {
-      const username = this.loginForm.get('username').value;
-      const password = this.loginForm.get('password').value;
+      // let jsonData = {
+      //   'user_name': this.loginForm.controls['username'].value.trim().toLowerCase(),
+      //   'password': this.encryptdecryptservice.encrypt(this.loginForm.controls['password'].value)
+      // }
+
+      let jsonData = {
+        "user_name": "test@gmail.com",
+          "password":"test"
+      }
+
+      this._authService.login(jsonData).subscribe(resp=>{
+        if(resp.status=="Success"){
+
+        }
+        else{
+
+        }
+      })
       // this.authService.login(username, password).subscribe(resp => {
       //   if (resp.status == 'Success') {
       //     this._toastr.success(resp.message, 'SUCCESS')

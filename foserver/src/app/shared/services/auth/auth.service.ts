@@ -6,10 +6,14 @@ import { HttpClient } from "@angular/common/http";
   providedIn: "root",
 })
 export class AuthService {
-  url = "";
+  url = "http://localhost:5011/login";
   constructor(private http: HttpClient) {}
 
   register(jsonData: any): Observable<any> {
     return this.http.post<any>(this.url, jsonData).pipe(map((data) => {}));
+  }
+
+  login(jsonData:any): Observable<any>{
+    return this.http.post<any>(this.url,jsonData).pipe(map((data) => {}));
   }
 }
