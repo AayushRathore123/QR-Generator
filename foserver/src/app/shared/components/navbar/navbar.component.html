@@ -8,19 +8,35 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" routerLink="/login">Login</a> 
+                    <a class="nav-link active" routerLink="/login">Login</a>  <!-- ✅ Fix path -->
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" routerLink="/register">Register</a> 
+                    <a class="nav-link active" routerLink="/register">Register</a>  <!-- ✅ Fix path -->
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/layout/home">Home</a>  
+                    <a class="nav-link" routerLink="/layout/home">Home</a>  <!-- ✅ Fix path -->
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/layout/dashboard">Dashboard</a> 
+                    <a class="nav-link" routerLink="/layout/dashboard">Dashboard</a>  <!-- ✅ Fix path -->
                 </li>
             </ul>
+
             <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        About
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li *ngFor="let item of userMap | keyvalue">
+                            <div *ngIf="!restrictAbout.includes(item.key)">
+                                <strong>{{ item.key }}:</strong> {{ item.value }}
+                            </div>
+                        </li>
+
+                    </ul>
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/login" (click)="logout()">Logout</a>
                 </li>
