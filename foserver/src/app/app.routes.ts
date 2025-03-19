@@ -5,7 +5,7 @@ import { RegisterComponent } from './layout/auth/register/register.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'layout', pathMatch: 'full' },
   { path: 'layout', loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule) },
-  { path: 'login', component: LoginComponent },  // ✅ Keep login outside layout
-  { path: 'register', component: RegisterComponent },  // ✅ Keep register outside layout
-  { path: '**', redirectTo: 'layout' } // Redirect unknown routes
+  { path: 'login', component: LoginComponent }, 
+  { path: 'register', component: RegisterComponent }, 
+  { path: '**', redirectTo: 'layout' } 
 ];
