@@ -1,3 +1,6 @@
+from datetime import date, time
+from decimal import Decimal
+
 import sqlalchemy as db
 from sqlalchemy import Column, Integer, DateTime, func
 from sqlalchemy.ext.automap import automap_base
@@ -38,3 +41,23 @@ Base.prepare(autoload_with=db_engine)
 # print(TableUser.__table__.columns.keys())
 # for res in result:
 #     print(res.password)
+
+
+def orm_to_dict(obj):
+    return {col.name: getattr(obj, col.name) for col in obj.__table__.columns}
+
+def orm_to_dict_v2(obj, date_format=None, round_decimal=True):
+    data = {}
+    for col in obj.__table__.columns:
+        value = getattr(obj, col.name)  # Get the column value once to avoid redundant lookups
+
+        if isinstance(value, date):
+            data[col.name] = value.strftime(date_format) if date_format else str(value)
+        elif isinstance(value, time):
+            data[col.name] = str(value)
+        elif isinstance(value, Decimal):
+            data[col.name] = round(float(value)) if round_decimal else float(value)
+        else:
+            data[col.name] = value
+
+    return data

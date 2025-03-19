@@ -30,8 +30,9 @@ Setup Step:
     1. git clone ____ (paste git repo https link)
     2. Install python 3.11
     3. python -m venv venv
-    4. python -r requirements.txt
-    5. git checkout -b ____ (branch name)
+    4. python setup.py develop
+    5. python -r requirements.txt
+    6. git checkout -b ____ (branch name)
 
  
 References:
