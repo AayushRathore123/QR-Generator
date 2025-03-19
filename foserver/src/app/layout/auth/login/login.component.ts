@@ -55,10 +55,12 @@ export class LoginComponent {
       this._authService.login(jsonData).subscribe(resp=>{
         console.log('resp',resp)
         if(resp && resp.errCode===0){
-          this.toastr.success(resp.msg,'Successs')
+          this.toastr.success(resp.msg,'Successs');
+          this._authService.setUser(resp.data_rec);
+          this.router.navigate(['/layout/home']);
         }
         else{
-          this.toastr.error('resp.msg','Error')
+          this.toastr.error(resp.msg,'Error');
         }
       })
       // this.authService.login(username, password).subscribe(resp => {
