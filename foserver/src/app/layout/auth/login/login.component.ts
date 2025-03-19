@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { DisableCutCopyPasteDirective } from '../../../shared/directives/disablecopypaste/disable-cut-copy-paste.directive';
 import { EncryptDecryptService } from '../../../shared/services/encrypt-decrypt/encrypt-decrypt.service';
 import { AuthService } from '../../../shared/services/auth/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent {
   showpassword = false;
 
   // constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private _toastr: ToastrService) { }
-  constructor(private fb: FormBuilder,private router: Router, private encryptdecryptservice: EncryptDecryptService, private _authService: AuthService){}
+  constructor(private fb: FormBuilder,private router: Router, private encryptdecryptservice: EncryptDecryptService, private _authService: AuthService, private toastr : ToastrService){}
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       username:['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
@@ -52,11 +53,12 @@ export class LoginComponent {
       }
 
       this._authService.login(jsonData).subscribe(resp=>{
-        if(resp.status=="Success"){
-
+        console.log('resp',resp)
+        if(resp && resp.errCode===0){
+          this.toastr.success(resp.msg,'Successs')
         }
         else{
-
+          this.toastr.error('resp.msg','Error')
         }
       })
       // this.authService.login(username, password).subscribe(resp => {
