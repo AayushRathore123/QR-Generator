@@ -11,3 +11,40 @@ input:focus {
     outline: none;
     border: none;
 }
+.input-group .form-control {
+    padding-right: 40px; /* Space for the eye icon */
+}
+
+.input-group-text {
+    background: transparent;
+    border: none;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.dropdown-container {
+    position: relative;
+}
+
+.dropdown-container select {
+    appearance: none;
+    padding-right: 40px; 
+}
+.dropdown-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+.input-group {
+    position: relative;
+  }
+  
+  .input-group-text {
+    cursor: pointer;
+    z-index: 10;
+  }

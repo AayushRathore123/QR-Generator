@@ -2,10 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DisableCutCopyPasteDirective } from '../../../shared/directives/disablecopypaste/disable-cut-copy-paste.directive';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule,CommonModule,ReactiveFormsModule],
+  imports: [FormsModule,CommonModule,ReactiveFormsModule,DisableCutCopyPasteDirective],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -18,19 +19,21 @@ export class LoginComponent {
   constructor(private fb: FormBuilder,private router: Router){}
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required, Validators.maxLength(5)]],
+      username: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
       password: ['', [Validators.required, Validators.maxLength(50)]]
     });
   }
 
   seepassword(flag:boolean) {
-    this.showpassword = true;
-    if (flag == true)
-      this.showpassword = false;
-    else
-      setTimeout(() => {
+    if( this.loginForm.controls['password'].value!=""){
+      this.showpassword = true;
+      if (flag == true)
         this.showpassword = false;
-      }, 3000);
+      else
+        setTimeout(() => {
+          this.showpassword = false;
+        }, 3000);
+    }
   }
 
   onSubmit(): void {
