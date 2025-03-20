@@ -37,10 +37,10 @@ class TableUserDetails(Base):
 Base.prepare(autoload_with=db_engine)
 
 # Testing DB Connection
-result = session.query(TableUser).all()
-print(TableUser.__table__.columns.keys())
-for res in result:
-    print(res.password)
+# result = session.query(TableUser).all()
+# print(TableUser.__table__.columns.keys())
+# for res in result:
+#     print(res.password)
 
 
 def orm_to_dict(obj):
