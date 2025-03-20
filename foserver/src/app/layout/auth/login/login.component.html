@@ -12,11 +12,13 @@
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <div class="mb-3">
                         <label class="form-label" for="username">Username<span style="color: red;">*</span></label>
-                        <span class="text-danger" *ngIf="submitted && loginForm.get('username')?.errors?.['required']">
+                        <span class="text-danger"
+                            *ngIf="submitted && loginForm.get('username')?.errors?.['required']">
                             Username is required*</span>
-                        <span class="text-danger" *ngIf="submitted && loginForm.get('username')?.errors?.['pattern']">
+                        <span class="text-danger"
+                            *ngIf="submitted && loginForm.get('username')?.errors?.['pattern']">
                             Not an email*</span>
-                    <input type="text" id="username" formControlName="username"
+                        <input type="text" id="username" formControlName="username"
                             class="form-control border border-dark rounded-3" placeholder="Username"
                             appDisableCutCopyPaste>
                     </div>
