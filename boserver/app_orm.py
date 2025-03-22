@@ -1,11 +1,11 @@
 from datetime import date, time
 from decimal import Decimal
-
-import sqlalchemy as db
 from sqlalchemy import Column, Integer, DateTime, func
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import sessionmaker
 from boserver.flask_app import app
+import sqlalchemy as db
+
 
 app.config.from_object("config.Config")
 Base = automap_base()
@@ -22,6 +22,7 @@ session = Session()
 class TableUser(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
+    status = Column(Integer, default=1)
     create_datetime = Column(DateTime, onupdate=func.now(), default=func.now())
     lastchange_datetime = Column(DateTime, default=func.now())
 
@@ -29,6 +30,7 @@ class TableUser(Base):
 class TableUserDetails(Base):
     __tablename__ = 'user_details'
     id = Column(Integer, primary_key=True)
+    status = Column(Integer, default=1)
     create_datetime = Column(DateTime, onupdate=func.now(), default=func.now())
     lastchange_datetime = Column(DateTime, default=func.now())
 
