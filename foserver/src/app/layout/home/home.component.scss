@@ -1,0 +1,261 @@
+/* Full height setup */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Home container remains unchanged */
+.home-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Form container setup */
+.container-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: all 0.3s ease;
+}
+
+.qr-form-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+    width: 80%;
+    max-width: 800px;
+}
+
+/* Form styling */
+.form-container {
+    width: 100%;
+    max-width: 350px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Input & Select Styling */
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+/* Form grouping */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* Error messages */
+.error {
+    color: red;
+    font-size: 12px;
+    margin-left: 3px;
+}
+
+/* Submit button */
+button {
+    width: 100%;
+    background: #4caf50;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #45a049;
+}
+
+/* QR Code Display */
+.qr-code-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Button container for download & save buttons */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Individual button styling */
+.button-container button {
+    flex: 1;
+    max-width: 150px;
+}
+
+/* Download button */
+button.download-btn {
+    background: #2196f3;
+}
+
+button.download-btn:hover {
+    background: #1976d2;
+}
+
+/* Dropdown styling */
+.dropdown-container {
+    position: relative;
+}
+
+.dropdown-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+select {
+    width: 100%;
+    padding-right: 30px;
+    appearance: none; /* Hide default dropdown arrow */
+}
+
+/* Dropdown icon fix */
+.bi-chevron-down {
+    position: absolute;
+    right: 10px;
+    pointer-events: none;
+    font-size: 18px;
+    color: #666;
+}
+
+.container {
+    width: 400px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: #fff;
+}
+
+h2 {
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-left: 3px;
+}
+
+button {
+    width: 100%;
+}
+
+.dropdown-container {
+    position: relative;
+}
+
+.dropdown-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+select {
+    width: 100%;
+    padding-right: 30px;
+    appearance: none;
+    /* Hide default dropdown arrow */
+}
+
+.bi-chevron-down {
+    position: absolute;
+    right: 10px;
+    pointer-events: none;
+}
+
+.qr-code-container {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.button-container button {
+    flex: 1;
+    max-width: 150px;
+}
+
+.container-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Center in viewport */
+    transition: all 0.3s ease;
+}
+
+.qr-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.form-container {
+    width: 400px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    transition: all 0.3s ease;
+}
+
+
+
+.qr-code-container {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.boxbtn{
+    width: 200px;
+    height: 100px;
+}

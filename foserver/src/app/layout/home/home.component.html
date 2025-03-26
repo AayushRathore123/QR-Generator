@@ -1,1 +1,53 @@
-<p>home works!</p>
+<!-- Show buttons only on the home page -->
+<div class="home-container" *ngIf="!isLinkQr && !isWifiQr">
+    <button class="boxbtn" (click)="onClickWifiQr()">WiFi QR</button>
+    <button class="boxbtn" (click)="onClickLinkQr()">Link QR</button>
+</div>
+
+<div *ngIf="isLinkQr || isWifiQr" class="container-wrapper">
+    <div class="form-container">
+        <form *ngIf="isWifiQr" [formGroup]="wifiForm" (ngSubmit)="generateWifiQR()">
+            <div class="form-group">
+                <label for="ssid">SSID</label>
+                <small *ngIf="wifiForm.controls['ssid'].invalid && wifiForm.controls['ssid'].touched" class="error">SSID is
+                    required</small>
+                <input type="text" id="ssid" class="form-control" formControlName="ssid" placeholder="Enter WiFi Name">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <small *ngIf="wifiForm.controls['password'].invalid && wifiForm.controls['password'].touched"
+                    class="error">Password is required</small>
+                <input type="password" id="password" class="form-control" formControlName="password"
+                    placeholder="Enter Password">
+            </div>
+
+            <div class="form-group">
+                <label for="authType">Authentication Type</label>
+                <select id="authType" class="form-control" formControlName="authType">
+                    <option *ngFor="let auth of authTypes" [value]="auth">{{ auth }}</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary" [disabled]="wifiForm.invalid">Generate QR Code</button>
+        </form>
+        <form *ngIf="isLinkQr" [formGroup]="linkForm" (ngSubmit)="generateLinkQR()">
+            <div class="form-group">
+                <label for="url">URL</label>
+                <small *ngIf="linkForm.controls['url'].invalid && linkForm.controls['url'].touched" class="error">URL is
+                    required</small>
+                <input type="text" id="url" class="form-control" formControlName="url" placeholder="Enter URL">
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="linkForm.invalid">Generate QR Code</button>
+        </form>
+    </div>
+
+    <div *ngIf="linkString" class="qr-code-container">
+        <qrcode #parent [elementType]="'canvas'" [qrdata]="linkString" [width]="256">
+        </qrcode>
+        <div class="button-container">
+            <button (click)="downloadQR(parent)" class="btn btn-success">Download</button>
+            <button (click)="saveQR()" class="btn btn-light">Save</button>
+        </div>
+    </div>
+</div>
