@@ -27,12 +27,9 @@ class AuthHandler:
         if user_rec.password != password:
             return {'errCode': 1, 'msg': 'Incorrect Password'}
 
-        user_details_rec = self.session.query(TableUserDetails).filter(
-            TableUser.id == TableUserDetails.this_user_details2user).first()
-
         user_rec.lastlogin_datetime = datetime.now()
         self.save()
-        return {'errCode': 0, 'msg': 'Successfully Logged In', 'data_rec': orm_to_dict_v2(user_details_rec)}
+        return {'errCode': 0, 'msg': 'Successfully LogIn', 'data_rec': orm_to_dict_v2(user_rec)}
 
     def register(self, payload):
         user_name = payload['user_name']

@@ -1,5 +1,6 @@
 from .flask_app import api, app
-from .app_resource import Login, Register
+from .app_resource import *
 
 api.add_resource(Login, '/login')
 api.add_resource(Register, '/register')
+api.add_resource(Foo, '/foo')
