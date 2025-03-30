@@ -9,6 +9,10 @@ import {
 } from '@angular/forms';
 import { QRCodeComponent } from 'angularx-qrcode';
 import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
+import { AuthService } from '../../shared/services/auth/auth.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { DataService } from '../../shared/services/data/data.service';
 @Component({
   selector: 'app-home',
   imports: [RouterModule, CommonModule, ReactiveFormsModule, QRCodeComponent],
@@ -17,16 +21,17 @@ import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 })
 export class HomeComponent {
   isLinkQr: boolean = false;
-  isWifiQr: boolean = false;
+  isWifiQr: boolean = true;
   qrCodeData: string | null = null;
   wifiForm: FormGroup;
   linkForm: FormGroup;
   authTypes = ['WPA/WPA2', 'WEP', 'None'];
-  wifiString: string | null = null;
-  linkString: string | null = null;
-  qrCodeDownloadLink: SafeUrl | null = null;
+  wifiString: string = '';
+  linkString: string= '';
+  qrCodeDownloadLink: SafeUrl = '';
 
-  constructor(private fb: FormBuilder, private sanitizer: DomSanitizer) {
+  constructor(private fb: FormBuilder, private sanitizer: DomSanitizer, private authService:AuthService, private toastr: ToastrService
+  , private router:Router, private data: DataService) {
     this.linkForm = this.fb.group({
       url: ['', [Validators.required]],
     });
@@ -37,6 +42,13 @@ export class HomeComponent {
       authType: ['WPA/WPA2', Validators.required],
     });
   }
+
+  toggleQrType(event: Event) {
+    const checked = (event.target as HTMLInputElement).checked;
+    this.isLinkQr = checked;
+    this.isWifiQr = !checked;
+    this.resetQrCodes();
+}
 
   onClickLinkQr() {
     this.isLinkQr = true;
@@ -51,9 +63,9 @@ export class HomeComponent {
   }
 
   resetQrCodes() {
-    this.wifiString = null;
-    this.linkString = null;
-    this.qrCodeDownloadLink = null;
+    this.wifiString = '';
+    this.linkString = '';
+    this.qrCodeDownloadLink = '';
   }
 
   generateWifiQR() {
@@ -69,18 +81,9 @@ export class HomeComponent {
     }
   }
 
-  onChangeURL(url: SafeUrl) {
-    if (url && url.toString().startsWith('data:image/png')) {
-      this.qrCodeDownloadLink = this.sanitizer.bypassSecurityTrustUrl(url as string);
-    } else {
-      console.error('Invalid QR Code URL:', url);
-    }
-  }
-
   downloadQR(parent:any) {
     const parentElement = parent.el.nativeElement.querySelector("img").src;
     let blobData = this.convertBase64ToBlob(parentElement);
-    console.log(blobData)
     const blob = new Blob([blobData], { type: "image/png" });
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
@@ -101,6 +104,24 @@ export class HomeComponent {
   }
 
   saveQR(){
-    
+    if(this.authService.isAuthenticatedUser()){
+      let jsonData ={
+        'type': this.isWifiQr? 'WIFI':'LINK',
+        'data': '',
+        'created_at': new Date()
+      }
+      this.data.saveQrCode(jsonData).subscribe(
+        (response) => {
+          this.toastr.success('QR Code saved successfully!', 'Success');
+        },
+        (error) => {
+          this.toastr.error('Failed to save QR Code. Try again!', 'Error');
+        }
+      );
+      this.router.navigate(['/layout/home']);
+    }
+    else{
+      this.toastr.warning('Please log in to save your QR Code!', 'Warning');
+    }
   }
 }
