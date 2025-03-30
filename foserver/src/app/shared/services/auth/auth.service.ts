@@ -34,7 +34,9 @@ export class AuthService {
 
   login(jsonData:any): Observable<any>{
     return this.http.post<any>(this.url,jsonData).pipe(map((data) => {
-      localStorage.setItem('Token', 'this.token');
+      if(data.errCode==0){
+        localStorage.setItem('Token', data.access_token);
+      }
       return data;
     }));
   }
