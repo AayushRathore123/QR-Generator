@@ -55,15 +55,16 @@ export class LoginComponent implements OnInit {
       this.loginForm.markAllAsTouched();
       return;
     }
-    // const jsonData = {
-    //   user_name: this.loginForm.value.username.trim().toLowerCase(),
-    //   password: this.encryptDecryptService.encrypt(this.loginForm.value.password),
-    // };
 
-    let jsonData = {
-      user_name: 'test@gmail.com',
-      password: 'test',
+    const jsonData = {
+      user_name: this.loginForm.value.username.trim().toLowerCase(),
+      password: this.encryptDecryptService.encrypt(this.loginForm.value.password),
     };
+
+    // let jsonData = {
+    //   user_name: 'test@gmail.com',
+    //   password: 'test',
+    // };
 
     this.authService.login(jsonData).subscribe(
       (resp) => {
