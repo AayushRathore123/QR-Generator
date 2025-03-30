@@ -5,40 +5,36 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" routerLink="/login">Login</a>  <!-- ✅ Fix path -->
+                <li *ngIf="!isLoggedIn" class="nav-item">
+                    <a class="nav-link" routerLink="/login">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" routerLink="/register">Register</a>  <!-- ✅ Fix path -->
+                    <a class="nav-link" *ngIf="!isLoggedIn" routerLink="/register">Register</a>  
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/layout/home">Home</a>  <!-- ✅ Fix path -->
+                    <a class="nav-link" routerLink="/layout/home">Home</a>  
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/layout/dashboard">Dashboard</a>  <!-- ✅ Fix path -->
+                <li *ngIf="isLoggedIn" class="nav-item">
+                    <a class="nav-link" routerLink="/layout/dashboard">Dashboard</a> 
                 </li>
             </ul>
 
-            <ul class="navbar-nav mb-2 mb-lg-0">
+            <ul *ngIf="isLoggedIn" class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        About
+                        <i class="fa-solid fa-user"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                        <li *ngFor="let item of userMap | keyvalue">
-                            <div *ngIf="!restrictAbout.includes(item.key)">
-                                <strong>{{ item.key }}:</strong> {{ item.value }}
-                            </div>
-                        </li>
-
+                        <li><span class="dropdown-item"><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</span></li>
+                        <li><span class="dropdown-item"><strong>DOB:</strong> {{ user.dob }}</span></li>
+                        <li><span class="dropdown-item"><strong>Gender:</strong> {{ user.gender }}</span></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" routerLink="/login" (click)="logout()">Logout</a></li>
                     </ul>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/login" (click)="logout()">Logout</a>
                 </li>
             </ul>
         </div>
