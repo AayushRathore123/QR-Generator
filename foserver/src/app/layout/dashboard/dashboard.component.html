@@ -1,1 +1,59 @@
-<p>dashboard works!</p>
+<div class="container mt-4">
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Data</th>
+                    <th>QR Code</th>
+                    <th>Saved On</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of qrcodes">
+                    <td>{{ data.name }}</td>
+                    <td>
+                        {{ data.type | uppercase }}
+                    </td>
+
+                    <td class="url-column" *ngIf="data.type === 'link'">
+                        <strong>URL:</strong><a [href]="data.data.url" class="text-primary">
+                            {{ data.data.url | slice:0:40 }}...
+                        </a>
+                    </td>
+                    <td *ngIf="data.type === 'wifi'">
+                        <strong>SSID:</strong> {{ data.data.ssid }} <br>
+                        <strong>Pass:</strong> {{ data.data.password }} <br>
+                        <strong>Encryption:</strong> {{ data.data.encryption }}
+                    </td>
+                    <td *ngIf="data.type === 'link'">
+                        <!-- <qrcode #parent [elementType]="'canvas'" [qrdata]="data.data?.url" [width]="100"></qrcode> -->
+                    </td>
+                    <td *ngIf="data.type === 'wifi'">
+                        <qrcode #parent [elementType]="'canvas'"
+                            [qrdata]="'WIFI:S:' + data.data.ssid + ';T:' + data.data.encryption + ';P:' + data.data.password + ';;'"
+                            [width]="100">
+                        </qrcode>
+                    </td>
+
+                    <td>{{ data.saved_at | date:'yyyy-MM-dd HH:mm' }}</td>
+
+                    <td>
+                        <button class="btn btn-danger btn-sm mx-1" data-toggle="tooltip" title="Delete">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                        <button class="btn btn-warning btn-sm mx-1" data-toggle="tooltip" title="Edit">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                        <button class="btn btn-primary btn-sm mx-1" data-toggle="tooltip"
+                            title="Download">
+                            <i class="fa-solid fa-download"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

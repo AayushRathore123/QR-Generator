@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -9,25 +10,28 @@ import { AuthService } from '../../services/auth/auth.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
+export class NavbarComponent{
 
-  restrictAbout:string[] = ["id", "create_datetime", "lastchange_datetime", "this_user_details2user", "status"];
-  userMap: Map<string, any> = new Map();
+  isLoggedIn=false;
+  private authSubscription!:Subscription;
 
   constructor(public _auth: AuthService) { }
-  ngOnInit(): void {
-    this._auth.getUser().subscribe(data => {
-      if (data) {
-        this.userMap = new Map(Object.entries(data.data_rec));
-      }
-    })
+  ngOnInit() {
+    this.authSubscription = this._auth.user.subscribe(user => {
+      this.isLoggedIn = !!user;
+    });
+    this.user = this._auth.getStoredUser();
+
   }
 
   user: any;
 
   logout(): void {
-    // this._auth.logout();
-    // this._toastr.success('Logged out successfully', "SUCCESS")
+    this._auth.logout();
+  }
+
+  OnDestroy(){
+    this.authSubscription.unsubscribe();
   }
 
 

@@ -9,14 +9,21 @@ export class AuthService {
   url = "http://localhost:5011/login";
   private userSubject = new BehaviorSubject<any>(null); 
   user = this.userSubject.asObservable();
+
   constructor(private http: HttpClient) {}
 
   setUser(user: any) {
     this.userSubject.next(user); 
+    localStorage.setItem("user", JSON.stringify(user));
   }
 
   getUser(): Observable<any> {
     return this.user; 
+  }
+
+  getStoredUser() {
+    const userData = localStorage.getItem("user");
+    return userData ? JSON.parse(userData) : null;
   }
 
   register(jsonData: any): Observable<any> {
@@ -27,7 +34,25 @@ export class AuthService {
 
   login(jsonData:any): Observable<any>{
     return this.http.post<any>(this.url,jsonData).pipe(map((data) => {
+      if(data.errCode==0){
+        localStorage.setItem('Token', data.access_token);
+      }
       return data;
     }));
+  }
+
+  isAuthenticatedUser():boolean{
+    if(localStorage.getItem("Token")===null){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+
+  logout(){
+    localStorage.removeItem("Token");
+    localStorage.removeItem("user");
+    this.userSubject.next(null);
   }
 }
