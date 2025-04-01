@@ -13,6 +13,7 @@ import { AuthService } from '../../shared/services/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { DataService } from '../../shared/services/data/data.service';
+import { EncryptDecryptService } from '../../shared/services/encrypt-decrypt/encrypt-decrypt.service';
 @Component({
   selector: 'app-home',
   imports: [RouterModule, CommonModule, ReactiveFormsModule, QRCodeComponent],
@@ -31,7 +32,7 @@ export class HomeComponent {
   qrCodeDownloadLink: SafeUrl = '';
 
   constructor(private fb: FormBuilder, private sanitizer: DomSanitizer, private authService:AuthService, private toastr: ToastrService
-  , private router:Router, private data: DataService) {
+  , private router:Router, private data: DataService, private encryptDecrypt:EncryptDecryptService) {
     this.linkForm = this.fb.group({
       url: ['', [Validators.required]],
     });
@@ -105,9 +106,22 @@ export class HomeComponent {
 
   saveQR(){
     if(this.authService.isAuthenticatedUser()){
+      let data;
+      if(this.isWifiQr){
+        data = {
+          'ssid': this.encryptDecrypt.encrypt(this.wifiForm.value.ssid),
+          'password': this.encryptDecrypt.encrypt(this.wifiForm.value.password),
+          'authType':this.encryptDecrypt.encrypt(this.wifiForm.value.authType)
+        }
+      }
+      else{
+        data={
+          'url': this.encryptDecrypt.encrypt(this.linkForm.value.url)
+        }
+      }
       let jsonData ={
         'type': this.isWifiQr? 'WIFI':'LINK',
-        'data': '',
+        'data': JSON.stringify(data),
         'created_at': new Date()
       }
       this.data.saveQrCode(jsonData).subscribe(
