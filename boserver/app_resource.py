@@ -2,6 +2,8 @@ from flask import make_response
 from flask_jwt_extended import create_access_token
 from boserver.resource_decorator import *
 from boserver.service_handler.auth_handler import AuthHandler
+from boserver.service_handler.qr_handler import QrHandler
+
 
 # Method 2 - To make API Calls
 class Foo(Resource):
@@ -40,3 +42,39 @@ class Register(Resource):
         payload = request.get_json()
         obj = AuthHandler()
         return obj.register(payload)
+
+
+class CreateQr(Resource):
+
+    @staticmethod
+    def post():
+        payload = request.get_json()
+        obj = QrHandler()
+        return obj.create_qr(payload)
+
+
+class UpdateQr(Resource):
+
+    @staticmethod
+    def post():
+        payload = request.get_json()
+        obj = QrHandler()
+        return obj.update_qr(payload)
+
+
+class RemoveQr(Resource):
+
+    @staticmethod
+    def post():
+        payload = request.get_json()
+        obj = QrHandler()
+        return obj.remove_qr(payload)
+
+
+class GetAllQr(Resource):
+
+    @staticmethod
+    def post():
+        payload = request.get_json()
+        obj = QrHandler()
+        return obj.get_all_qr(payload)
