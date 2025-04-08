@@ -1,5 +1,3 @@
-from http.client import responses
-
 from boserver.app_orm import *
 from boserver.json_helper import ReturnJSON
 
@@ -26,7 +24,7 @@ class QrHandler:
         return model_obj
 
     def create_qr(self, payload):
-        #Todo - Check if qr already exist or not, user already exist or not... etc
+        #Todo - Check if qr already exist or not
         qr_rec = TableQrCodes(**payload)
         self.session.add(qr_rec)
         self.session.flush()
@@ -37,7 +35,6 @@ class QrHandler:
 
     def update_qr(self, payload):
         qr_id = payload.pop('qr_id')
-        # todo - instead of doing this, create a core class and write this below line in class __init__
         qr_rec = self.session.query(TableQrCodes).filter(TableQrCodes.id == qr_id).first()
         qr_update_rec = self.update(payload, qr_rec)
         save_data = self.save()
@@ -52,7 +49,6 @@ class QrHandler:
         qr_rec = self.session.query(TableQrCodes).filter(TableQrCodes.id == qr_id).first()
         self.update(payload, qr_rec)
         save_data = self.save()
-
         return save_data
 
     def get_all_qr(self, payload):
