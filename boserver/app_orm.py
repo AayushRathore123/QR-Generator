@@ -35,6 +35,14 @@ class TableUserDetails(Base):
     lastchange_datetime = Column(DateTime, default=func.now())
 
 
+class TableQrCodes(Base):
+    __tablename__ = 'qr_codes'
+    id = Column(Integer, primary_key=True)
+    status = Column(Integer, default=1)
+    create_datetime = Column(DateTime, onupdate=func.now(), default=func.now())
+    lastchange_datetime = Column(DateTime, default=func.now())
+
+
 # Automatically reflects all columns from the database.
 Base.prepare(autoload_with=db_engine)
 
