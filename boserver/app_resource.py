@@ -1,8 +1,7 @@
 from flask import make_response
 from flask_jwt_extended import create_access_token
 from boserver.resource_decorator import *
-from boserver.service_handler.auth_handler import AuthHandler
-from boserver.service_handler.qr_handler import QrHandler
+from service_handler.service_handler_imports import *
 
 
 # Method 2 - To make API Calls
