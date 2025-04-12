@@ -1,16 +1,32 @@
 import { Injectable } from '@angular/core';
 import * as CryptoJS from 'crypto-js';
+import { environment } from '../../../../environment/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class EncryptDecryptService {
 
-  constructor() { }
-  key ="hello"
-  encrypt(password:string){
-    return CryptoJS.AES.encrypt(password, this.key).toString();
+  private readonly key = CryptoJS.enc.Utf8.parse(environment.encryptionKey); 
+  private readonly iv = CryptoJS.enc.Utf8.parse(environment.encryptionIv);   
+
+  constructor() {}
+
+  encrypt(text: string): string {
+    const encrypted = CryptoJS.AES.encrypt(text, this.key, {
+      iv: this.iv,
+      mode: CryptoJS.mode.CBC,
+      padding: CryptoJS.pad.Pkcs7,
+    });
+    return encrypted.toString(); 
   }
-  decrypt(passwordToDecrypt:string){
-    return CryptoJS.AES.decrypt(passwordToDecrypt, this.key).toString(CryptoJS.enc.Utf8);
+
+  decrypt(encryptedText: string): string {
+    const decrypted = CryptoJS.AES.decrypt(encryptedText, this.key, {
+      iv: this.iv,
+      mode: CryptoJS.mode.CBC,
+      padding: CryptoJS.pad.Pkcs7,
+    });
+    return decrypted.toString(CryptoJS.enc.Utf8);
   }
 }
