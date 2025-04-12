@@ -77,3 +77,12 @@ class GetAllQr(Resource):
         payload = request.get_json()
         obj = QrHandler()
         return obj.get_all_qr(payload)
+
+
+class CreateShortUrl(Resource):
+
+    @staticmethod
+    def post():
+        payload = request.get_json()
+        obj = UrlHandler()
+        return obj.create_short_url(payload)

@@ -43,6 +43,12 @@ class TableQrCodes(Base):
     lastchange_datetime = Column(DateTime, default=func.now())
 
 
+class TableUrlShortener(Base):
+    __tablename__ = 'url_shortener'
+    id = Column(Integer, primary_key=True)
+    create_datetime = Column(DateTime, default=func.now())
+
+
 # Automatically reflects all columns from the database.
 Base.prepare(autoload_with=db_engine)
 
