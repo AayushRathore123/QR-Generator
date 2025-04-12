@@ -27,7 +27,6 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   showPassword = false;
-  submitted = false;
 
   constructor(
     private fb: FormBuilder,
@@ -49,7 +48,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.submitted = true;
 
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
@@ -59,15 +57,10 @@ export class LoginComponent implements OnInit {
     const jsonData = {
       user_name: this.loginForm.value.username.trim().toLowerCase(),
       password: this.encryptDecryptService.encrypt(this.loginForm.value.password),
-    };
-
-    // let jsonData = {
-    //   user_name: 'test@gmail.com',
-    //   password: 'test',
-    // };
+    }
 
     this.authService.login(jsonData).subscribe(
-      (resp) => {
+      (resp => {
         if (resp && resp.errCode === 0) {
           this.toastr.success(resp.msg, 'Success');
           this.authService.setUser(resp.data_rec);
@@ -75,12 +68,8 @@ export class LoginComponent implements OnInit {
         } else {
           this.toastr.error(resp.msg, 'Error');
         }
-      },
-      (error) => {
-        this.toastr.error('Something went wrong. Please try again.', 'Error');
-      }
+      })
     );
-
-    console.log("hi",this.authService.getStoredUser() );
   }
 }
+
