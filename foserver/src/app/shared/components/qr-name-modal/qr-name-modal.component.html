@@ -1,0 +1,13 @@
+<div class="modal-overlay">
+    <div class="modal-box">
+      <label>QR Name:</label>
+      <input type="text" [(ngModel)]="qrName" placeholder="Enter QR name" class="form-control mb-2">
+      <label>QR Descripton:</label>
+      <input type="text" [(ngModel)]="qrDescription" placeholder="Enter QR name" class="form-control mb-2">
+      <div class="d-flex justify-content-end gap-2">
+        <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
+        <button class="btn btn-primary" (click)="submitNameDesc()">Save</button>
+      </div>
+    </div>
+  </div>
+  

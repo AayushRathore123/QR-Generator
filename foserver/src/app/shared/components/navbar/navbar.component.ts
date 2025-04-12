@@ -13,15 +13,13 @@ import { Subscription } from 'rxjs';
 export class NavbarComponent{
 
   isLoggedIn=false;
-  private authSubscription!:Subscription;
+  private authSub!: Subscription;
 
   constructor(public _auth: AuthService) { }
   ngOnInit() {
-    this.authSubscription = this._auth.user.subscribe(user => {
-      this.isLoggedIn = !!user;
+    this.authSub = this._auth.isLoggedIn$.subscribe(status => {
+      this.isLoggedIn = status;
     });
-    this.user = this._auth.getStoredUser();
-
   }
 
   user: any;
@@ -30,8 +28,8 @@ export class NavbarComponent{
     this._auth.logout();
   }
 
-  OnDestroy(){
-    this.authSubscription.unsubscribe();
+  ngOnDestroy(){
+    this.authSub.unsubscribe();
   }
 
 

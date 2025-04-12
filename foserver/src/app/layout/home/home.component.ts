@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component,ElementRef, ViewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {
   FormBuilder,
@@ -13,9 +13,11 @@ import { AuthService } from '../../shared/services/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { DataService } from '../../shared/services/data/data.service';
+import { EncryptDecryptService } from '../../shared/services/encrypt-decrypt/encrypt-decrypt.service';
+import { QrNameModalComponent } from '../../shared/components/qr-name-modal/qr-name-modal.component';
 @Component({
   selector: 'app-home',
-  imports: [RouterModule, CommonModule, ReactiveFormsModule, QRCodeComponent],
+  imports: [RouterModule, CommonModule, ReactiveFormsModule, QRCodeComponent,QrNameModalComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -29,9 +31,11 @@ export class HomeComponent {
   wifiString: string = '';
   linkString: string= '';
   qrCodeDownloadLink: SafeUrl = '';
+  showNamePrompt = false;
 
+  @ViewChild('qrCanvas') qrCanvas!:ElementRef;
   constructor(private fb: FormBuilder, private sanitizer: DomSanitizer, private authService:AuthService, private toastr: ToastrService
-  , private router:Router, private data: DataService) {
+  , private router:Router, private data: DataService, private encryptDecrypt:EncryptDecryptService) {
     this.linkForm = this.fb.group({
       url: ['', [Validators.required]],
     });
@@ -81,15 +85,17 @@ export class HomeComponent {
     }
   }
 
-  downloadQR(parent:any) {
-    const parentElement = parent.el.nativeElement.querySelector("img").src;
-    let blobData = this.convertBase64ToBlob(parentElement);
-    const blob = new Blob([blobData], { type: "image/png" });
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'Qrcode';
-    link.click();
+  downloadQR(qrCanvas: any) {
+      const canvas: HTMLCanvasElement = qrCanvas.qrcElement.nativeElement.querySelector('canvas');
+      const dataUrl = canvas.toDataURL('image/png');
+      const blobData = this.convertBase64ToBlob(dataUrl);
+      const blob = new Blob([blobData], { type: 'image/png' });
+      const url = window.URL.createObjectURL(blob);
+  
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'QRCode.png';
+      link.click();
   }
 
   private convertBase64ToBlob(Base64Image: any) {
@@ -105,23 +111,48 @@ export class HomeComponent {
 
   saveQR(){
     if(this.authService.isAuthenticatedUser()){
-      let jsonData ={
-        'type': this.isWifiQr? 'WIFI':'LINK',
-        'data': '',
-        'created_at': new Date()
-      }
-      this.data.saveQrCode(jsonData).subscribe(
-        (response) => {
-          this.toastr.success('QR Code saved successfully!', 'Success');
-        },
-        (error) => {
-          this.toastr.error('Failed to save QR Code. Try again!', 'Error');
-        }
-      );
-      this.router.navigate(['/layout/home']);
+      this.showNamePrompt = true;
     }
     else{
       this.toastr.warning('Please log in to save your QR Code!', 'Warning');
     }
+  }
+
+  onNameSubmit(event: { name: string; description: string }) {
+    this.showNamePrompt = false;
+    let data;
+    if(this.isWifiQr){
+      data = {
+        'ssid': this.encryptDecrypt.encrypt(this.wifiForm.value.ssid),
+        'password': this.encryptDecrypt.encrypt(this.wifiForm.value.password),
+        'authType':this.encryptDecrypt.encrypt(this.wifiForm.value.authType)
+      }
+    }
+    else{
+      data={
+        'url': this.encryptDecrypt.encrypt(this.linkForm.value.url)
+      }
+    }
+    let jsonData ={
+      'name':event.name,
+      'description':event.description,
+      'type': this.isWifiQr? 'wifi qr':'link qr',
+      'data': JSON.stringify(data),
+      'this_qr2user': this.authService.getUserId()
+    }
+    this.data.saveQrCode(jsonData).subscribe(
+      (response) => {
+        if(response && response.errCode === 0){
+        this.toastr.success(response.msg, 'Success');
+        }
+      else{
+        this.toastr.error(response.msg, 'Error');
+      }
+      }
+    );
+    this.router.navigate(['/layout/home']);  }
+  
+  onPromptCancel() {
+    this.showNamePrompt = false;
   }
 }
