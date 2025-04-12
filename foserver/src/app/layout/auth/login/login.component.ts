@@ -63,7 +63,6 @@ export class LoginComponent implements OnInit {
       (resp => {
         if (resp && resp.errCode === 0) {
           this.toastr.success(resp.msg, 'Success');
-          this.authService.setUser(resp.data_rec);
           this.router.navigate(['/layout/home']);
         } else {
           this.toastr.error(resp.msg, 'Error');
