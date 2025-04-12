@@ -12,4 +12,4 @@ neon_user_pwd_qr_generator_db.txt
 qr_generator.egg-info/
 *.pyc
 __pycache__/
-src/environments
+src/environment
