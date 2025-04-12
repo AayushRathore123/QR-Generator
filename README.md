@@ -22,7 +22,7 @@ Technology Stack:
 
     1. Frontend: Angular.js
     2. Backend: Python 3.11 with Flask
-    3. Database: MySQL
+    3. Database: Postgresql
 
 
 Setup Step:
@@ -31,10 +31,9 @@ Setup Step:
     2. Install python 3.11
     3. python -m venv venv
     4. python setup.py develop
-    5. python -r requirements.txt
+    5. pip install -r requirements.txt
     6. git checkout -b ____ (branch name)
 
- 
 References:
 
     1. For Git/GitHub – 
@@ -46,4 +45,10 @@ References:
         b.	To add SSH Key - https://www.youtube.com/watch?v=xkhUH9Fx2z8
         c.	https://www.youtube.com/watch?v=z7jVOenqFYk
         d.	https://www.youtube.com/watch?v=lRMAJwMQ0Vc
-
+    3. JWT (Json Web Token)
+        a. https://www.sitepoint.com/using-json-web-tokens-node-js/
+        b. https://www.geeksforgeeks.org/how-does-the-token-based-authentication-work/sa
+        c. https://www.geeksforgeeks.org/difference-between-local-storage-session-storage-and-cookies/
+        d. https://stackoverflow.com/questions/27067251/where-to-store-jwt-in-browser-how-to-protect-against-csrf
+        e. https://portswigger.net/web-security/csrf
+        f. https://www.descope.com/blog/post/developer-guide-jwt-storage#common-jwt-storage-methods
