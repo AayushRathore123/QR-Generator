@@ -47,9 +47,9 @@
 
         <div class="qr-display">
             <div *ngIf="wifiString || linkString">
-                <qrcode #parent [elementType]="'canvas'" [qrdata]="wifiString || linkString" [width]="256"></qrcode>
+                <qrcode #qrCanvas [elementType]="'canvas'" [qrdata]="wifiString || linkString" [width]="256"></qrcode>
                 <div class="button-container">
-                    <button (click)="downloadQR(parent)" class="btn btn-success">Download</button>
+                    <button (click)="downloadQR(qrCanvas)" class="btn btn-success">Download</button>
                     <button (click)="saveQR()" class="btn btn-success">Save</button>
                 </div>
             </div>
@@ -59,3 +59,8 @@
         </div>
     </div>
 </div>
+<app-qr-name-modal 
+  *ngIf="showNamePrompt" 
+  (nameDescSubmitted)="onNameSubmit($event)" 
+  (cancelled)="onPromptCancel()">
+</app-qr-name-modal>
