@@ -1,5 +1,6 @@
 from boserver.app_orm import orm_to_dict_v2
 from coreclasses.url import Url
+from flask import redirect
 
 
 class UrlHandler:
@@ -10,7 +11,7 @@ class UrlHandler:
         url_obj = Url()
 
         # Check if already exist in DB
-        rec = url_obj.get_rec(long_url)
+        rec = url_obj.get_rec(long_url=long_url)
         if rec:
             return {'errCode': 0, 'msg': orm_to_dict_v2(rec)}
 
@@ -20,3 +21,12 @@ class UrlHandler:
             return saved_data
         saved_data.update({"datarec": orm_to_dict_v2(rec)})
         return saved_data
+
+    @staticmethod
+    def redirect_to_long_url(hash_value):
+        url_obj = Url()
+        rec = url_obj.get_rec(short_url_hash_value=hash_value)
+        if rec:
+            redirect(rec.long_url)
+            return {'errCode': 0, 'msg': 'Redirected to original URL Done', 'datarec': orm_to_dict_v2(rec)}
+        return {'errCode': 1, 'msg': f'Record not found for hash value: {hash_value}'}

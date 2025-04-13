@@ -86,3 +86,10 @@ class CreateShortUrl(Resource):
         payload = request.get_json()
         obj = UrlHandler()
         return obj.create_short_url(payload)
+
+class RedirectShortUrl(Resource):
+
+    @staticmethod
+    def get(hash_value):
+        obj = UrlHandler()
+        return obj.redirect_to_long_url(hash_value)

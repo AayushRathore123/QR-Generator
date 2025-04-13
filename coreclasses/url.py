@@ -11,6 +11,8 @@ class Url:
     def __init__(self):
         self.session = session
         self.ret_json = ReturnJSON()
+        self.base_url = f"http://{app.config['HOST']}:{app.config['PORT']}/shortify/"
+
 
     def save(self):
         try:
@@ -22,9 +24,17 @@ class Url:
         self.ret_json.set_success_msg("Successfully Saved Data.")
         return self.ret_json
 
-    def get_rec(self, long_url):
-        rec = self.session.query(TableUrlShortener).filter(TableUrlShortener.long_url == long_url,
+    def get_rec(self, long_url=None, short_url_hash_value=None):
+        rec = None
+        if long_url:
+            rec = self.session.query(TableUrlShortener).filter(TableUrlShortener.long_url == long_url,
                                                            TableUrlShortener.status == 1).first()
+        elif short_url_hash_value:
+            # short_url = self.base_url + short_url_hash_value
+            # rec = self.session.query(TableUrlShortener).filter(TableUrlShortener.short_url == short_url,
+            #                                                    TableUrlShortener.status == 1).first()
+            rec = self.session.query(TableUrlShortener).filter(
+                TableUrlShortener.short_url.endswith(short_url_hash_value), TableUrlShortener.status == 1).first()
         return rec
 
     @staticmethod
@@ -76,8 +86,7 @@ class Url:
         numeric_id = self.generate_numeric_id(my_uuid)
         # hashed_value = self.base62_encode(numeric_id)  # manually function
         hashed_value = base62.encode(numeric_id)
-        base_url = f"http://{app.config['HOST']}:{app.config['PORT']}/"
-        short_url = base_url + hashed_value
+        short_url = self.base_url + hashed_value
 
         return short_url
 
