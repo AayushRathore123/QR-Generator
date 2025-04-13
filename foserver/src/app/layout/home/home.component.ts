@@ -43,7 +43,7 @@ export class HomeComponent {
 
     this.wifiForm = this.fb.group({
       ssid: ['', Validators.required],
-      password: ['', Validators.required],
+      password: [''],
       authType: ['WPA/WPA2', Validators.required],
     });
   }
@@ -74,16 +74,29 @@ export class HomeComponent {
   }
 
   generateWifiQR() {
-    const trimmedValues = {
-      ssid: this.wifiForm.value.ssid.trim(),
-      password: this.wifiForm.value.password.trim(),
-      authType: this.wifiForm.value.authType.trim(),
-    };
-    this.wifiForm.setValue(trimmedValues);
+    const passwordControl = this.wifiForm.get('password');
+    if (this.wifiForm.value.authType !== 'None') {
+      passwordControl?.setValidators(Validators.required);
+    } else {
+      passwordControl?.clearValidators();
+      passwordControl?.setValue('');
+    }
+  
+    passwordControl?.updateValueAndValidity();
+  this.wifiForm.patchValue({
+    ssid: this.wifiForm.value.ssid.trim(),
+    password: this.wifiForm.value.password?.trim(),
+    authType: this.wifiForm.value.authType.trim(),
+  });
     this.wifiForm.markAllAsTouched();
+
     if (this.wifiForm.valid) {
-      const { ssid, authType, password } = trimmedValues;
+      const { ssid, authType, password } = this.wifiForm.value;
+      if (authType === 'None') {
+      this.wifiString = `WIFI:S:${ssid};T:nopass;;`;
+    } else {
       this.wifiString = `WIFI:S:${ssid};T:${authType};P:${password};;`;
+    }
     }
   }
 
