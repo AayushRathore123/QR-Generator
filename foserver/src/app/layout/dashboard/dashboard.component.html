@@ -1,9 +1,8 @@
 <div class="container py-4">
-  <h2 class="mb-3">Saved QR Codes</h2>
 
-  <div class="table-responsive">
-    <table class="table table-hover table-bordered align-middle">
-      <thead class="table-dark">
+  <div class="table-responsive rounded shadow-sm">
+    <table class="table table-hover table-bordered align-middle text-nowrap">
+      <thead class="table-header text-center">
         <tr>
           <th>Name</th>
           <th>Description</th>
@@ -11,72 +10,101 @@
           <th>Details</th>
           <th>QR Code</th>
           <th>Saved On</th>
-          <th class="text-center">Actions</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of qrcodes; let i = index">
-          <td>
-            <ng-container *ngIf="editIndex !== i; else editName">
-              {{ data.name }}
-            </ng-container>
-            <ng-template #editName>
-              <input [(ngModel)]="editedName" class="form-control form-control-sm" />
-            </ng-template>
-          </td>
+        <ng-container *ngIf="qrcodes.length > 0; else noRecords">
+          <tr *ngFor="let data of qrcodes; let i = index">
+            <td>
+              <ng-container *ngIf="editIndex !== i; else editName">
+                <strong>{{ data.name }}</strong>
+              </ng-container>
+              <ng-template #editName>
+                <input [(ngModel)]="editedName" class="form-control form-control-sm" />
+              </ng-template>
+            </td>
 
-          <td>
-            <ng-container *ngIf="editIndex !== i; else editDesc">
-              {{ data.description }}
-            </ng-container>
-            <ng-template #editDesc>
-              <input [(ngModel)]="editedDescription" class="form-control form-control-sm" />
-            </ng-template>
-          </td>
+            <td>
+              <ng-container *ngIf="editIndex !== i; else editDesc">
+                {{ data.description || '-' }}
+              </ng-container>
+              <ng-template #editDesc>
+                <input [(ngModel)]="editedDescription" class="form-control form-control-sm" />
+              </ng-template>
+            </td>
 
-          <td class="text-uppercase">{{ data.type }}</td>
+            <td class="text-uppercase text-center fw-semibold">{{ data.type }}</td>
 
-          <td *ngIf="data.type === 'wifi'">
-            <strong>SSID:</strong> {{ data.data.ssid }}<br />
-            <strong>Auth type:</strong> {{ data.data.authType }}
-          </td>
+            <td>
+              <ng-container [ngSwitch]="data.type">
+                <div *ngSwitchCase="'wifi'">
+                  <strong>SSID:</strong> {{ data.data.ssid }}<br />
+                  <strong>Auth:</strong> {{ data.data.authType }}
+                </div>
+                <div *ngSwitchCase="'link'">
+                  <strong>URL:</strong>
+                  <a [href]="data.data.url" target="_blank" class="text-decoration-underline text-primary">
+                    {{ data.data.url | slice: 0: 40 }}
+                  </a>
+                </div>
+                <div *ngSwitchDefault>-</div>
+              </ng-container>
+            </td>
 
-          <td *ngIf="data.type === 'link'">
-            <strong>URL:</strong>
-            <a [href]="data.data.url" target="_blank">
-              {{ data.data.url | slice: 0: 40 }}
-            </a>
-          </td>
+            <td class="text-center">
+              <qrcode
+                [elementType]="'canvas'"
+                [qrdata]="data.data.url || ('WIFI:S:' + data.data.ssid + ';T:' + data.data.authType + ';P:' + data.data.password + ';;')"
+                #qrCanvas
+                [width]="100"
+              ></qrcode>
+            </td>
 
-          <td>
-            <qrcode [elementType]="'canvas'" [qrdata]="data.data.url || ('WIFI:S:' + data.data.ssid + ';T:' + data.data.authType + ';P:' + data.data.password + ';;')" #qrCanvas [width]="150"></qrcode>
-          </td>
+            <td class="text-center text-muted">
+              {{ data.saved_at | date: 'yyyy-MM-dd HH:mm' }}
+            </td>
 
-          <td>{{ data.saved_at | date: 'yyyy-MM-dd HH:mm' }}</td>
+            <td class="text-center">
+              <ng-container *ngIf="editIndex === i; else actions">
+                <button class="btn btn-sm btn-success me-1" (click)="saveEdit(data)">
+                  <i class="fa-solid fa-check"></i>
+                </button>
+                <button class="btn btn-sm btn-secondary" (click)="cancelEdit()">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </ng-container>
+              <ng-template #actions>
+                <button class="btn btn-sm btn-outline-primary me-1" (click)="downloadQR(qrCanvas)">
+                  <i class="fa-solid fa-download"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-warning me-1" (click)="editRow(i)">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-danger" (click)="confirmDelete(data)">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </ng-template>
+            </td>
+          </tr>
+        </ng-container>
 
-          <td class="text-center">
-            <ng-container *ngIf="editIndex === i; else actions">
-              <button class="btn btn-sm btn-success me-1" (click)="saveEdit(data)">
-                <i class="fa-solid fa-check"></i>
-              </button>
-              <button class="btn btn-sm btn-secondary" (click)="cancelEdit()">
-                <i class="fa-solid fa-xmark"></i>
-              </button>
-            </ng-container>
-            <ng-template #actions>
-              <button class="btn btn-sm btn-primary me-1" (click)="downloadQR(qrCanvas)">
-                <i class="fa-solid fa-download"></i>
-              </button>
-              <button class="btn btn-sm btn-warning me-1" (click)="editRow(i)">
-                <i class="fa-solid fa-pen-to-square"></i>
-              </button>
-              <button class="btn btn-sm btn-danger" (click)="confirmDelete(data)" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
-            </ng-template>
-          </td>
-        </tr>
+        <ng-template #noRecords>
+          <tr>
+            <td colspan="7" class="text-center text-muted py-4">
+              No records found.
+            </td>
+          </tr>
+        </ng-template>
       </tbody>
     </table>
   </div>
 </div>
+
+<app-delete-confirm-modal
+  [show]="showDeleteConfirm"
+  title="Delete QR Code"
+  message="Are you sure you want to delete this QR code?"
+  (confirmed)="handleDeleteConfirm()"
+  (cancelled)="handleDeleteCancel()">
+</app-delete-confirm-modal>

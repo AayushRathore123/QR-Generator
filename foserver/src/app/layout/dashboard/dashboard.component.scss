@@ -20,3 +20,100 @@ table {
     }
   }
   
+  .container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  
+  h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .table {
+    border-collapse: collapse;
+    border: 1px solid #dee2e6;
+  }
+  
+  .table th,
+  .table td {
+    vertical-align: middle;
+    text-align: left;
+  }
+  
+  .table thead th {
+    background-color: #343a40;
+    color: #fff;
+  }
+  
+  .table-responsive {
+    overflow-x: auto;
+  }
+  
+  .table .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-radius: 0.25rem;
+  }
+  
+  .btn i {
+    margin: 0;
+  }
+  
+  qrcode canvas {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  input.form-control-sm {
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+  }
+  
+  .text-center .btn {
+    margin-bottom: 0.25rem;
+  }
+  
+  app-delete-confirm-modal {
+    z-index: 1050;
+  }
+  
+  .text-uppercase {
+    text-transform: uppercase;
+  }
+
+.table-header {
+  background: linear-gradient(45deg, #6a5acd, #483d8b);
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.table-header th {
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.table-header th:hover {
+  background: #483d8b;
+}
+
+.table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.table thead th {
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table thead th {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+  
