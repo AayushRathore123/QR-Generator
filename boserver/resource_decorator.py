@@ -11,7 +11,7 @@ import json
 from boserver.app_routes import app
 
 
-TOKEN_NOT_PRESENT = ['/login', '/register', '/foo']
+TOKEN_NOT_PRESENT = ['/login', '/register', '/foo', '/shortify']
 app.config.from_object("config.Config")
 app.config["JWT_TOKEN_LOCATION"] = ["headers"]
 app.config["JWT_HEADER_TYPE"] = "Bearer"
@@ -22,7 +22,7 @@ jwt = JWTManager(app)
 def get_user_data_decorator(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        if request.path in TOKEN_NOT_PRESENT:
+        if request.path in TOKEN_NOT_PRESENT or request.path.startswith('/shortify'):
             try:
                 return func(*args, **kwargs)
             except Exception as e:

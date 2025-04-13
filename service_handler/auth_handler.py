@@ -29,7 +29,7 @@ class AuthHandler:
 
         user_rec.lastlogin_datetime = datetime.now()
         self.save()
-        return {'errCode': 0, 'msg': 'Successfully LogIn', 'data_rec': orm_to_dict_v2(user_rec)}
+        return {'errCode': 0, 'msg': 'Successfully Login', 'data_rec': orm_to_dict_v2(user_rec)}
 
     def register(self, payload):
         user_name = payload['user_name']
@@ -49,3 +49,10 @@ class AuthHandler:
         save_data = self.save()
         save_data.update({"datarec":orm_to_dict_v2(user_details_rec)})
         return save_data
+
+    def get_user_details(self, user_id):
+        rec = self.session.query(TableUserDetails).filter(TableUserDetails.this_user_details2user == user_id,
+                                                          TableUserDetails.status == 1).first()
+        if rec:
+            return orm_to_dict_v2(rec)
+        return rec
