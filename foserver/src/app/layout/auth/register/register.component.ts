@@ -67,8 +67,19 @@ export class RegisterComponent {
   }
 
   onSubmit(): void {
+    const trimmedValues = {
+      username: this.registerForm.value.username?.trim(),
+      firstname: this.registerForm.value.firstname?.trim(),
+      lastname: this.registerForm.value.lastname?.trim(),
+      dob: this.registerForm.value.dob,
+      gender: this.registerForm.value.gender,
+      password: this.registerForm.value.password?.trim(),
+    };
+    this.registerForm.patchValue(trimmedValues);
+  
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
+      this.toastr.error("The passwords you entered do not match.", 'Password Mismatch');
       return;
     }
     if (this.registerForm.valid && this.registerForm.controls['confirmpassword'].value != this.registerForm.controls['password'].value) {
@@ -78,11 +89,11 @@ export class RegisterComponent {
     }
     if (this.registerForm.valid && this.registerForm.controls['confirmpassword'].value == this.registerForm.controls['password'].value) {
       let jsonData = {
-        'user_name': this.registerForm.controls['username'].value.trim().toLowerCase(),
-        'first_name': this.registerForm.controls['firstname'].value.trim().toLowerCase(),
-        'last_name':this.registerForm.controls['lastname'].value.trim().toLowerCase(),
-        'dob': this.registerForm.controls['dob'].value,
-        'gender': this.registerForm.controls['gender'].value,
+        'user_name': this.registerForm.controls['username'].value.toLowerCase(),
+        'first_name': this.registerForm.controls['firstname'].value.toLowerCase(),
+        'last_name':this.registerForm.controls['lastname'].value.toLowerCase() || null,
+        'dob': this.registerForm.controls['dob'].value || null,
+        'gender': this.registerForm.controls['gender'].value || null,
         'password': this.encryptdecryptservice.encrypt(this.registerForm.controls['password'].value)
       }
       this._authService.register(jsonData).subscribe(resp => {
