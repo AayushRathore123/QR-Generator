@@ -48,29 +48,39 @@ export class HomeComponent {
     });
   }
 
-  toggleQrType(event: Event) {
-    const checked = (event.target as HTMLInputElement).checked;
+  toggleQrType(event:any) {
+    const checked = event.target.checked;
     this.isLinkQr = checked;
     this.isWifiQr = !checked;
-    this.resetQrCodes();
+    this.resetQrCodesAndForms();
+    
 }
 
   onClickLinkQr() {
     this.isLinkQr = true;
     this.isWifiQr = false;
-    this.resetQrCodes();
+    this.resetQrCodesAndForms();
   }
 
   onClickWifiQr() {
     this.isLinkQr = false;
     this.isWifiQr = true;
-    this.resetQrCodes();
+    this.resetQrCodesAndForms();
   }
 
-  resetQrCodes() {
+  resetQrCodesAndForms() {
     this.wifiString = '';
     this.linkString = '';
     this.qrCodeDownloadLink = '';
+    this.wifiForm.reset({
+      ssid: '',
+      password: '',
+      authType: 'WPA/WPA2' 
+    });
+  
+    this.linkForm.reset({
+      url: ''
+    });
   }
 
   generateWifiQR() {
