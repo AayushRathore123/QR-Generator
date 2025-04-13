@@ -37,7 +37,7 @@
               [class.invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
               appDisableCutCopyPaste
             />
-            <span class="input-group-text" (click)="togglePassword()">
+            <span class="input-group-text" (click)="togglePassword(showPassword)">
               <i [class.fa-eye]="!showPassword && loginForm.value.password !=''" [class.fa-eye-slash]="showPassword" class="fa-solid"></i>
             </span>
           </div>
