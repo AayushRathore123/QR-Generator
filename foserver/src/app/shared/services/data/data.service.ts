@@ -10,7 +10,7 @@ export class DataService {
   private saveURL = environment.apiUrl+'qr_code/create';
   private getDataURL =environment.apiUrl+'qr_code/get_all';
   private updateDataURL =environment.apiUrl+'qr_code/update';
-  private deleteDataURL =environment.apiUrl+'qr_code/delete';
+  private deleteDataURL =environment.apiUrl+'qr_code/remove';
 
   constructor(private http: HttpClient) {}
 
