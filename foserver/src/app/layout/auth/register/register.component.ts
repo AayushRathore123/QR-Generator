@@ -79,11 +79,11 @@ export class RegisterComponent {
   
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
-      this.toastr.error("The passwords you entered do not match.", 'Password Mismatch');
+      this.toastr.error("Please fill all required fields properly.", 'Error');
       return;
     }
     if (this.registerForm.valid && this.registerForm.controls['confirmpassword'].value != this.registerForm.controls['password'].value) {
-      this.toastr.error("Passswords dont match", 'Error');
+      this.toastr.error("The passwords you entered do not match.", 'Password Mismatch');
       this.registerForm.patchValue({ confirmpassword: '' });
       return;
     }
