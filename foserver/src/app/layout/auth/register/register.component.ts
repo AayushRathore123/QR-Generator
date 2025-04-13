@@ -86,10 +86,10 @@ export class RegisterComponent {
         'password': this.encryptdecryptservice.encrypt(this.registerForm.controls['password'].value)
       }
       this._authService.register(jsonData).subscribe(resp => {
-        if (resp.status == "Success") {
-          this.toastr.error(resp.msg, 'Success');
-          this.toastr.error('Please login to your account now.', 'Success');
-          this.router.navigate(['/layout/home']);
+        if (resp.errCode === 0) {
+          this.toastr.success(resp.msg, 'Success');
+          this.toastr.success('Please log in to continue.', 'Success');
+          this.router.navigate(['/login']);
         }
         else {
           this.toastr.error(resp.msg, 'Error');
