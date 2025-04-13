@@ -49,3 +49,10 @@ class AuthHandler:
         save_data = self.save()
         save_data.update({"datarec":orm_to_dict_v2(user_details_rec)})
         return save_data
+
+    def get_user_details(self, user_id):
+        rec = self.session.query(TableUserDetails).filter(TableUserDetails.this_user_details2user == user_id,
+                                                          TableUserDetails.status == 1).first()
+        if rec:
+            return orm_to_dict_v2(rec)
+        return rec

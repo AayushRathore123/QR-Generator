@@ -29,10 +29,12 @@ class Login(Resource):
         access_token = create_access_token(identity=json.dumps({"user_name": user_data["user_name"],
                                                      "user_id":user_data["id"]}))
         # access_token = create_access_token(identity={"user_name": user_data["user_name"],"user_id":user_data["id"]})
-        auth_ret = {"msg": "Login Successful", "errCode": 0, "access_token": access_token }
+        data = obj.get_user_details(user_data["id"])
+        auth_ret = {"msg": "Login Successfully", "errCode": 0, "access_token": access_token, "data_rec": data}
         resp = make_response(json.dumps(auth_ret))
         resp.headers.extend({"token": access_token})
         return resp
+
 
 class Register(Resource):
 
