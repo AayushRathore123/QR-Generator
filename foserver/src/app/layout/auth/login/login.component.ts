@@ -43,8 +43,14 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  togglePassword(): void {
-    this.showPassword = !this.showPassword;
+  togglePassword(flag:boolean): void {
+    this.showPassword = true;
+      if (flag == true)
+        this.showPassword = false;
+      else
+        setTimeout(() => {
+          this.showPassword = false;
+        }, 3000);
   }
 
   onSubmit(): void {

@@ -32,7 +32,8 @@ export class HomeComponent {
   linkString: string= '';
   qrCodeDownloadLink: SafeUrl = '';
   showNamePrompt = false;
-
+  showPassword = false;
+  
   @ViewChild('qrCanvas') qrCanvas!:ElementRef;
   constructor(private fb: FormBuilder, private sanitizer: DomSanitizer, private authService:AuthService, private toastr: ToastrService
   , private router:Router, private data: DataService, private encryptDecrypt:EncryptDecryptService) {
@@ -73,15 +74,36 @@ export class HomeComponent {
   }
 
   generateWifiQR() {
+    const trimmedValues = {
+      ssid: this.wifiForm.value.ssid.trim(),
+      password: this.wifiForm.value.password.trim(),
+      authType: this.wifiForm.value.authType.trim(),
+    };
+    this.wifiForm.setValue(trimmedValues);
+    this.wifiForm.markAllAsTouched();
     if (this.wifiForm.valid) {
-      const { ssid, authType, password } = this.wifiForm.value;
+      const { ssid, authType, password } = trimmedValues;
       this.wifiString = `WIFI:S:${ssid};T:${authType};P:${password};;`;
     }
   }
 
+  togglePassword(flag: boolean): void {
+    this.showPassword = true;
+    if (flag === true) {
+      this.showPassword = false;
+    } else {
+      setTimeout(() => {
+        this.showPassword = false;
+      }, 3000);
+    }
+  }
+
   generateLinkQR() {
+    const trimmedUrl = this.linkForm.value.url.trim();
+    this.linkForm.get('url')?.setValue(trimmedUrl);
+    this.wifiForm.markAllAsTouched();
     if (this.linkForm.valid) {
-      this.linkString = this.linkForm.value.url;
+      this.linkString = trimmedUrl;
     }
   }
 
@@ -123,14 +145,14 @@ export class HomeComponent {
     let data;
     if(this.isWifiQr){
       data = {
-        'ssid': this.encryptDecrypt.encrypt(this.wifiForm.value.ssid),
+        'ssid': this.wifiForm.value.ssid,
         'password': this.encryptDecrypt.encrypt(this.wifiForm.value.password),
-        'authType':this.encryptDecrypt.encrypt(this.wifiForm.value.authType)
+        'authType':this.wifiForm.value.authType
       }
     }
     else{
       data={
-        'url': this.encryptDecrypt.encrypt(this.linkForm.value.url)
+        'url': this.linkForm.value.url
       }
     }
     let jsonData ={

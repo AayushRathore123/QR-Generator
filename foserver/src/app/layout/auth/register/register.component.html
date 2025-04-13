@@ -44,8 +44,6 @@
                             [class.invalid]="registerForm.get('lastname')?.invalid && registerForm.get('lastname')?.touched"
                             appDisableCutCopyPaste>
                         <div *ngIf="registerForm.get('lastname')?.invalid && registerForm.get('lastname')?.touched">
-                            <small *ngIf="registerForm.get('lastname')?.errors?.['required']">Last name is
-                                required.</small>
                             <small *ngIf="registerForm.get('lastname')?.errors?.['maxlength']">Maximum 50 characters
                                 allowed.</small>
                         </div>

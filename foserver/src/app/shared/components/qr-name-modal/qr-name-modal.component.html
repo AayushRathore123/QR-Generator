@@ -1,13 +1,29 @@
 <div class="modal-overlay">
-    <div class="modal-box">
-      <label>QR Name:</label>
-      <input type="text" [(ngModel)]="qrName" placeholder="Enter QR name" class="form-control mb-2">
-      <label>QR Descripton:</label>
-      <input type="text" [(ngModel)]="qrDescription" placeholder="Enter QR name" class="form-control mb-2">
-      <div class="d-flex justify-content-end gap-2">
-        <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
-        <button class="btn btn-primary" (click)="submitNameDesc()">Save</button>
-      </div>
+  <div class="modal-box" [formGroup]="nameForm">
+    <label>QR Name:</label>
+    <small style="padding-left: 10px;" *ngIf="nameForm.get('qrName')?.touched && nameForm.get('qrName')?.errors" class="text-danger">
+      <ng-container *ngIf="nameForm.get('qrName')?.errors?.['required']">Required</ng-container>
+      <ng-container *ngIf="nameForm.get('qrName')?.errors?.['maxlength']">Max 50 characters</ng-container>
+    </small>
+    <input
+      type="text"
+      formControlName="qrName"
+      placeholder="Enter QR name"
+      class="form-control mb-2"
+    />
+    <label>QR Description:</label>
+    <small style="padding-left: 10px;" *ngIf="nameForm.get('qrDescription')?.touched && nameForm.get('qrDescription')?.errors" class="text-danger">
+      <ng-container *ngIf="nameForm.get('qrDescription')?.errors?.['maxlength']">Max 50 characters</ng-container>
+    </small>
+    <input
+      type="text"
+      formControlName="qrDescription"
+      placeholder="Enter QR description"
+      class="form-control mb-2"
+    />
+    <div class="d-flex justify-content-end gap-2">
+      <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
+      <button class="btn btn-primary" (click)="submitNameDesc()">Save</button>
     </div>
   </div>
-  
+</div>

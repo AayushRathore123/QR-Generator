@@ -30,7 +30,7 @@ export class RegisterComponent {
     this.registerForm = this.fb.group({
       username: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
       firstname: ['', [Validators.required, Validators.maxLength(50)]],
-      lastname: ['', [Validators.required, Validators.maxLength(50)]],
+      lastname: ['', [Validators.maxLength(50)]],
       dob: [''],
       gender: [''],
       password: ['', [
@@ -67,29 +67,39 @@ export class RegisterComponent {
   }
 
   onSubmit(): void {
+    const trimmedValues = {
+      username: this.registerForm.value.username?.trim(),
+      firstname: this.registerForm.value.firstname?.trim(),
+      lastname: this.registerForm.value.lastname?.trim(),
+      dob: this.registerForm.value.dob,
+      gender: this.registerForm.value.gender,
+      password: this.registerForm.value.password?.trim(),
+    };
+    this.registerForm.patchValue(trimmedValues);
+  
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
+      this.toastr.error("Please fill all required fields properly.", 'Error');
       return;
     }
     if (this.registerForm.valid && this.registerForm.controls['confirmpassword'].value != this.registerForm.controls['password'].value) {
-      this.toastr.error("Passswords dont match", 'Error');
-      this.registerForm.patchValue({ confirmpassword: '' });
+      this.toastr.error("The passwords you entered do not match.", 'Password Mismatch');
       return;
     }
     if (this.registerForm.valid && this.registerForm.controls['confirmpassword'].value == this.registerForm.controls['password'].value) {
       let jsonData = {
-        'user_name': this.registerForm.controls['username'].value.trim().toLowerCase(),
-        'first_name': this.registerForm.controls['firstname'].value.trim().toLowerCase(),
-        'last_name':this.registerForm.controls['lastname'].value.trim().toLowerCase(),
-        'dob': this.registerForm.controls['dob'].value,
-        'gender': this.registerForm.controls['gender'].value,
+        'user_name': this.registerForm.controls['username'].value.toLowerCase(),
+        'first_name': this.registerForm.controls['firstname'].value.toLowerCase(),
+        'last_name':this.registerForm.controls['lastname'].value.toLowerCase() || null,
+        'dob': this.registerForm.controls['dob'].value || null,
+        'gender': this.registerForm.controls['gender'].value || null,
         'password': this.encryptdecryptservice.encrypt(this.registerForm.controls['password'].value)
       }
       this._authService.register(jsonData).subscribe(resp => {
-        if (resp.status == "Success") {
-          this.toastr.error(resp.msg, 'Success');
-          this.toastr.error('Please login to your account now.', 'Success');
-          this.router.navigate(['/layout/home']);
+        if (resp.errCode === 0) {
+          this.toastr.success(resp.msg, 'Success');
+          this.toastr.success('Please log in to continue.', 'Success');
+          this.router.navigate(['/login']);
         }
         else {
           this.toastr.error(resp.msg, 'Error');
