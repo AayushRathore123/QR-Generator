@@ -32,6 +32,7 @@ export class AuthService {
         const exp = decodedPayload.exp;
         localStorage.setItem('UserId',userId);
         localStorage.setItem('expiry', exp);
+        this.userSubject.next(data.data_rec); 
         this.loggedInSubject.next(true);
       }
       return data;
