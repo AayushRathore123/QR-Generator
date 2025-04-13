@@ -84,7 +84,6 @@ export class RegisterComponent {
     }
     if (this.registerForm.valid && this.registerForm.controls['confirmpassword'].value != this.registerForm.controls['password'].value) {
       this.toastr.error("The passwords you entered do not match.", 'Password Mismatch');
-      this.registerForm.patchValue({ confirmpassword: '' });
       return;
     }
     if (this.registerForm.valid && this.registerForm.controls['confirmpassword'].value == this.registerForm.controls['password'].value) {
