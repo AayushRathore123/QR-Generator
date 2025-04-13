@@ -20,12 +20,14 @@ Non-Functional Requirements:
 
 Technology Stack: 
 
-    1. Frontend: Angular.js
+    1. Frontend: Angular CLI 19.2.1, Node.js 20.11.1 (npm 10.8.0)
     2. Backend: Python 3.11 with Flask
     3. Database: Postgresql
 
 
 Setup Step:
+
+Backend
 
     1. git clone ____ (paste git repo https link)
     2. Install python 3.11
@@ -33,6 +35,36 @@ Setup Step:
     4. python setup.py develop
     5. pip install -r requirements.txt
     6. git checkout -b ____ (branch name)
+
+Frontend
+  
+  1. Navigate to the frontend folder:
+     ```bash
+     cd foserver
+     ```
+  
+  2. The `src/environments/` folder is ignored via `.gitignore`. You must create the `environment.ts` file manually.  
+     Sample `environment.ts` file:
+     ```ts
+     export const environment = {
+       apiUrl: 'http://localhost:5011/',
+       encryptionKey: '',
+       encryptionIv: ''
+     };
+     ```
+  
+     Save this file at `src/environments/environment.ts`
+  
+  3. Install Angular dependencies:
+     ```bash
+     npm install
+     ```
+  
+  4. Start the Angular development server:
+     ```bash
+     ng serve
+     ```
+
 
 References:
 

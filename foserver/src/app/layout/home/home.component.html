@@ -1,66 +1,122 @@
 <div class="page-container">
     <h2>QR Code Generator</h2>
     <p>Select a QR Code type and generate it instantly.</p>
-
+  
     <div class="toggle-container">
-        <label class="switch">
-            <input type="checkbox" (change)="toggleQrType($event)" [checked]="isLinkQr">
-            <span class="slider">
-            </span>
-        </label>
-        <span class="toggle-label">{{ isLinkQr ? 'Link QR' : 'WiFi QR' }}</span>
+      <label class="switch">
+        <input type="checkbox" (change)="toggleQrType($event)" [checked]="isLinkQr">
+        <span class="slider"></span>
+      </label>
+      <span class="toggle-label">{{ isLinkQr ? 'Link QR' : 'WiFi QR' }}</span>
     </div>
-
+  
     <div class="container-wrapper">
-        <div class="form-card">
-            <form *ngIf="isWifiQr" [formGroup]="wifiForm" (ngSubmit)="generateWifiQR()">
-                <h3>WiFi QR Code</h3>
-                <div class="form-group">
-                    <label for="ssid">SSID</label>
-                    <input type="text" id="ssid" class="form-control" formControlName="ssid" placeholder="Enter WiFi Name">
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" class="form-control" formControlName="password" placeholder="Enter Password">
-                </div>
-
-                <div class="form-group">
-                    <label for="authType">Authentication Type</label>
-                    <select id="authType" class="form-control" formControlName="authType">
-                        <option *ngFor="let auth of authTypes" [value]="auth">{{ auth }}</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn btn-primary" [disabled]="wifiForm.invalid">Generate QR Code</button>
-            </form>
-
-            <form *ngIf="isLinkQr" [formGroup]="linkForm" (ngSubmit)="generateLinkQR()">
-                <h3>Link QR Code</h3>
-                <div class="form-group">
-                    <label for="url">URL</label>
-                    <input type="text" id="url" class="form-control" formControlName="url" placeholder="Enter URL">
-                </div>
-                <button type="submit" class="btn btn-primary" [disabled]="linkForm.invalid">Generate QR Code</button>
-            </form>
-        </div>
-
-        <div class="qr-display">
-            <div *ngIf="wifiString || linkString">
-                <qrcode #qrCanvas [elementType]="'canvas'" [qrdata]="wifiString || linkString" [width]="256"></qrcode>
-                <div class="button-container">
-                    <button (click)="downloadQR(qrCanvas)" class="btn btn-success">Download</button>
-                    <button (click)="saveQR()" class="btn btn-success">Save</button>
-                </div>
+      <div class="form-card">
+        <form *ngIf="isWifiQr" [formGroup]="wifiForm" (ngSubmit)="generateWifiQR()">
+          <h3>WiFi QR Code</h3>
+  
+          <div class="form-group">
+            <label for="ssid">SSID</label>
+            <div class="input-group">
+              <input
+                type="text"
+                id="ssid"
+                formControlName="ssid"
+                placeholder="Enter WiFi Name"
+                [class.invalid]="wifiForm.get('ssid')?.invalid && wifiForm.get('ssid')?.touched"
+              />
             </div>
-            <div *ngIf="!wifiString && !linkString" class="qr-placeholder">
-                <p>No QR Code generated yet</p>
+            <div *ngIf="wifiForm.get('ssid')?.invalid && wifiForm.get('ssid')?.touched">
+              <small *ngIf="wifiForm.get('ssid')?.errors?.['required']">SSID is required.</small>
             </div>
+          </div>      
+  
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-group">
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                id="password"
+                formControlName="password"
+                placeholder="Enter Password"
+                [class.invalid]="wifiForm.get('password')?.invalid && wifiForm.get('password')?.touched"
+              />
+              <span class="input-group-text" (click)="togglePassword(showPassword)">
+                <i
+                  class="fa-solid"
+                  [class.fa-eye]="!showPassword && wifiForm.value.password !== ''"
+                  [class.fa-eye-slash]="showPassword"
+                ></i>
+              </span>
+            </div>
+            <div *ngIf="wifiForm.get('password')?.invalid && wifiForm.get('password')?.touched">
+              <small>Password is required.</small>
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label for="authType">Authentication Type</label>
+            <select
+              id="authType"
+              formControlName="authType"
+              [class.invalid]="wifiForm.get('authType')?.invalid && wifiForm.get('authType')?.touched"
+            >
+              <option *ngFor="let auth of authTypes" [value]="auth">{{ auth }}</option>
+            </select>
+            <div *ngIf="wifiForm.get('authType')?.invalid && wifiForm.get('authType')?.touched">
+              <small>Authentication type is required.</small>
+            </div>
+          </div>
+  
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+              Generate QR Code
+            </button>
+          </div>
+        </form>
+  
+        <form *ngIf="isLinkQr" [formGroup]="linkForm" (ngSubmit)="generateLinkQR()">
+          <h3>Link QR Code</h3>
+          <div class="form-group">
+            <label for="url">URL</label>
+            <input
+              type="text"
+              id="url"
+              formControlName="url"
+              placeholder="Enter URL"
+              [class.invalid]="linkForm.get('url')?.invalid && linkForm.get('url')?.touched"
+            />
+            <div *ngIf="linkForm.get('url')?.invalid && linkForm.get('url')?.touched">
+              <small>URL is required.</small>
+            </div>
+          </div>
+  
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+              Generate QR Code
+            </button>
+          </div>
+        </form>
+      </div>
+  
+      <div class="qr-display">
+        <div *ngIf="wifiString || linkString">
+          <qrcode #qrCanvas [elementType]="'canvas'" [qrdata]="wifiString || linkString" [width]="256"></qrcode>
+          <div class="button-container">
+            <button (click)="downloadQR(qrCanvas)" class="btn btn-success">Download</button>
+            <button (click)="saveQR()" class="btn btn-success">Save</button>
+          </div>
         </div>
+        <div *ngIf="!wifiString && !linkString" class="qr-placeholder">
+          <p>No QR Code generated yet</p>
+        </div>
+      </div>
     </div>
-</div>
-<app-qr-name-modal 
-  *ngIf="showNamePrompt" 
-  (nameDescSubmitted)="onNameSubmit($event)" 
-  (cancelled)="onPromptCancel()">
-</app-qr-name-modal>
+  </div>
+  
+  <app-qr-name-modal
+    *ngIf="showNamePrompt"
+    (nameDescSubmitted)="onNameSubmit($event)"
+    (cancelled)="onPromptCancel()"
+  ></app-qr-name-modal>
+  

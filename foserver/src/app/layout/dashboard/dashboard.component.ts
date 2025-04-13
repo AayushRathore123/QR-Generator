@@ -5,11 +5,13 @@ import { DataService } from '../../shared/services/data/data.service';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { EncryptDecryptService } from '../../shared/services/encrypt-decrypt/encrypt-decrypt.service';
 import { FormsModule } from '@angular/forms';
+import { DeleteConfirmModalComponent } from '../../shared/components/delete-confirm-modal/delete-confirm-modal.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, QRCodeComponent,FormsModule],
+  imports: [CommonModule, QRCodeComponent,FormsModule,DeleteConfirmModalComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
@@ -19,11 +21,12 @@ export class DashboardComponent implements OnInit {
 editedName: string = '';
 editedDescription: string = '';
 deleteTarget: any = null;
-
+showDeleteConfirm: boolean = false;
 constructor(
   private _getDataService: DataService,
   private _authService: AuthService,
-  private _encryptDecryptService:EncryptDecryptService
+  private _encryptDecryptService:EncryptDecryptService,
+  private _toastrService : ToastrService
 ) {}
 
 ngOnInit() {
@@ -45,9 +48,12 @@ saveEdit(qr: any) {
 
   this._getDataService.updateQR(payload).subscribe((response: any) => {
     if (response.errCode === 0) {
-      qr.name = this.editedName;
-      qr.description = this.editedDescription;
+      this._toastrService.success(response.msg,'Success')
+      this.getQrData();
       this.editIndex = null;
+    }
+    else{
+      this._toastrService.error(response.msg,'Error')
     }
   });
 }
@@ -58,6 +64,27 @@ cancelEdit() {
 
 confirmDelete(qr: any) {
   this.deleteTarget = qr;
+  this.showDeleteConfirm = true;
+}
+
+handleDeleteConfirm() {
+  const payload = { qr_id: this.deleteTarget.id };
+  this._getDataService.deleteQR(payload).subscribe((response: any) => {
+    if (response.errCode === 0) {
+      this._toastrService.success(response.msg,'Success')
+      this.getQrData();    
+    }
+    else{
+      this._toastrService.error(response.msg,'Error')
+    }
+    this.showDeleteConfirm = false;
+    this.deleteTarget = null;
+  });
+}
+
+handleDeleteCancel() {
+  this.showDeleteConfirm = false;
+  this.deleteTarget = null;
 }
 
 deleteQR() {
@@ -77,22 +104,21 @@ deleteQR() {
     const jsonData = {
       user_id: this._authService.getUserId(),
     };
-  
     this._getDataService.getDashboardData(jsonData).subscribe(
       (response) => {
-        if (response.errCode === 0 && response.data?.length) {
-          this.qrcodes = response.data.map((item: any) => {
+        if (response.errCode === 0 && response.msg?.length) {
+          this.qrcodes = response.msg.map((item: any) => {
             let parsedData: any = {};
                 parsedData = JSON.parse(item.data);
               if (item.type.includes('wifi')) {
                 parsedData = {
-                  ssid: this._encryptDecryptService.decrypt(parsedData.ssid),
+                  ssid: parsedData.ssid,
                   password: this._encryptDecryptService.decrypt(parsedData.password),
-                  authType: this._encryptDecryptService.decrypt(parsedData.authType),
+                  authType: parsedData.authType,
                 };
               } else if (item.type.includes('link')) {
                 parsedData = {
-                  url: this._encryptDecryptService.decrypt(parsedData.url),
+                  url: parsedData.url,
                 };
               }
             return {
