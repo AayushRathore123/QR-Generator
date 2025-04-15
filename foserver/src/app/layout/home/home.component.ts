@@ -43,47 +43,70 @@ export class HomeComponent {
 
     this.wifiForm = this.fb.group({
       ssid: ['', Validators.required],
-      password: ['', Validators.required],
+      password: [''],
       authType: ['WPA/WPA2', Validators.required],
     });
   }
 
-  toggleQrType(event: Event) {
-    const checked = (event.target as HTMLInputElement).checked;
+  toggleQrType(event:any) {
+    const checked = event.target.checked;
     this.isLinkQr = checked;
     this.isWifiQr = !checked;
-    this.resetQrCodes();
+    this.resetQrCodesAndForms();
+    
 }
 
   onClickLinkQr() {
     this.isLinkQr = true;
     this.isWifiQr = false;
-    this.resetQrCodes();
+    this.resetQrCodesAndForms();
   }
 
   onClickWifiQr() {
     this.isLinkQr = false;
     this.isWifiQr = true;
-    this.resetQrCodes();
+    this.resetQrCodesAndForms();
   }
 
-  resetQrCodes() {
+  resetQrCodesAndForms() {
     this.wifiString = '';
     this.linkString = '';
     this.qrCodeDownloadLink = '';
+    this.wifiForm.reset({
+      ssid: '',
+      password: '',
+      authType: 'WPA/WPA2' 
+    });
+  
+    this.linkForm.reset({
+      url: ''
+    });
   }
 
   generateWifiQR() {
-    const trimmedValues = {
-      ssid: this.wifiForm.value.ssid.trim(),
-      password: this.wifiForm.value.password.trim(),
-      authType: this.wifiForm.value.authType.trim(),
-    };
-    this.wifiForm.setValue(trimmedValues);
+    const passwordControl = this.wifiForm.get('password');
+    if (this.wifiForm.value.authType !== 'None') {
+      passwordControl?.setValidators(Validators.required);
+    } else {
+      passwordControl?.clearValidators();
+      passwordControl?.setValue('');
+    }
+  
+    passwordControl?.updateValueAndValidity();
+  this.wifiForm.patchValue({
+    ssid: this.wifiForm.value.ssid.trim(),
+    password: this.wifiForm.value.password?.trim(),
+    authType: this.wifiForm.value.authType.trim(),
+  });
     this.wifiForm.markAllAsTouched();
+
     if (this.wifiForm.valid) {
-      const { ssid, authType, password } = trimmedValues;
+      const { ssid, authType, password } = this.wifiForm.value;
+      if (authType === 'None') {
+      this.wifiString = `WIFI:S:${ssid};T:nopass;;`;
+    } else {
       this.wifiString = `WIFI:S:${ssid};T:${authType};P:${password};;`;
+    }
     }
   }
 

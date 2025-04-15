@@ -31,7 +31,7 @@
             </div>
           </div>      
   
-          <div class="form-group">
+          <div class="form-group" *ngIf="wifiForm.get('authType')?.value !== 'None'">
             <label for="password">Password</label>
             <div class="input-group">
               <input
@@ -102,10 +102,11 @@
       <div class="qr-display">
         <div *ngIf="wifiString || linkString">
           <qrcode #qrCanvas [elementType]="'canvas'" [qrdata]="wifiString || linkString" [width]="256"></qrcode>
-          <div class="button-container">
+          <div class="button-container mb-3">
             <button (click)="downloadQR(qrCanvas)" class="btn btn-success">Download</button>
             <button (click)="saveQR()" class="btn btn-success">Save</button>
           </div>
+          <div class="d-flex"><button (click)="resetQrCodesAndForms()" class="btn btn-success">Reset</button></div>
         </div>
         <div *ngIf="!wifiString && !linkString" class="qr-placeholder">
           <p>No QR Code generated yet</p>

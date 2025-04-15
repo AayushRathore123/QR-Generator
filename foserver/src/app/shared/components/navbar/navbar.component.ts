@@ -14,11 +14,15 @@ export class NavbarComponent{
 
   isLoggedIn=false;
   private authSub!: Subscription;
+  private userSub!: Subscription;
 
   constructor(public _auth: AuthService) { }
   ngOnInit() {
     this.authSub = this._auth.isLoggedIn$.subscribe(status => {
       this.isLoggedIn = status;
+    });
+    this.userSub = this._auth.user.subscribe(user => {
+      this.user = user;
     });
   }
 
@@ -30,6 +34,7 @@ export class NavbarComponent{
 
   ngOnDestroy(){
     this.authSub.unsubscribe();
+    this.userSub.unsubscribe();
   }
 
 

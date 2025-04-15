@@ -29,9 +29,10 @@
                         <i class="fa-solid fa-user"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                        <!-- <li><span class="dropdown-item"><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</span></li>
-                        <li><span class="dropdown-item"><strong>DOB:</strong> {{ user.dob }}</span></li>
-                        <li><span class="dropdown-item"><strong>Gender:</strong> {{ user.gender }}</span></li> -->
+                        <li *ngIf="user.user_name"><span class="dropdown-item"><strong>Username:</strong> {{ user.user_name }}</span></li>
+                        <li *ngIf="user.first_name || user.last_name"><span class="dropdown-item"><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</span></li>
+                        <li *ngIf="user.dob"><span class="dropdown-item"><strong>DOB:</strong> {{ user.dob }}</span></li>
+                        <li *ngIf="user.gender"><span class="dropdown-item"><strong>Gender:</strong> {{ user.gender }}</span></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" routerLink="/login" (click)="logout()">Logout</a></li>
                     </ul>
