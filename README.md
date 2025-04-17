@@ -1,4 +1,4 @@
-Functional Requirements:
+### Functional Requirements:
 
     1. Users can register for an account.
     2. Users can log in and log out securely.
@@ -12,38 +12,63 @@ Functional Requirements:
     8. Users can save QR codes to their dashboard for future use.
 
 
-Non-Functional Requirements:
+### Non-Functional Requirements:
 
     1. Authentication using JWT tokens.
     2. Authorization for accessing saved QR codes and user-specific features.
 
 
-Technology Stack: 
+### Technology Stack: 
 
     1. Frontend: Angular CLI 19.2.1, Node.js 20.11.1 (npm 10.8.0)
     2. Backend: Python 3.11 with Flask
     3. Database: Postgresql
 
 
-Setup Step:
+### Backend
 
-Backend
+1. Install python 3.11
+2. python -m venv venv
+3. Activate environment
+   1. For Windows
+         - In cmd.exe - venv\Scripts\activate.bat  
+         - In PowerShell - venv\Scripts\Activate.ps1
+   2. For Linux and MacOS
+         - source venv/bin/activate
 
-    1. git clone ____ (paste git repo https link)
-    2. Install python 3.11
-    3. python -m venv venv
-    4. python setup.py develop
-    5. pip install -r requirements.txt
-    6. git checkout -b ____ (branch name)
+   `Go inside boserver directory then run these commands`
+4. python setup.py develop
+5. pip install -r requirements.txt
+6. Create config.py file inside boserver directory - 
+     
 
-Frontend
-  
+      class Config(object):
+         DEBUG = False
+         HOST = 'localhost'
+         PORT = 5011
+
+         DB_NAME = ''
+         DB_USERNAME = ''
+         DB_HOST = ''
+         DB_PWD = ''
+          
+         JWT_SECRET_KEY = ''
+7. python app.py
+
+     
+### Frontend
+
+*   nvm install 20.11.1
+*   nvm use 20.11.1
+*   npm install @angular/cli@19.2.1 (Inside foserver)
+
+
   1. Navigate to the frontend folder:
      ```bash
      cd foserver
      ```
   
-  2. The `src/environments/` folder is ignored via `.gitignore`. You must create the `environment.ts` file manually.  
+  2. The `src/environment/` folder is ignored via `.gitignore`. You must create the `environment.ts` file manually.  
      Sample `environment.ts` file:
      ```ts
      export const environment = {
@@ -53,7 +78,7 @@ Frontend
      };
      ```
   
-     Save this file at `src/environments/environment.ts`
+     Save this file at `src/environment/environment.ts`
   
   3. Install Angular dependencies:
      ```bash
@@ -66,7 +91,7 @@ Frontend
      ```
 
 
-References:
+### References:
 
     1. For Git/GitHub – 
         a. https://youtu.be/cn8l5bXhTBM?si=5VbjlfbdbAwmSDUO
