@@ -1,8 +1,10 @@
-from boserver.app_orm import orm_to_dict_v2
+from boserver.app_orm import orm_to_dict_v2, TableQrCodes, session, orm_to_dict_selected
 from coreclasses.qr import Qr
 
 
 class QrHandler:
+    def __init__(self):
+        self.session = session
 
     @staticmethod
     def create_qr(payload):
@@ -30,13 +32,15 @@ class QrHandler:
         qr_obj = Qr(payload['qr_id'])
         qr_update_rec = qr_obj.update_rec({'status':0})
         saved_data = qr_obj.save()
-        if saved_data["errCode"]:
-            return saved_data
-        saved_data.update({'datarec': orm_to_dict_v2(qr_update_rec)})
+        # if saved_data["errCode"]:
+        #     return saved_data
+        # saved_data.update({'datarec': orm_to_dict_v2(qr_update_rec)})
         return saved_data
 
-    @staticmethod
-    def get_all_qr(payload):
-        qr_obj = Qr()
-        user_qr_recs = qr_obj.get_all_user_qr(payload['user_id'])
-        return {'errCode': 0, 'msg': [orm_to_dict_v2(rec) for rec in user_qr_recs]}
+    def get_all_qr(self, user_id):
+        cols_to_get = ["name", "description", "data", "type", "create_datetime"]
+        table_cols = [getattr(TableQrCodes, cols) for cols in cols_to_get]
+        user_qr_recs = self.session.query(*table_cols).filter(TableQrCodes.this_qr2user == user_id,
+                                                              TableQrCodes.status == 1).all()
+
+        return {'errCode': 0, 'data': orm_to_dict_selected(user_qr_recs, table_cols), 'msg': "Data fetched Successfully"}

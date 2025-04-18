@@ -1,3 +1,4 @@
+import datetime
 from datetime import date, time
 from decimal import Decimal
 from sqlalchemy import Column, Integer, DateTime, func
@@ -10,9 +11,9 @@ import sqlalchemy as db
 app.config.from_object("config.Config")
 Base = automap_base()
 
-db_engine = db.create_engine(
-    "postgresql://{0}:{1}@{2}/{3}?sslmode=require".format(app.config["DB_USERNAME"], app.config["DB_PWD"],
-                                          app.config["DB_HOST"], app.config["DB_NAME"]))
+DB_URL = "postgresql://{0}:{1}@{2}/{3}?sslmode=require".format(app.config["DB_USERNAME"], app.config["DB_PWD"],
+                                          app.config["DB_HOST"], app.config["DB_NAME"])
+db_engine = db.create_engine(DB_URL)
 
 # Session is responsible for managing the interactions with the database, such as adding, querying, and committing changes.
 Session = sessionmaker(bind=db_engine)
@@ -77,3 +78,27 @@ def orm_to_dict_v2(obj, date_format=None, round_decimal=True):
             data[col.name] = value
 
     return data
+
+def orm_to_dict_selected(data, table_cols, date_format=None):
+    datalist = []
+    for _rec in data:
+        data = {}
+        for _val in zip(table_cols, _rec):
+            dtype = _val[0].type.python_type
+            if dtype == datetime.datetime:
+                if date_format:
+                    dvalue = _val[1].strftime(date_format)
+                else:
+                    dvalue = str(_val[1])
+            elif dtype == datetime.date:
+                dvalue = str(_val[1])
+            elif dtype == datetime.time:
+                dvalue = str(_val[1])
+            elif dtype == Decimal:
+                dvalue = round(float(_val[1]))
+            else:
+                dvalue = _val[1]
+            data.update({_val[0].name:dvalue})
+        datalist.append(data)
+
+    return datalist
