@@ -41,10 +41,3 @@ class Qr:
             setattr(model_obj, k, v)
         self.session.flush()
         return model_obj
-
-    def get_all_user_qr(self, user_id):
-        user_qr_recs = self.session.query(TableQrCodes).filter(TableQrCodes.this_qr2user == user_id,
-                                                               TableQrCodes.status == 1).all()
-        if not user_qr_recs:
-            return []
-        return user_qr_recs

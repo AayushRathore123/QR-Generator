@@ -75,10 +75,11 @@ class RemoveQr(Resource):
 class GetAllQr(Resource):
 
     @staticmethod
-    def post():
-        payload = request.get_json()
+    def get():
+        # payload = request.args
+        user_id = request.args["user_id"]
         obj = QrHandler()
-        return obj.get_all_qr(payload)
+        return obj.get_all_qr(user_id)
 
 
 class CreateShortUrl(Resource):
@@ -89,8 +90,11 @@ class CreateShortUrl(Resource):
         obj = UrlHandler()
         return obj.create_short_url(payload)
 
+
 class RedirectShortUrl(Resource):
 
+    # Cannot use request.args["hash_value"] here as it is used when parameters are passed via the query string Ex: GET /endpoint?user_id=123
+    # Whereas here parameters are passed as part of the route. Ex: GET /endpoint/hash_value OR GET /endpoint/SFNk
     @staticmethod
     def get(hash_value):
         obj = UrlHandler()
