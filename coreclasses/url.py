@@ -59,6 +59,8 @@ class Url:
 
             For a-z, we can add +37 But doing +73 ensures better separation and avoids numeric overlap between character
             types. It gives uniqueness and range separation in URL shortening
+
+            It can generate 62^4 i.e. more than 14 Million unique hash value of 4 chars
         """
         numeric_id = 1
         for char in my_uuid:
@@ -70,7 +72,8 @@ class Url:
                 numeric_id += ascii_code - 65 + 11
             elif ascii_code in range(97, 123):  # a-z
                 numeric_id += ascii_code - 97 + 73
-
+        # random.random() gives number in the interval [0, 1). Ex: 0.3084051232736251
+        # math.ceil(random.random() * 100) gives ceil of number Ex: 30
         random_num = math.ceil(random.random() * 100) * 23 * 7
         numeric_id *= random_num
         return numeric_id
@@ -78,6 +81,7 @@ class Url:
     def generate_short_url(self):
         """
             1. Generate uuid and convert uuid to unique numeric_id
+               It is of 128-bit (32 hex digits)
             2. Generate short hashValue using base62 conversion
             3. Generate own short url from this hashValue
         """
