@@ -49,23 +49,26 @@ class CaptchaHandler:
         captcha_uuid, captcha_img = self.generate_captcha_img(captcha_code)
         ident = CAPTCHA_CACHING_KEY_IDENT + captcha_uuid
         redis_cache_obj.set_cache_data(ident, captcha_code)
+        self.ret_json.set_success_msg("Captcha generated Successfully")
+        self.ret_json.update({"datarec": {"captcha_img": captcha_img, "captcha_id":captcha_uuid }})
+        return self.ret_json
 
-        return {"errCode":0, "msg": "Captcha generated Successfully",
-                "datarec": {"captcha_img": captcha_img, "captcha_id":captcha_uuid }}
-
-    @staticmethod
-    def validate_captcha_code(payload):
+    def validate_captcha_code(self, payload):
         input_captcha = payload["input_captcha"]
         captcha_id = payload["captcha_id"]
 
         ident = CAPTCHA_CACHING_KEY_IDENT + captcha_id
         captcha_code = redis_cache_obj.get_cache_data(ident)
-        if not input_captcha:
-            return {'errCode':1, "msg": "CAPTCHA not found or expired"}
-        if input_captcha == captcha_code:
-            return {"msg": "CAPTCHA verification passed"}
 
-        return {"msg": "CAPTCHA verification failed"}
+        if not captcha_code:
+            self.ret_json.set_error_msg(1, "CAPTCHA not found or expired")
+        elif input_captcha == captcha_code:
+            self.ret_json.set_success_msg("Captcha verification passed")
+        else:
+            self.ret_json.set_error_msg(1, "Captcha verification failed")
+
+        return self.ret_json
+
 
 if __name__ == '__main__':
     obj = CaptchaHandler()

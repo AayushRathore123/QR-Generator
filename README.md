@@ -96,7 +96,7 @@
     1. For Git/GitHub – 
         a. https://youtu.be/cn8l5bXhTBM?si=5VbjlfbdbAwmSDUO
         b. https://youtu.be/k5D37W6h56o?si=F57C_thMym5P0Krr
-        c.	https://youtu.be/fI-2k_XqXLg?si=WRUbZPHsfxcO0l2t
+        c. https://youtu.be/fI-2k_XqXLg?si=WRUbZPHsfxcO0l2t
     2. For SSH – 
         a.	Issue - https://stackoverflow.com/questions/29297154/github-invalid-username-or-password
         b.	To add SSH Key - https://www.youtube.com/watch?v=xkhUH9Fx2z8
@@ -109,3 +109,17 @@
         d. https://stackoverflow.com/questions/27067251/where-to-store-jwt-in-browser-how-to-protect-against-csrf
         e. https://portswigger.net/web-security/csrf
         f. https://www.descope.com/blog/post/developer-guide-jwt-storage#common-jwt-storage-methods
+    4. To generate Captcha
+        a. https://medium.com/@nomannayeem/cracking-the-captcha-code-your-complete-guide-to-understanding-and-implementing-captcha-technology-cf606367e8af
+        b. https://medium.com/@varun.tyagi83/a-guide-to-building-a-captcha-verification-system-in-python-1a5c62922674
+    5. To connect redis with flask
+        a. https://medium.com/@fahadnujaimalsaedi/using-flask-and-redis-to-optimize-web-application-performance-34a8ae750097
+    6. To Setups Redis
+        a. https://youtu.be/DLKzd3bvgt8?si=el1tsVM-V61a976G
+        b. Open file redis.windows-service.conf on path C:\Program Files\Redis and uncomment the line - 
+            Change # requirepass foobared --> requirepass __your_redis_password__
+        c. redis-server --service-stop
+        d. redis-server --service-start
+        e. redis-cli    --> auth __your_redis_password__    --> keys *
+
+
