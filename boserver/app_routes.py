@@ -17,3 +17,7 @@ api.add_resource(GetAllQr, '/qr_code/get_all')
 # URL Shortener API
 api.add_resource(CreateShortUrl, '/url_shortener/create')
 api.add_resource(RedirectShortUrl, '/shortify/<string:hash_value>')
+
+# Captcha API
+api.add_resource(GetCaptchaCode, '/captcha_code/get')
+api.add_resource(ValidateCaptchaCode, '/captcha_code/validate')

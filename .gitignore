@@ -13,3 +13,4 @@ qr_generator.egg-info/
 *.pyc
 __pycache__/
 src/environment
+captcha_code/

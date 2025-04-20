@@ -99,3 +99,19 @@ class RedirectShortUrl(Resource):
     def get(hash_value):
         obj = UrlHandler()
         return obj.redirect_to_long_url(hash_value)
+
+
+class GetCaptchaCode(Resource):
+    @staticmethod
+    def get():
+        obj = CaptchaHandler()
+        return obj.get_captcha_code()
+
+
+class ValidateCaptchaCode(Resource):
+
+    @staticmethod
+    def post():
+        payload = request.get_json()
+        obj = CaptchaHandler()
+        return obj.validate_captcha_code(payload)
