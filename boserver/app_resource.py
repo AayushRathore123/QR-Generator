@@ -25,12 +25,12 @@ class Login(Resource):
         user_resp = obj.login(payload)
         if user_resp.get('errCode')!=0:
             return user_resp
-        user_data = user_resp['data_rec']
+        user_data = user_resp['datarec']
         access_token = create_access_token(identity=json.dumps({"user_name": user_data["user_name"],
                                                      "user_id":user_data["id"]}))
-        # access_token = create_access_token(identity={"user_name": user_data["user_name"],"user_id":user_data["id"]})
-        data = obj.get_user_details(user_data["id"])
-        auth_ret = {"msg": "Login Successfully", "errCode": 0, "access_token": access_token, "data_rec": data}
+        # Why make_response
+        auth_ret = {"errCode": 0, "msg": "Login Successfully", "access_token": access_token,
+                    "user_name": user_data["user_name"], "user_id": user_data["id"]}
         resp = make_response(json.dumps(auth_ret))
         resp.headers.extend({"token": access_token})
         return resp
@@ -43,6 +43,25 @@ class Register(Resource):
         payload = request.get_json()
         obj = AuthHandler()
         return obj.register(payload)
+
+
+class GetUserDetails(Resource):
+
+    @staticmethod
+    def get():
+        user_id = request.args["user_id"]
+        # print('user_name', request.args["user_name"])
+        obj = UserHandler()
+        return obj.get_user_details(user_id)
+
+
+class UpdateUserDetails(Resource):
+
+    @staticmethod
+    def post():
+        payload = request.get_json()
+        obj = UserHandler()
+        return obj.update_user_details(payload)
 
 
 class CreateQr(Resource):
@@ -99,3 +118,19 @@ class RedirectShortUrl(Resource):
     def get(hash_value):
         obj = UrlHandler()
         return obj.redirect_to_long_url(hash_value)
+
+
+class GetCaptchaCode(Resource):
+    @staticmethod
+    def get():
+        obj = CaptchaHandler()
+        return obj.get_captcha_code()
+
+
+class ValidateCaptchaCode(Resource):
+
+    @staticmethod
+    def post():
+        payload = request.get_json()
+        obj = CaptchaHandler()
+        return obj.validate_captcha_code(payload)

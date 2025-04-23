@@ -7,12 +7,10 @@ from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
 import flask_restful as restful
 from jwt import ExpiredSignatureError, DecodeError, InvalidTokenError, InvalidIssuerError, InvalidAudienceError
 import json
+from boserver.flask_app import app
 
-from boserver.app_routes import app
 
-
-TOKEN_NOT_PRESENT = ['/login', '/register', '/foo', '/shortify']
-app.config.from_object("config.Config")
+TOKEN_NOT_PRESENT = ['/login', '/register', '/foo', '/shortify', '/captcha_code/get', '/captcha_code/validate']
 app.config["JWT_TOKEN_LOCATION"] = ["headers"]
 app.config["JWT_HEADER_TYPE"] = "Bearer"
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(seconds=36000)

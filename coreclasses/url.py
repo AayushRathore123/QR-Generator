@@ -2,8 +2,8 @@ import math
 import random
 import base62
 import uuid
+from boserver.app_config_load import APP_HOST, APP_PORT
 from boserver.app_orm import session, TableUrlShortener
-from boserver.flask_app import app
 from boserver.json_helper import ReturnJSON
 
 
@@ -11,8 +11,7 @@ class Url:
     def __init__(self):
         self.session = session
         self.ret_json = ReturnJSON()
-        self.base_url = f"http://{app.config['HOST']}:{app.config['PORT']}/shortify/"
-
+        self.base_url = f"http://{APP_HOST}:{APP_PORT}/shortify/"
 
     def save(self):
         try:
