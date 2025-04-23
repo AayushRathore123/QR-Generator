@@ -4,15 +4,14 @@ from decimal import Decimal
 from sqlalchemy import Column, Integer, DateTime, func
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import sessionmaker
-from boserver.flask_app import app
+
+from boserver.app_config_load import DB_USERNAME, DB_PWD, DB_HOST, DB_NAME
 import sqlalchemy as db
 
 
-app.config.from_object("config.Config")
 Base = automap_base()
 
-DB_URL = "postgresql://{0}:{1}@{2}/{3}?sslmode=require".format(app.config["DB_USERNAME"], app.config["DB_PWD"],
-                                          app.config["DB_HOST"], app.config["DB_NAME"])
+DB_URL = "postgresql://{0}:{1}@{2}/{3}?sslmode=require".format(DB_USERNAME, DB_PWD, DB_HOST, DB_NAME)
 db_engine = db.create_engine(DB_URL)
 
 # Session is responsible for managing the interactions with the database, such as adding, querying, and committing changes.

@@ -1,6 +1,6 @@
+from boserver.app_config_load import APP_HOST, APP_PORT
 from boserver.app_routes import app
-
-app.config.from_object("config.Config")
+# Why not from boserver.flask_app import app ???
 
 # Method 1 - To make API Calls
 @app.route("/")
@@ -10,4 +10,4 @@ def hello_world():
 
 if __name__ == '__main__':
     print("Starting Application")
-    app.run(debug=True, host= app.config["HOST"], port= app.config["PORT"])
+    app.run(debug=True, host= APP_HOST, port= APP_PORT)
