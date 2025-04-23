@@ -39,21 +39,31 @@
    `Go inside boserver directory then run these commands`
 4. python setup.py develop
 5. pip install -r requirements.txt
-6. Create config.py file inside boserver directory - 
-     
-
-      class Config(object):
-         DEBUG = False
-         HOST = 'localhost'
-         PORT = 5011
-
-         DB_NAME = ''
-         DB_USERNAME = ''
-         DB_HOST = ''
-         DB_PWD = ''
-          
-         JWT_SECRET_KEY = ''
-7. python app.py
+6. Create config.py file inside boserver directory -
+    ```
+    class Config(object):
+        DEBUG = False
+        HOST = 'localhost'
+        PORT = 5011
+    
+    
+        DB_NAME = 'qr_generator'
+        DB_USERNAME = 'test'
+        DB_HOST = 'localhost'
+        DB_PWD = '12345678'
+    
+        JWT_SECRET_KEY = '1234567812345678'
+    
+        CAPTCHA_LENGTH = 6
+        CAPTCHA_EXPIRY = 300
+        CAPTCHA_IMG_PATH = "D:/Projects/QR Generator/captcha_code/"
+    
+        REDIS_HOST = 'localhost'
+        REDIS_PWD = 'redis'
+        REDIS_DB = 0
+        REDIS_PORT = 6379
+    ```
+7. To start backend server - python app.py
 
      
 ### Frontend
@@ -114,7 +124,7 @@
         b. https://medium.com/@varun.tyagi83/a-guide-to-building-a-captcha-verification-system-in-python-1a5c62922674
     5. To connect redis with flask
         a. https://medium.com/@fahadnujaimalsaedi/using-flask-and-redis-to-optimize-web-application-performance-34a8ae750097
-    6. To Setups Redis
+    6. To Setup Redis
         a. https://youtu.be/DLKzd3bvgt8?si=el1tsVM-V61a976G
         b. Open file redis.windows-service.conf on path C:\Program Files\Redis and uncomment the line - 
             Change # requirepass foobared --> requirepass __your_redis_password__
