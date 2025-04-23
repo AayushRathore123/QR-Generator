@@ -2,3 +2,4 @@ from service_handler.auth_handler import AuthHandler
 from service_handler.qr_handler import QrHandler
 from service_handler.url_handler import UrlHandler
 from service_handler.captcha_handler import CaptchaHandler
+from service_handler.user_handler import UserHandler

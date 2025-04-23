@@ -19,7 +19,8 @@ class QrHandler:
 
     @staticmethod
     def update_qr(payload):
-        qr_obj = Qr(payload['qr_id'])
+        qr_id = payload.pop('qr_id')
+        qr_obj = Qr(qr_id)
         qr_update_rec = qr_obj.update_rec(payload)
         saved_data = qr_obj.save()
         if saved_data["errCode"]:
@@ -29,7 +30,8 @@ class QrHandler:
 
     @staticmethod
     def remove_qr(payload):
-        qr_obj = Qr(payload['qr_id'])
+        qr_id = payload.pop('qr_id')
+        qr_obj = Qr(qr_id)
         qr_update_rec = qr_obj.update_rec({'status':0})
         saved_data = qr_obj.save()
         # if saved_data["errCode"]:
