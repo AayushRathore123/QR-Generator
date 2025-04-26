@@ -134,3 +134,12 @@ class ValidateCaptchaCode(Resource):
         payload = request.get_json()
         obj = CaptchaHandler()
         return obj.validate_captcha_code(payload)
+
+
+class ContactUs(Resource):
+
+    @staticmethod
+    def post():
+        payload = request.get_json()
+        obj = EmailHandler()
+        return obj.send_email(payload)

@@ -12,3 +12,8 @@ DB_NAME = app.config["DB_NAME"]
 CAPTCHA_LENGTH = app.config["CAPTCHA_LENGTH"]
 CAPTCHA_IMG_PATH = app.config["CAPTCHA_IMG_PATH"]
 
+EMAIL_TO = app.config["EMAIL_TO"]
+EMAIL_PASSWORD = app.config["EMAIL_PASSWORD"]
+SMTP_SERVER = app.config["SMTP_SERVER"]
+SMTP_PORT = app.config["SMTP_PORT"]
+EMAIL_SUBJECT = app.config["EMAIL_SUBJECT"]
