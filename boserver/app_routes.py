@@ -25,3 +25,5 @@ api.add_resource(RedirectShortUrl, '/shortify/<string:hash_value>')
 # Captcha API
 api.add_resource(GetCaptchaCode, '/captcha_code/get')
 api.add_resource(ValidateCaptchaCode, '/captcha_code/validate')
+
+api.add_resource(ContactUs, '/contact_us')

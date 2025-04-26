@@ -63,6 +63,7 @@
         REDIS_DB = 0
         REDIS_PORT = 6379
     ```
+   Inside QR Generator, create folder captcha_code and add folder path in this CAPTCHA_IMG_PATH
 7. To start backend server - python app.py
 
      
@@ -103,33 +104,45 @@
 
 ### References:
 
-    1. For Git/GitHub – 
-        a. https://youtu.be/cn8l5bXhTBM?si=5VbjlfbdbAwmSDUO
-        b. https://youtu.be/k5D37W6h56o?si=F57C_thMym5P0Krr
-        c. https://youtu.be/fI-2k_XqXLg?si=WRUbZPHsfxcO0l2t
-    2. For SSH – 
-        a.	Issue - https://stackoverflow.com/questions/29297154/github-invalid-username-or-password
-        b.	To add SSH Key - https://www.youtube.com/watch?v=xkhUH9Fx2z8
-        c.	https://www.youtube.com/watch?v=z7jVOenqFYk
-        d.	https://www.youtube.com/watch?v=lRMAJwMQ0Vc
-    3. JWT (Json Web Token)
-        a. https://www.sitepoint.com/using-json-web-tokens-node-js/
-        b. https://www.geeksforgeeks.org/how-does-the-token-based-authentication-work/sa
-        c. https://www.geeksforgeeks.org/difference-between-local-storage-session-storage-and-cookies/
-        d. https://stackoverflow.com/questions/27067251/where-to-store-jwt-in-browser-how-to-protect-against-csrf
-        e. https://portswigger.net/web-security/csrf
-        f. https://www.descope.com/blog/post/developer-guide-jwt-storage#common-jwt-storage-methods
-    4. To generate Captcha
-        a. https://medium.com/@nomannayeem/cracking-the-captcha-code-your-complete-guide-to-understanding-and-implementing-captcha-technology-cf606367e8af
-        b. https://medium.com/@varun.tyagi83/a-guide-to-building-a-captcha-verification-system-in-python-1a5c62922674
-    5. To connect redis with flask
-        a. https://medium.com/@fahadnujaimalsaedi/using-flask-and-redis-to-optimize-web-application-performance-34a8ae750097
-    6. To Setup Redis
-        a. https://youtu.be/DLKzd3bvgt8?si=el1tsVM-V61a976G
-        b. Open file redis.windows-service.conf on path C:\Program Files\Redis and uncomment the line - 
-            Change # requirepass foobared --> requirepass __your_redis_password__
-        c. redis-server --service-stop
-        d. redis-server --service-start
-        e. redis-cli    --> auth __your_redis_password__    --> keys *
+1. For Git/GitHub – 
+   1. https://youtu.be/cn8l5bXhTBM?si=5VbjlfbdbAwmSDUO
+   2. https://youtu.be/k5D37W6h56o?si=F57C_thMym5P0Krr
+   3. https://youtu.be/fI-2k_XqXLg?si=WRUbZPHsfxcO0l2t
 
 
+2. For SSH – 
+   1. Issue - https://stackoverflow.com/questions/29297154/github-invalid-username-or-password
+   2. To add SSH Key - https://www.youtube.com/watch?v=xkhUH9Fx2z8
+   3. https://www.youtube.com/watch?v=z7jVOenqFYk
+   4. https://www.youtube.com/watch?v=lRMAJwMQ0Vc
+    
+
+3. JWT (Json Web Token)
+    1. https://www.sitepoint.com/using-json-web-tokens-node-js/
+    2. https://www.geeksforgeeks.org/how-does-the-token-based-authentication-work/sa
+    3. https://www.geeksforgeeks.org/difference-between-local-storage-session-storage-and-cookies/
+    4. https://stackoverflow.com/questions/27067251/where-to-store-jwt-in-browser-how-to-protect-against-csrf
+    5. https://portswigger.net/web-security/csrf
+    6. https://www.descope.com/blog/post/developer-guide-jwt-storage#common-jwt-storage-methods
+
+
+4. To generate Captcha
+    1. https://medium.com/@nomannayeem/cracking-the-captcha-code-your-complete-guide-to-understanding-and-implementing-captcha-technology-cf606367e8af
+    2. https://medium.com/@varun.tyagi83/a-guide-to-building-a-captcha-verification-system-in-python-1a5c62922674
+
+
+6. To Setup Redis
+    1. https://youtu.be/DLKzd3bvgt8?si=el1tsVM-V61a976G
+    2. To connect redis with flask https://medium.com/@fahadnujaimalsaedi/using-flask-and-redis-to-optimize-web-application-performance-34a8ae750097
+    3. Open file redis.windows-service.conf on path C:\Program Files\Redis and uncomment the line - 
+        Change # requirepass foobared --> requirepass __your_redis_password__
+    4. redis-server --service-stop
+    5. redis-server --service-start
+    6. redis-cli    --> auth __your_redis_password__    --> keys *
+
+ 
+7. To To send mail for contact 
+   1. https://www.geeksforgeeks.org/send-mail-gmail-account-using-python/
+   2. https://www.freecodecamp.org/news/send-emails-in-python-using-mailtrap-smtp-and-the-email-api/
+   3. Use of Mailtrap and Google App password
+   4. Mimetext, Mimebase, MimeMultipart - https://stackoverflow.com/questions/38825943/mimemultipart-mimetext-mimebase-and-payloads-for-sending-email-with-file-atta
