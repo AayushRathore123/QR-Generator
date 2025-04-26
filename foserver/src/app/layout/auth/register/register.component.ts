@@ -89,8 +89,8 @@ export class RegisterComponent {
     if (this.registerForm.valid && this.registerForm.controls['confirmpassword'].value == this.registerForm.controls['password'].value) {
       let jsonData = {
         'user_name': this.registerForm.controls['username'].value.toLowerCase(),
-        'first_name': this.registerForm.controls['firstname'].value.toLowerCase(),
-        'last_name':this.registerForm.controls['lastname'].value.toLowerCase() || null,
+        'first_name': this.registerForm.controls['firstname'].value,
+        'last_name':this.registerForm.controls['lastname'].value || null,
         'dob': this.registerForm.controls['dob'].value || null,
         'gender': this.registerForm.controls['gender'].value || null,
         'password': this.encryptdecryptservice.encrypt(this.registerForm.controls['password'].value)
