@@ -7,13 +7,14 @@ class UserHandler:
     def __init__(self):
         self.ret_json = ReturnJSON()
 
-    @staticmethod
-    def get_user_details(user_id):
+    def get_user_details(self, user_id):
         obj = User(user_id)
         user_rec = obj.dataset_rec
         if user_rec:
             user_rec = orm_to_dict_v2(user_rec)
-        return {"errCode":0, "msg": user_rec}
+            self.ret_json.update({"datarec":user_rec})
+        self.ret_json.update({"msg": "Successfully fetched data"})
+        return self.ret_json
 
     @staticmethod
     def update_user_details(payload):
