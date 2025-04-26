@@ -1,0 +1,94 @@
+<div *ngIf="isLoader" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+  
+  
+<div *ngIf="!isLoader" >
+    <div class="container1">
+        <div class="sidebar">
+            <a (click)="goBackToProfile()">Edit User Info</a>
+            <a (click)="goToChangePassword()">Change Password</a>
+            <a (click)="onDeleteModal($event)" href="#">Delete Account</a>
+            <a (click)="logout()">Logout</a>
+        </div>
+    
+        <div class="profile-container">
+            <form *ngIf="!showChangePasswordSection" [formGroup]="editUserForm">
+                <div class="form-group" style="max-height: 77.6px;">
+                    <label for="username">Username</label>
+                    <input formControlName="username" type="text" id="username" name="username">
+                </div>
+    
+                <div class="form-group" style="max-height: 77.6px; cursor: not-allowed;">
+                    <label for="firstname">First Name</label>
+                    <input formControlName="firstname" type="text" id="firstname" name="firstname" />
+                    <div *ngIf="editUserForm.get('firstname')?.touched && editUserForm.get('firstname')?.invalid" class="error-messages">
+                      <small *ngIf="editUserForm.get('firstname')?.errors?.['required']" style="color: red;">First name is required.</small>
+                      <small *ngIf="editUserForm.get('firstname')?.errors?.['maxlength']" style="color: red;">Maximum 50 characters allowed.</small>
+                    </div>
+                  </div>
+                  
+    
+                <div class="form-group" style="max-height: 77.6px;">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" formControlName="lastname" id="lastname" name="lastname">
+                </div>
+    
+                <div class="form-group" style="max-height: 77.6px;">
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender" formControlName="gender">
+                        <option value="" disabled>Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+    
+                <div class="form-group" style="max-height: 77.6px;">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" formControlName="dob" [max]="maxDate" id="dob" name="dob" >
+                </div>
+    
+                <div class="form-actions">
+                    <button (click)="updateUserDetails()" type="submit">Save Changes</button>
+                </div>
+            </form>
+            <form *ngIf="showChangePasswordSection" [formGroup]="changePasswordForm">
+    
+                <div class="form-group">
+                  <label for="currentPassword">Current Password</label>
+                  <input type="password" formControlName="currentPassword" id="currentPassword" name="currentPassword">
+                </div>
+          
+                <div class="form-group">
+                  <label for="newPassword">New Password</label>
+                  <input type="password" formControlName="newPassword" id="newPassword" name="newPassword">
+                </div>
+          
+                <div class="form-group">
+                  <label for="confirmPassword">Confirm New Password</label>
+                  <input type="password" formControlName="confirmPassword" id="confirmPassword" name="confirmPassword">
+                </div>
+          
+                <div class="form-actions">
+                  <button (click)="changePassword()" type="submit">Update Password</button>
+                </div>
+              </form>
+        </div>
+    </div>
+</div>
+  
+
+
+<div *ngIf="showDeleteModal" class="modal">
+    <div class="modal-content">
+        <h2>Delete Account</h2>
+        <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+        <div class="modal-actions">
+            <button class="cancel-btn" (click)="closeDeleteModal()">Cancel</button>
+            <button class="delete-btn" (click)="confirmDelete()">Delete</button>
+        </div>
+    </div>
+</div>
