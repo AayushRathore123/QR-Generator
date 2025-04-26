@@ -35,10 +35,10 @@
          - In PowerShell - venv\Scripts\Activate.ps1
    2. For Linux and MacOS
          - source venv/bin/activate
-
-   `Go inside boserver directory then run these commands`
 4. python setup.py develop
 5. pip install -r requirements.txt
+
+`Go inside boserver directory then run these commands`
 6. Create config.py file inside boserver directory -
     ```
     class Config(object):
@@ -63,7 +63,9 @@
         REDIS_DB = 0
         REDIS_PORT = 6379
     ```
+   ```
    Inside QR Generator, create folder captcha_code and add folder path in this CAPTCHA_IMG_PATH
+   ```
 7. To start backend server - python app.py
 
      
