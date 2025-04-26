@@ -1,22 +1,29 @@
-<div class="container py-4">
+<div *ngIf="isLoader" class="text-center py-5">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
 
-  <div class="table-responsive rounded shadow-sm">
-    <table class="table table-hover table-bordered align-middle text-nowrap">
-      <thead class="table-header text-center">
+
+<div *ngIf="!isLoader" class="container py-4">
+
+  <div class="table-responsive rounded shadow-sm border" >
+    <table class="table table-striped table-hover table-bordered align-middle text-nowrap mb-0">
+      <thead class="table-primary text-center">
         <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Type</th>
-          <th>Details</th>
-          <th>QR Code</th>
-          <th>Saved On</th>
-          <th>Actions</th>
+          <th class="border">Name</th>
+          <th class="border">Description</th>
+          <th class="border">Type</th>
+          <th class="border">Details</th>
+          <th class="border">QR Code</th>
+          <th class="border">Saved On</th>
+          <th class="border">Actions</th>
         </tr>
       </thead>
       <tbody>
         <ng-container *ngIf="qrcodes.length > 0; else noRecords">
           <tr *ngFor="let data of qrcodes; let i = index">
-            <td>
+            <td class="border">
               <ng-container *ngIf="editIndex !== i; else editName">
                 <strong>{{ data.name }}</strong>
               </ng-container>
@@ -25,7 +32,7 @@
               </ng-template>
             </td>
 
-            <td>
+            <td class="border">
               <ng-container *ngIf="editIndex !== i; else editDesc">
                 {{ data.description || '-' }}
               </ng-container>
@@ -34,9 +41,9 @@
               </ng-template>
             </td>
 
-            <td class="text-uppercase text-center fw-semibold">{{ data.type }}</td>
+            <td class="text-uppercase text-center fw-semibold border">{{ data.type }}</td>
 
-            <td>
+            <td class="border">
               <ng-container [ngSwitch]="data.type">
                 <div *ngSwitchCase="'wifi'">
                   <strong>SSID:</strong> {{ data.data.ssid }}<br />
@@ -52,7 +59,7 @@
               </ng-container>
             </td>
 
-            <td class="text-center">
+            <td class="text-center border">
               <qrcode
                 [elementType]="'canvas'"
                 [qrdata]="data.data.url || ('WIFI:S:' + data.data.ssid + ';T:' + data.data.authType + ';P:' + data.data.password + ';;')"
@@ -61,11 +68,11 @@
               ></qrcode>
             </td>
 
-            <td class="text-center text-muted">
+            <td class="text-center text-muted border">
               {{ data.saved_at | date: 'yyyy-MM-dd HH:mm' }}
             </td>
 
-            <td class="text-center">
+            <td class="text-center border">
               <ng-container *ngIf="editIndex === i; else actions">
                 <button class="btn btn-sm btn-success me-1" (click)="saveEdit(data)">
                   <i class="fa-solid fa-check"></i>

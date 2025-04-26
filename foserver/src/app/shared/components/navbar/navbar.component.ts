@@ -8,16 +8,18 @@ import { Subscription } from 'rxjs';
   selector: 'app-navbar',
   imports: [CommonModule, RouterModule],
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent{
 
   isLoggedIn=false;
+  username:string = '';
   private authSub!: Subscription;
   private userSub!: Subscription;
 
   constructor(public _auth: AuthService) { }
   ngOnInit() {
+    this.username = this._auth.getUserName() || '';
     this.authSub = this._auth.isLoggedIn$.subscribe(status => {
       this.isLoggedIn = status;
     });

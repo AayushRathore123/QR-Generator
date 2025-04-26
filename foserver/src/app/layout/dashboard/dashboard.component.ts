@@ -7,7 +7,6 @@ import { EncryptDecryptService } from '../../shared/services/encrypt-decrypt/enc
 import { FormsModule } from '@angular/forms';
 import { DeleteConfirmModalComponent } from '../../shared/components/delete-confirm-modal/delete-confirm-modal.component';
 import { ToastrService } from 'ngx-toastr';
-
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -22,6 +21,8 @@ editedName: string = '';
 editedDescription: string = '';
 deleteTarget: any = null;
 showDeleteConfirm: boolean = false;
+isLoader: boolean = false;
+
 constructor(
   private _getDataService: DataService,
   private _authService: AuthService,
@@ -101,13 +102,14 @@ deleteQR() {
 }
 
   getQrData() {
-    const jsonData = {
-      user_id: this._authService.getUserId(),
-    };
-    this._getDataService.getDashboardData(jsonData).subscribe(
+  this.isLoader=true
+    const user_id= this._authService.getUserId();
+
+    this._getDataService.getDashboardData(user_id).subscribe(
       (response) => {
-        if (response.errCode === 0 && response.msg?.length) {
-          this.qrcodes = response.msg.map((item: any) => {
+      this.isLoader=false;
+        if (response.errCode == 0 ) {
+          this.qrcodes = response.data.map((item: any) => {
             let parsedData: any = {};
                 parsedData = JSON.parse(item.data);
               if (item.type.includes('wifi')) {
@@ -122,7 +124,6 @@ deleteQR() {
                 };
               }
             return {
-              id: item.id,
               description: item.description,
               name: item.name,
               type: item.type.includes('wifi') ? 'wifi' : 'link',
@@ -131,8 +132,12 @@ deleteQR() {
             };
           });
         }
+        else {
+          this._toastrService.error(response.msg || 'Something went wrong', 'Error');
+        }
       },
       (error) => {
+        this.isLoader=false;
         console.error('Error fetching dashboard data:', error);
       }
     );

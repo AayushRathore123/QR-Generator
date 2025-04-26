@@ -18,8 +18,9 @@ export class DataService {
     return this.http.post(this.saveURL, data);
   }
 
-  getDashboardData(data:any):Observable<any>{
-    return this.http.post(this.getDataURL,data);
+  getDashboardData(user_id:any):Observable<any>{
+    const url = `${this.getDataURL}?user_id=${user_id}`;  
+    return this.http.get(url);
   }
 
   updateQR(data: any) {
