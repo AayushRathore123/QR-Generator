@@ -29,13 +29,22 @@
                         <i class="fa-solid fa-user"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                        <li *ngIf="user.user_name"><span class="dropdown-item"><strong>Username:</strong> {{ user.user_name }}</span></li>
-                        <li *ngIf="user.first_name || user.last_name"><span class="dropdown-item"><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</span></li>
-                        <li *ngIf="user.dob"><span class="dropdown-item"><strong>DOB:</strong> {{ user.dob }}</span></li>
-                        <li *ngIf="user.gender"><span class="dropdown-item"><strong>Gender:</strong> {{ user.gender }}</span></li>
+                        <li class="dropdown-item-text text-center fw-bold">
+                          <i class="fa-solid fa-user-circle me-2"></i> {{ username }}
+                        </li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" routerLink="/login" (click)="logout()">Logout</a></li>
-                    </ul>
+                        <li>
+                          <a class="dropdown-item d-flex align-items-center" routerLink="/layout/profile">
+                            <i class="fa-solid fa-id-badge me-2"></i> Profile
+                          </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                          <a class="dropdown-item d-flex align-items-center text-danger" routerLink="/login" (click)="logout()">
+                            <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
+                          </a>
+                        </li>
+                      </ul>                      
                 </li>
             </ul>
         </div>
