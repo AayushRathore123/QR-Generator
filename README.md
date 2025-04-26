@@ -62,6 +62,12 @@
         REDIS_PWD = 'redis'
         REDIS_DB = 0
         REDIS_PORT = 6379
+   
+         EMAIL_TO = 'raayush1101@gmail.com'
+         EMAIL_PASSWORD = 'ynli ngvq bzgp cucx'
+         SMTP_SERVER = 'smtp.gmail.com'
+         SMTP_PORT = 587
+         EMAIL_SUBJECT = 'QR Generator Query/Feedback'
     ```
    ```
    Inside QR Generator, create folder captcha_code and add folder path in this CAPTCHA_IMG_PATH
