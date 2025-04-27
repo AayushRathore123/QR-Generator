@@ -5,6 +5,7 @@ import { LayoutComponent } from './layout.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserProfileComponent } from './auth/user-profile/user-profile.component';
+import { UrlShortnerComponent } from './url-shortner/url-shortner.component';
 
 @NgModule({
   declarations: [],
@@ -14,7 +15,8 @@ import { UserProfileComponent } from './auth/user-profile/user-profile.component
     LayoutComponent,
     HomeComponent,
     DashboardComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    UrlShortnerComponent
   ]
 })
 export class LayoutModule { }
