@@ -9,8 +9,8 @@ from jwt import ExpiredSignatureError, DecodeError, InvalidTokenError, InvalidIs
 import json
 from boserver.flask_app import app
 
-
-TOKEN_NOT_PRESENT = ['/login', '/register', '/foo', '/shortify', '/captcha_code/get', '/captcha_code/validate']
+TOKEN_NOT_PRESENT = ['/login', '/register', '/foo', '/url_shortener/create', '/shortify', '/captcha_code/get',
+                     '/captcha_code/validate']
 app.config["JWT_TOKEN_LOCATION"] = ["headers"]
 app.config["JWT_HEADER_TYPE"] = "Bearer"
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(seconds=36000)
