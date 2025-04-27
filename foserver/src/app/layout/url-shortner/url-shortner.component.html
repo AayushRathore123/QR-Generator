@@ -1,0 +1,33 @@
+<div class="url-shortener">
+    <h2>URL Shortner</h2>
+    <p>Enter your URL below to generate a short link and copy it easily!</p>
+    <form [formGroup]="urlForm" (ngSubmit)="generateShortUrl()">
+      <div>
+        <input
+          type="text"
+          formControlName="longUrl"
+          placeholder="Enter your URL"
+          class="url-input"
+        />
+        <div *ngIf="urlForm.get('longUrl')?.touched && urlForm.get('longUrl')?.invalid" class="error">
+          <div *ngIf="urlForm.get('longUrl')?.errors?.['required']">
+            URL is required.
+          </div>
+          <div *ngIf="urlForm.get('longUrl')?.errors?.['pattern']">
+            Please enter a valid URL (starting with http or https).
+          </div>
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="isLoader || urlForm.invalid">
+        <span *ngIf="isLoader" class="loader"></span>
+        {{ isLoader ? 'Generating...' : 'Generate Short URL' }}
+      </button>
+    </form>
+  
+    <div *ngIf="shortUrl" class="short-url">
+      <input type="text" [value]="shortUrl" readonly class="short-url-input" />
+      <button type="button" (click)="copyToClipboard()" class="btn btn-warning">Copy</button>
+    </div>
+  </div>
+  

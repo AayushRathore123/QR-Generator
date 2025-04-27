@@ -15,10 +15,13 @@
                     <a class="nav-link" *ngIf="!isLoggedIn" routerLink="/register">Register</a>  
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/layout/home">Home</a>  
+                    <a class="nav-link" routerLink="/layout/home">QR Generator</a>  
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/layout/url-shortner">Url Shortner</a>  
                 </li>
                 <li *ngIf="isLoggedIn" class="nav-item">
-                    <a class="nav-link" routerLink="/layout/dashboard">Dashboard</a> 
+                    <a class="nav-link" routerLink="/layout/dashboard">QR Dashboard</a> 
                 </li>
             </ul>
 
