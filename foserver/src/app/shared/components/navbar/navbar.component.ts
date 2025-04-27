@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-navbar',
@@ -13,11 +14,13 @@ import { Subscription } from 'rxjs';
 export class NavbarComponent{
 
   isLoggedIn=false;
+  isDarkMode : boolean=false;
   username:string = '';
   private authSub!: Subscription;
   private userSub!: Subscription;
 
-  constructor(public _auth: AuthService) { }
+  constructor(public _auth: AuthService, private _toastrService:ToastrService) { }
+
   ngOnInit() {
     this.username = this._auth.getUserName() || '';
     this.authSub = this._auth.isLoggedIn$.subscribe(status => {
@@ -32,7 +35,21 @@ export class NavbarComponent{
 
   logout(): void {
     this._auth.logout();
+    this._toastrService.success('Logged out successfully!','Success')
   }
+
+  toggleTheme(event: any) {
+    const isChecked = event.target.checked;
+    this.isDarkMode= isChecked;
+    const body = document.body;
+    
+    if (isChecked) {
+      body.classList.add('dark-theme');
+    } else {
+      body.classList.remove('dark-theme');
+    }
+  }
+  
 
   ngOnDestroy(){
     this.authSub.unsubscribe();
