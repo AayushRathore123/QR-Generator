@@ -140,5 +140,6 @@ export class UserProfileComponent {
 
   logout(){
     this._authService.logout();
-  }
+    this._toastrService.success('Logged out successfully!','Success')
+    this.router.navigate(['/layout/home']);  }
 }

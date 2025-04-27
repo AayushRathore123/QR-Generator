@@ -25,8 +25,8 @@
                     <label for="firstname">First Name</label>
                     <input formControlName="firstname" type="text" id="firstname" name="firstname" />
                     <div *ngIf="editUserForm.get('firstname')?.touched && editUserForm.get('firstname')?.invalid" class="error-messages">
-                      <small *ngIf="editUserForm.get('firstname')?.errors?.['required']" style="color: red;">First name is required.</small>
-                      <small *ngIf="editUserForm.get('firstname')?.errors?.['maxlength']" style="color: red;">Maximum 50 characters allowed.</small>
+                      <small *ngIf="editUserForm.get('firstname')?.errors?.['required']" >First name is required.</small>
+                      <small *ngIf="editUserForm.get('firstname')?.errors?.['maxlength']">Maximum 50 characters allowed.</small>
                     </div>
                   </div>
                   

@@ -8,8 +8,8 @@
 
 .sidebar {
     width: 250px;
-    background-color: #2c3e50;
-    color: white;
+    background-color: var(--card-background);
+    color: var(--text-color);
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -21,7 +21,7 @@
 }
 
 .sidebar a {
-    color: white;
+    color: var(--text-color);
     text-decoration: none;
     margin: 10px 0;
     padding: 10px;
@@ -30,11 +30,12 @@
 
 .sidebar a:hover {
     background-color: #34495e;
+    color: white;
 }
 
 .profile-container {
     padding: 40px;
-    background-color: #f4f4f4;
+    background-color: var(--background-color);
     width: calc(100% - 250px);
     display: flex;
     justify-content: center; 
@@ -48,10 +49,10 @@
 
 form {
     width: 600px;
-    background: white;
+    background-color: var(--card-background);
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .form-group {
@@ -61,6 +62,7 @@ form {
 label {
     display: block;
     margin-bottom: 8px;
+    color: var(--label);
     font-weight: bold;
 }
 
@@ -70,6 +72,7 @@ select {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    background-color: var(--input-bg);
 }
 
 .form-actions {
@@ -78,15 +81,11 @@ select {
 
 .form-actions button {
     padding: 10px 20px;
-    background-color: #2c3e50;
-    color: white;
+    background-color: var(--primary-btn);
     border: none;
     border-radius: 4px;
     cursor: pointer;
-}
-
-.form-actions button:hover {
-    background-color: #1a252f;
+    color: white;
 }
 
 .modal {
@@ -103,7 +102,7 @@ select {
 }
 
 .modal-content {
-    background: white;
+    background-color: var(--card-background);
     padding: 30px;
     border-radius: 8px;
     width: 90%;
@@ -135,7 +134,7 @@ select {
 }
 
 .delete-btn {
-    background-color: #e74c3c;
+    background-color: var(--error-color);
     color: white;
 }
 
@@ -145,4 +144,16 @@ select {
 
 a{
     cursor: pointer;
+}
+
+small{
+    color: var(--error-color);
+}
+
+h2{
+    color: var(--text-color);
+}
+
+p{
+    color: var(--label);
 }

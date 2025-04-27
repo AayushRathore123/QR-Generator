@@ -1,55 +1,63 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
-        <a class="navbar-brand" routerLink="/">QR GENERATOR</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li *ngIf="!isLoggedIn" class="nav-item">
-                    <a class="nav-link" routerLink="/login">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" *ngIf="!isLoggedIn" routerLink="/register">Register</a>  
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/layout/home">QR Generator</a>  
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/layout/url-shortner">Url Shortner</a>  
-                </li>
-                <li *ngIf="isLoggedIn" class="nav-item">
-                    <a class="nav-link" routerLink="/layout/dashboard">QR Dashboard</a> 
-                </li>
-            </ul>
-
-            <ul *ngIf="isLoggedIn" class="navbar-nav mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-solid fa-user"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                        <li class="dropdown-item-text text-center fw-bold">
-                          <i class="fa-solid fa-user-circle me-2"></i> {{ username }}
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                          <a class="dropdown-item d-flex align-items-center" routerLink="/layout/profile">
-                            <i class="fa-solid fa-id-badge me-2"></i> Profile
-                          </a>
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                          <a class="dropdown-item d-flex align-items-center text-danger" routerLink="/login" (click)="logout()">
-                            <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
-                          </a>
-                        </li>
-                      </ul>                      
-                </li>
-            </ul>
-        </div>
+      <a class="navbar-brand" routerLink="/">QR GENERATOR</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li *ngIf="!isLoggedIn" class="nav-item">
+            <a class="nav-link" routerLink="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" *ngIf="!isLoggedIn" routerLink="/register">Register</a>  
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/layout/home">QR Generator</a>  
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/layout/url-shortner">Url Shortener</a>  
+          </li>
+          <li *ngIf="isLoggedIn" class="nav-item">
+            <a class="nav-link" routerLink="/layout/dashboard">QR Dashboard</a> 
+          </li>
+        </ul>
+  
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item" style="margin-right: 20px;">
+            <label class="switch">
+              <input type="checkbox" (change)="toggleTheme($event)" [checked]="isDarkMode">
+              <span class="slider round"></span>
+            </label>
+          </li>
+          
+          <li *ngIf="isLoggedIn" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-user"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li class="dropdown-item-text text-center fw-bold">
+                <i class="fa-solid fa-user-circle me-2"></i> {{ username }}
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <a class="dropdown-item d-flex align-items-center" routerLink="/layout/profile">
+                  <i class="fa-solid fa-id-badge me-2"></i> Profile
+                </a>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <a class="dropdown-item d-flex align-items-center text-danger" routerLink="/login" (click)="logout()">
+                  <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
+                </a>
+              </li>
+            </ul>                      
+          </li>
+        </ul>
+      </div>
     </div>
-</nav>
+  </nav>
+  

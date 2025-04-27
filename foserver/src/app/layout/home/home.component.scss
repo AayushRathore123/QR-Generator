@@ -3,18 +3,25 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
 }
 
 .page-container {
+  background-color: var(--background-color);
   text-align: center;
   padding: 20px;
+  height: calc(100vh - 56px);
+}
+
+h3{
+  color: var(--text-color);
 }
 
 h2 {
   font-size: 24px;
   margin-bottom: 5px;
   text-align: center;
+  color: var(--text-color);
 }
 
 p {
@@ -30,20 +37,20 @@ p {
 }
 
 .form-card {
+  background-color: var(--card-background);
   width: 350px;
   padding: 20px;
   border-radius: 8px;
-  background: white;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .qr-display {
+  background-color: var(--card-background);
   width: 300px;
   text-align: center;
   padding: 20px;
-  background: white;
   border-radius: 8px;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .qr-placeholder {
@@ -118,8 +125,7 @@ input:checked + .slider:before {
 
 label {
   display: block;
-  font-weight: bold;
-  color: #6c757d;
+  color: var(--label);
   margin-bottom: 4px;
 }
 
@@ -131,6 +137,7 @@ select {
   border-radius: 6px;
   font-size: 1rem;
   outline: none;
+  background-color: var(--input-bg);
 }
 
 input:focus,
@@ -143,7 +150,7 @@ select:focus {
 }
 
 small {
-  color: #d9534f;
+  color: var(--error-color);
   font-size: 12px;
   margin-left: 3px;
   display: block;
@@ -203,11 +210,9 @@ button {
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
+  background-color: var(--primary-btn);
 }
 
-button:hover {
-  background: #45a049;
-}
 
 button.download-btn {
   background: #2196f3;
@@ -220,4 +225,8 @@ button.download-btn:hover {
 .boxbtn {
   width: 200px;
   height: 100px;
+}
+
+.toggle-label{
+  color: var(--label);
 }

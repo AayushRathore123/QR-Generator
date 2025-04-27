@@ -1,3 +1,22 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.container{
+  height: calc(100vh - 56px);
+  width: 100%;  
+  margin: 0px;
+  background-color: var(--background-color);  
+  display: flex; 
+  flex-direction: column;
+  max-width: 100%;
+}
+
 table {
     th,
     td {
@@ -20,10 +39,7 @@ table {
     }
   }
   
-  .container {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-  }
+
   
   h2 {
     margin-bottom: 1rem;

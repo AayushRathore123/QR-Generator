@@ -3,24 +3,34 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
   font-family: Arial, sans-serif;
 }
 
+h2{
+  color: var(--text-color);
+}
+
+p{
+  color: var(--label);
+}
 .url-shortener {
   display: flex;
+  background-color: var(--background-color);
   padding-top: 100px;
   align-items: center;
   height: calc(100vh - 56px);
   flex-direction: column;
 }
 
+.invalid-text{
+  color: var(--error-color);
+}
 
 .url-shortener form {
-    background: #fff;
+    background: var(--card-background);
     padding: 30px 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     width: 320px;
     display: flex;
     flex-direction: column;
@@ -69,5 +79,24 @@ body {
     border: 1px solid #ccc;
     border-radius: 6px;
     width: 250px;
-    background-color: #f9f9f9;
+  }
+
+  .generatebutton{
+    background-color: var(--primary-btn);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  input{
+    outline: none;
+    background-color: var(--input-bg);
+  }
+
+  .copy-btn{
+    background-color: var(--warning-btn);
   }
