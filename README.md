@@ -134,6 +134,10 @@
     6. https://www.descope.com/blog/post/developer-guide-jwt-storage#common-jwt-storage-methods
 
 
+4. URL Shortner
+    1. https://kitrakiar73.medium.com/url-shortner-how-to-build-one-f458fecf038f
+
+
 4. To generate Captcha
     1. https://medium.com/@nomannayeem/cracking-the-captcha-code-your-complete-guide-to-understanding-and-implementing-captcha-technology-cf606367e8af
     2. https://medium.com/@varun.tyagi83/a-guide-to-building-a-captcha-verification-system-in-python-1a5c62922674
@@ -154,3 +158,10 @@
    2. https://www.freecodecamp.org/news/send-emails-in-python-using-mailtrap-smtp-and-the-email-api/
    3. Use of Mailtrap and Google App password
    4. Mimetext, Mimebase, MimeMultipart - https://stackoverflow.com/questions/38825943/mimemultipart-mimetext-mimebase-and-payloads-for-sending-email-with-file-atta
+
+
+8. OAuth Implementation
+   1. https://youtu.be/ZDuRmhLSLOY?si=H5CXEFra8PbNdP0y
+   2. https://www.geeksforgeeks.org/oauth-authentication-with-flask-connect-to-google-twitter-and-facebook/
+   3. https://medium.com/google-cloud/understanding-oauth2-and-building-a-basic-authorization-server-of-your-own-a-beginners-guide-cf7451a16f66
+   4. 
