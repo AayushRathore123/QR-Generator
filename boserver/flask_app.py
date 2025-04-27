@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_restful import Api
 from flask_cors import CORS
+from authlib.integrations.flask_client import OAuth
 from boserver.rediscacher.redis_cache_core import RedisCacheCore
 
 
@@ -16,3 +17,5 @@ redis_pwd = app.config["REDIS_PWD"]
 redis_db = app.config["REDIS_DB"]
 redis_port = app.config["REDIS_PORT"]
 redis_cache_obj = RedisCacheCore(redis_host, redis_port, redis_db, redis_pwd)
+
+oauth = OAuth(app)

@@ -153,7 +153,7 @@
     6. redis-cli    --> auth __your_redis_password__    --> keys *
 
  
-7. To To send mail for contact 
+7. To send mail for contact 
    1. https://www.geeksforgeeks.org/send-mail-gmail-account-using-python/
    2. https://www.freecodecamp.org/news/send-emails-in-python-using-mailtrap-smtp-and-the-email-api/
    3. Use of Mailtrap and Google App password
@@ -162,6 +162,6 @@
 
 8. OAuth Implementation
    1. https://youtu.be/ZDuRmhLSLOY?si=H5CXEFra8PbNdP0y
-   2. https://www.geeksforgeeks.org/oauth-authentication-with-flask-connect-to-google-twitter-and-facebook/
-   3. https://medium.com/google-cloud/understanding-oauth2-and-building-a-basic-authorization-server-of-your-own-a-beginners-guide-cf7451a16f66
-   4. 
+   2. https://medium.com/google-cloud/understanding-oauth2-and-building-a-basic-authorization-server-of-your-own-a-beginners-guide-cf7451a16f66
+   3. Code - https://www.geeksforgeeks.org/oauth-authentication-with-flask-connect-to-google-twitter-and-facebook/
+   4. Setup in Google cloud console - https://youtube.com/shorts/WABhO9KsOpU?si=pW-R7SMcw46sSrDl
