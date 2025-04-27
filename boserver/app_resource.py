@@ -143,3 +143,19 @@ class ContactUs(Resource):
         payload = request.get_json()
         obj = EmailHandler()
         return obj.send_email(payload)
+
+
+class LoginOAuth(Resource):
+
+    @staticmethod
+    def get():
+        obj = AuthHandler()
+        return obj.oauth_login()
+
+
+class OAuth2Callback(Resource):
+
+    @staticmethod
+    def get():
+        obj = AuthHandler()
+        return obj.oauth_callback()
