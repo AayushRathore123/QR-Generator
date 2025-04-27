@@ -68,6 +68,16 @@
          SMTP_SERVER = 'smtp.gmail.com'
          SMTP_PORT = 587
          EMAIL_SUBJECT = 'QR Generator Query/Feedback'
+   
+         SECRET_KEY = '__your_screte_key__' (Generate using os.urandom(24))
+   
+         OAUTH_GOOGLE_CONF_URL = 'https://accounts.google.com/.well-known/openid-configuration'
+         OAUTH2_PROVIDERS = {
+              "google": {
+                  "client_id": "__your_client__id",
+                  "client_secret": "__your_client_secret__"
+              }
+         }
     ```
    ```
    Inside QR Generator, create folder captcha_code and add folder path in this CAPTCHA_IMG_PATH
