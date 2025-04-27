@@ -7,10 +7,14 @@ import { environment } from '../../../../environment/environment';
 })
 export class DataService {
 
+  //QR generator
   private saveURL = environment.apiUrl+'qr_code/create';
   private getDataURL =environment.apiUrl+'qr_code/get_all';
   private updateDataURL =environment.apiUrl+'qr_code/update';
   private deleteDataURL =environment.apiUrl+'qr_code/remove';
+
+  //URL shortner
+  private urlShortnerURL =environment.apiUrl+'url_shortener/create';
 
   constructor(private http: HttpClient) {}
 
@@ -29,6 +33,10 @@ export class DataService {
   
   deleteQR(data: any) {
     return this.http.post(this.deleteDataURL, data);
+  }
+
+  urlShortner(url:any){
+    return this.http.post(this.urlShortnerURL, url);
   }
   
 }
