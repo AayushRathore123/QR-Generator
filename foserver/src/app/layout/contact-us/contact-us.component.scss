@@ -1,0 +1,98 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+h2{
+  color: var(--text-color);
+}
+
+p{
+  color: var(--label);
+}
+
+.contactus{
+  display: flex;
+  background-color: var(--background-color);
+  padding-top: 30px;
+  align-items: center;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.contactus form {
+    background: var(--card-background);
+    padding: 30px 20px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    width: 750px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contactus-input, .message-input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 3px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+label {
+    color: var(--label);
+  }
+
+
+
+.inputgrp{
+    display: flex;
+    min-height: 87.6px;
+    flex-direction: column;
+}
+
+.inputs{
+    justify-content: space-between;
+}
+
+.contactus-input{
+    width: 300px;
+}
+
+.message-input{
+    height: 200px;
+}
+
+.error {
+    color: var(--error-color);
+    font-size: 12px;
+  }
+
+  button{
+    margin-top: 10px;
+    background-color: var(--primary-btn);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  input{
+    outline: none;
+    background-color: var(--input-bg);
+  }
+
+  textarea{
+    outline: none;
+    background-color: var(--input-bg);
+  }
+
+.textarea{
+    min-height: 250.6px;
+}
