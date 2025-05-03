@@ -11,7 +11,7 @@ export class AuthService {
   private registerURL =environment.apiUrl+'register';
   private getDataURL =environment.apiUrl+'user_details/get';
   private updateDataURL = environment.apiUrl+'user_details/update';
-  private changeUserPasswordURL = environment.apiUrl+'change';
+  private changeUserPasswordURL = environment.apiUrl+'user/update/password';
   private deleteUserURL = environment.apiUrl+'delete';
 
   private userSubject = new BehaviorSubject<any>(null); 
@@ -91,9 +91,7 @@ export class AuthService {
   }
 
   changeUserPassword(jsonData: any): Observable<any>{
-    return this.http.post<any>(this.changeUserPasswordURL, jsonData).pipe(map((data) => {
-      return data;
-    }));
+    return this.http.post<any>(this.changeUserPasswordURL, jsonData);
   }
 
   deleteUser(user_id:any){
