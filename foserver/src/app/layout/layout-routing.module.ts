@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { authGuard } from '../shared/guards/auth.guard';
 import { UserProfileComponent } from './auth/user-profile/user-profile.component';
 import { UrlShortnerComponent } from './url-shortner/url-shortner.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,8 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'url-shortner', component: UrlShortnerComponent },
       { path: 'dashboard', component: DashboardComponent, canActivate:[authGuard] },
-      { path: 'profile', component: UserProfileComponent, canActivate:[authGuard] }
+      { path: 'profile', component: UserProfileComponent, canActivate:[authGuard] },
+      { path: 'contactus', component: ContactUsComponent }
 
     ]
   }
