@@ -6,6 +6,8 @@ api.add_resource(Foo, '/foo')
 
 # AUTH API
 api.add_resource(Login, '/login')
+api.add_resource(LoginOAuth, '/oauth/login')
+api.add_resource(OAuth2Callback, '/oauth2callback')
 api.add_resource(Register, '/register')
 
 # USER CRUD API
