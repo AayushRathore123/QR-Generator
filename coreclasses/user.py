@@ -36,3 +36,8 @@ class User:
             setattr(model_obj, k, v)
         self.session.flush()
         return model_obj
+
+    def get_user_rec(self, user_id):
+        user_rec = self.session.query(TableUser).filter(TableUser.id==user_id).first()
+        self.dataset_rec = user_rec
+        return user_rec

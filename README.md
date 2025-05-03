@@ -45,8 +45,7 @@
         DEBUG = False
         HOST = 'localhost'
         PORT = 5011
-    
-    
+        
         DB_NAME = 'qr_generator'
         DB_USERNAME = 'test'
         DB_HOST = 'localhost'
@@ -63,22 +62,25 @@
         REDIS_DB = 0
         REDIS_PORT = 6379
    
-         EMAIL_TO = 'raayush1101@gmail.com'
-         EMAIL_PASSWORD = 'ynli ngvq bzgp cucx'
-         SMTP_SERVER = 'smtp.gmail.com'
-         SMTP_PORT = 587
-         EMAIL_SUBJECT = 'QR Generator Query/Feedback'
+        # Generate Google app password - https://support.google.com/mail/answer/185833?hl=en
+        EMAIL_TO = 'raayush1101@gmail.com'
+        EMAIL_PASSWORD = 'aaaa bbbb cccc dddd'
+        SMTP_SERVER = 'smtp.gmail.com'
+        SMTP_PORT = 587
+        EMAIL_SUBJECT = 'QR Generator Query/Feedback'
+         
+        # Generate using os.urandom(24)
+        SECRET_KEY = '__your_screte_key__'   
    
-         SECRET_KEY = '__your_screte_key__' (Generate using os.urandom(24))
-   
-         OAUTH_GOOGLE_CONF_URL = 'https://accounts.google.com/.well-known/openid-configuration'
-         OAUTH2_PROVIDERS = {
+        OAUTH_GOOGLE_CONF_URL = 'https://accounts.google.com/.well-known/openid-configuration'
+        OAUTH2_PROVIDERS = {
               "google": {
                   "client_id": "__your_client__id",
                   "client_secret": "__your_client_secret__"
               }
-         }
+        }
     ```
+   
    ```
    Inside QR Generator, create folder captcha_code and add folder path in this CAPTCHA_IMG_PATH
    ```
@@ -166,12 +168,41 @@
 7. To send mail for contact 
    1. https://www.geeksforgeeks.org/send-mail-gmail-account-using-python/
    2. https://www.freecodecamp.org/news/send-emails-in-python-using-mailtrap-smtp-and-the-email-api/
-   3. Use of Mailtrap and Google App password
+   3. Use of Mailtrap and Google App password (https://support.google.com/mail/answer/185833?hl=en)
    4. Mimetext, Mimebase, MimeMultipart - https://stackoverflow.com/questions/38825943/mimemultipart-mimetext-mimebase-and-payloads-for-sending-email-with-file-atta
 
 
-8. OAuth Implementation
+8. OAuth Intro and Implementation
    1. https://youtu.be/ZDuRmhLSLOY?si=H5CXEFra8PbNdP0y
    2. https://medium.com/google-cloud/understanding-oauth2-and-building-a-basic-authorization-server-of-your-own-a-beginners-guide-cf7451a16f66
    3. Code - https://www.geeksforgeeks.org/oauth-authentication-with-flask-connect-to-google-twitter-and-facebook/
-   4. Setup in Google cloud console - https://youtube.com/shorts/WABhO9KsOpU?si=pW-R7SMcw46sSrDl
+   4. To Setup in Google cloud console - https://youtube.com/shorts/WABhO9KsOpU?si=pW-R7SMcw46sSrDl
+
+
+
+Setup & Flow of Email Sending
+1. At payload, getting email, name and msg
+2. Add your email and app generated password by Gmail on Config.py file
+3. At SMTP server, login with email and password 
+4. Send email to the user you want to send
+
+Flow of URL Shortener
+1. At payload - long_url
+2. If url exist in DB, then fetch and return it
+3. Generate uuid and convert uuid to unique numeric_id i.e. of 128-bit (32 hex digits). 
+4. Generate short hashValue using base62 conversion, store that hash_value corresponding to long url
+5. Return short url
+6. 2nd API called - When user click on short_url then api called which retrieve long_url and redirect it
+
+Flow of Captcha Generation
+1. Add captcha details in config file
+2. Generate captcha code with random char 
+3. Using generated captcha code, create image and store that uuid with captcha code in redis 
+4. Return uuid and captcha image in response
+5. 2nd API called - When user input captcha and submit then using uuid retrieve captcha code and check inputted and store captcha code
+
+OAuth setup & FLow
+1. Create client id & client secret key and add it to config file 
+2. Register the Oauth provider 
+3. Function - it sends the user to Google Login Page, after user logs in, Google will send back user to app(to 2nd API /oauth2callback) with an authorization code
+4. Further this /oauth2callback api exchange code with token.

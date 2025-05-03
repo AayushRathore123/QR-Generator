@@ -13,6 +13,7 @@ api.add_resource(Register, '/register')
 # USER CRUD API
 api.add_resource(GetUserDetails, '/user_details/get')
 api.add_resource(UpdateUserDetails, '/user_details/update')
+api.add_resource(UpdateUserPassword, '/user/update/password')
 
 # QR CRUD API
 api.add_resource(CreateQr, '/qr_code/create')
