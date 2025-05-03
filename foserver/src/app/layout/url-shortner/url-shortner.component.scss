@@ -18,7 +18,7 @@ p{
   background-color: var(--background-color);
   padding-top: 100px;
   align-items: center;
-  height: calc(100vh - 56px);
+  min-height: 100vh;
   flex-direction: column;
 }
 
@@ -46,7 +46,7 @@ p{
   }
   
   .error {
-    color: #e74c3c;
+    color: var(--error-color);
     font-size: 12px;
     margin-bottom: 8px;
   }

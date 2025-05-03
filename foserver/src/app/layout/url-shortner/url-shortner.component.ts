@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { DataService } from '../../shared/services/data/data.service';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
-
+declare var bootstrap: any;
 @Component({
   selector: 'app-url-shortner',
   imports: [CommonModule,FormsModule,ReactiveFormsModule],
@@ -47,6 +47,9 @@ export class UrlShortnerComponent {
     )
   }
 
-  copyToClipboard(){
+  copyToClipboard(inputElement:any,btnElement:any){
+    inputElement.select();
+    document.execCommand('copy');
+    inputElement.setSelectionRange(0, 0);
   }
 }
