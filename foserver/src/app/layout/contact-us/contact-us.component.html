@@ -1,0 +1,41 @@
+<div class="contactus">
+    <h2>Contact Us</h2>
+    <p>Get in touch with us!</p>
+    <form [formGroup]="contactusForm" (ngSubmit)="submit()">
+        <div class="d-flex inputs">
+            <div class="inputgrp">
+                <label>Name </label>
+                <input type="text" formControlName="name" placeholder="Enter your name" class="contactus-input"/>
+                <div *ngIf="contactusForm.get('name')?.invalid && isSubmitted" class="error">
+                <div class="invalid-text" *ngIf="contactusForm.get('name')?.errors?.['required']">
+                    Name is required.
+                </div>
+                </div>
+            </div>
+            <div class="inputgrp">
+                <label>Email </label>
+                <input type="text" formControlName="email" placeholder="Enter your email" class="contactus-input" />
+                <div *ngIf="contactusForm.get('email')?.invalid && isSubmitted" class="error">
+                    <div class="invalid-text" *ngIf="contactusForm.get('email')?.errors?.['required']">
+                        Email is required.
+                    </div>
+                    <div class="invalid-text" *ngIf="contactusForm.get('email')?.errors?.['email']">
+                        Please enter a valid email.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="textarea">
+            <label>Message </label>
+            <textarea type="text" formControlName="message" placeholder="Enter your message" class="message-input"></textarea>
+            <div *ngIf="contactusForm.get('message')?.invalid && isSubmitted" class="error">
+            <div class="invalid-text" *ngIf="contactusForm.get('message')?.errors?.['required']">
+                Message is required.
+            </div>
+            </div>
+        </div>
+    
+        <button type="submit">Submit</button>
+    </form>
+</div>
+  

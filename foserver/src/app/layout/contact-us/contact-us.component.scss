@@ -13,75 +13,66 @@ h2{
 p{
   color: var(--label);
 }
-.url-shortener {
+
+.contactus{
   display: flex;
   background-color: var(--background-color);
-  padding-top: 100px;
+  padding-top: 30px;
   align-items: center;
   min-height: 100vh;
   flex-direction: column;
 }
 
-.invalid-text{
-  color: var(--error-color);
-}
-
-.url-shortener form {
+.contactus form {
     background: var(--card-background);
     padding: 30px 20px;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    width: 320px;
+    width: 750px;
     display: flex;
     flex-direction: column;
-  }
-  
-  .url-input {
+}
+
+.contactus-input, .message-input {
     width: 100%;
     padding: 10px 12px;
-    margin-bottom: 8px;
+    margin-bottom: 3px;
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 14px;
-  }
-  
-  .error {
-    color: var(--error-color);
-    font-size: 12px;
-    margin-bottom: 8px;
-  }
-  
-  .loader {
-    border: 2px solid #f3f3f3;
-    border-top: 2px solid #3498db;
-    border-radius: 50%;
-    width: 15px;
-    height: 15px;
-    animation: spin 1s linear infinite;
-    margin-right: 8px;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
-  .short-url {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .short-url-input {
-    padding: 8px 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    width: 250px;
+}
+
+label {
+    color: var(--label);
   }
 
-  .generatebutton{
+
+
+.inputgrp{
+    display: flex;
+    min-height: 87.6px;
+    flex-direction: column;
+}
+
+.inputs{
+    justify-content: space-between;
+}
+
+.contactus-input{
+    width: 300px;
+}
+
+.message-input{
+    height: 200px;
+}
+
+.error {
+    color: var(--error-color);
+    font-size: 12px;
+  }
+
+  button{
+    margin-top: 10px;
     background-color: var(--primary-btn);
     color: #fff;
     border: none;
@@ -97,6 +88,11 @@ p{
     background-color: var(--input-bg);
   }
 
-  .copy-btn{
-    background-color: var(--warning-btn);
+  textarea{
+    outline: none;
+    background-color: var(--input-bg);
   }
+
+.textarea{
+    min-height: 250.6px;
+}

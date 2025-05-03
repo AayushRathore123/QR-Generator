@@ -26,8 +26,8 @@
     </form>
   
     <div *ngIf="shortUrl" class="short-url">
-      <input type="text" [value]="shortUrl" readonly class="short-url-input" />
-      <button type="button" (click)="copyToClipboard()" class="btn copy-btn btn-warning">Copy</button>
+      <input type="text" #shorturl [value]="shortUrl" readonly class="short-url-input" />
+      <button #btnElement type="button" (click)="copyToClipboard(shorturl,btnElement)" class="btn copy-btn btn-warning">Copy</button>
     </div>
   </div>
   
