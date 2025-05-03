@@ -159,3 +159,12 @@ class OAuth2Callback(Resource):
     def get():
         obj = AuthHandler()
         return obj.oauth_callback()
+
+
+class UpdateUserPassword(Resource):
+
+    @staticmethod
+    def post():
+        payload = request.get_json()
+        obj = UserHandler()
+        return obj.update_password(payload)
