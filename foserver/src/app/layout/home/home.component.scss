@@ -10,7 +10,7 @@ body {
   background-color: var(--background-color);
   text-align: center;
   padding: 20px;
-  height: calc(100vh - 56px);
+  min-height: 100vh;
 }
 
 h3{
