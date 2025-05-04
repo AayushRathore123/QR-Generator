@@ -2,9 +2,9 @@ import math
 import random
 import base62
 import uuid
-from boserver.app_config_load import APP_HOST, APP_PORT
-from boserver.app_orm import session, TableUrlShortener
-from boserver.json_helper import ReturnJSON
+from dbserver.app_config_load import APP_HOST, APP_PORT
+from dbserver.app_orm import session, TableUrlShortener
+from dbserver.json_helper import ReturnJSON
 
 
 class Url:

@@ -7,7 +7,7 @@ package-lock.json
 .angular/
 .angular/cache/
 .angular/cache/19.2.1/
-boserver/config.py
+dbserver/config.py
 neon_user_pwd_qr_generator_db.txt
 qr_generator.egg-info/
 *.pyc

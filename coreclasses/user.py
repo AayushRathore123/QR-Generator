@@ -1,5 +1,5 @@
-from boserver.app_orm import session, TableUser, TableUserDetails
-from boserver.json_helper import ReturnJSON
+from dbserver.app_orm import session, TableUser, TableUserDetails
+from dbserver.json_helper import ReturnJSON
 from service_handler.qr_exceptions import RecordNotFound
 
 

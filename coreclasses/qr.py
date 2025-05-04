@@ -1,5 +1,5 @@
-from boserver.app_orm import session, TableQrCodes
-from boserver.json_helper import ReturnJSON
+from dbserver.app_orm import session, TableQrCodes
+from dbserver.json_helper import ReturnJSON
 from service_handler.qr_exceptions import RecordNotFound
 
 

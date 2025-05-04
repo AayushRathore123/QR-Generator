@@ -1,4 +1,4 @@
-from boserver.flask_app import app
+from dbserver.flask_app import app
 
 
 APP_HOST = app.config["HOST"]

@@ -1,4 +1,4 @@
-from boserver.app_orm import orm_to_dict_v2, TableQrCodes, session, orm_to_dict_selected
+from dbserver.app_orm import orm_to_dict_v2, TableQrCodes, session, orm_to_dict_selected
 from coreclasses.qr import Qr
 
 

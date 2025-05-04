@@ -1,6 +1,6 @@
 from flask import make_response
 from flask_jwt_extended import create_access_token
-from boserver.resource_decorator import *
+from dbserver.resource_decorator import *
 from service_handler.service_handler_imports import *
 
 
