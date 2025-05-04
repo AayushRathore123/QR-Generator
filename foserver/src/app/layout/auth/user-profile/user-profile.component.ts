@@ -150,7 +150,7 @@ export class UserProfileComponent {
       this._toastrService.error("Please fill all required fields properly.", 'Error');
       return;
     }
-    if(this.changePasswordForm.value.currentPassword != this.changePasswordForm.value.confirmPassword){
+    if(this.changePasswordForm.value.newPassword != this.changePasswordForm.value.confirmPassword){
       this._toastrService.error("Passwords don't match.", 'Error');
       return;
     }
