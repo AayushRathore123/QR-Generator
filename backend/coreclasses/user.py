@@ -1,6 +1,6 @@
-from dbserver.app_orm import session, TableUser, TableUserDetails
-from dbserver.json_helper import ReturnJSON
-from service_handler.qr_exceptions import RecordNotFound
+from backend.dbserver.app_orm import session, TableUser, TableUserDetails
+from backend.dbserver.json_helper import ReturnJSON
+from backend.service_handler.qr_exceptions import RecordNotFound
 
 
 class User:

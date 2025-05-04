@@ -1,4 +1,4 @@
-from dbserver.flask_app import app
+from backend.dbserver.flask_app import app
 
 
 APP_HOST = app.config["HOST"]

@@ -2,9 +2,9 @@ import math
 import random
 import base62
 import uuid
-from dbserver.app_config_load import APP_HOST, APP_PORT
-from dbserver.app_orm import session, TableUrlShortener
-from dbserver.json_helper import ReturnJSON
+from backend.dbserver.app_config_load import APP_HOST, APP_PORT
+from backend.dbserver.app_orm import session, TableUrlShortener
+from backend.dbserver.json_helper import ReturnJSON
 
 
 class Url:
