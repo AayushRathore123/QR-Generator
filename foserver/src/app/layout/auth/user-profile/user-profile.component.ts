@@ -126,6 +126,7 @@ export class UserProfileComponent {
         if(res && res.errCode ===0){
           this._authService.logout();
           this._toastrService.success(res.msg,'Success');
+          this.router.navigate(['/layout/home']);
         }
         else{
           this._toastrService.error(res.msg,'Error')
