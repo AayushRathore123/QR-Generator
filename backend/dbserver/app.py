@@ -1,6 +1,6 @@
-from boserver.app_config_load import APP_HOST, APP_PORT
-from boserver.app_routes import app
-# Why not from boserver.flask_app import app ???
+from backend.dbserver.app_config_load import APP_HOST, APP_PORT
+from backend.dbserver.app_routes import app
+# Why not from dbserver.flask_app import app ???
 
 # Method 1 - To make API Calls
 @app.route("/")

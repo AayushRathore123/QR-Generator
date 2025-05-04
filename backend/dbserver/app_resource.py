@@ -1,7 +1,7 @@
 from flask import make_response
 from flask_jwt_extended import create_access_token
-from boserver.resource_decorator import *
-from service_handler.service_handler_imports import *
+from backend.dbserver.resource_decorator import *
+from backend.service_handler.service_handler_imports import *
 
 
 # Method 2 - To make API Calls
@@ -100,6 +100,16 @@ class GetAllQr(Resource):
         obj = QrHandler()
         return obj.get_all_qr(user_id)
 
+class RemoveAllQr(Resource):
+
+    @staticmethod
+    def post():
+        pass
+        # Need to update remove_all_qr function if need to used this API
+        payload = request.get_json()
+        obj = QrHandler()
+        return obj.remove_all_qr(payload)
+
 
 class CreateShortUrl(Resource):
 
@@ -168,3 +178,12 @@ class UpdateUserPassword(Resource):
         payload = request.get_json()
         obj = UserHandler()
         return obj.update_password(payload)
+
+
+class RemoveUserAccount(Resource):
+
+    @staticmethod
+    def post():
+        payload = request.get_json()
+        obj = UserHandler()
+        return obj.remove_user(payload)

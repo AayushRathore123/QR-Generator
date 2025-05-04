@@ -1,9 +1,9 @@
 from datetime import datetime
 from flask import url_for
-from boserver.app_orm import session, TableUser, TableUserDetails, orm_to_dict_v2
-from boserver.flask_app import oauth
-from boserver.json_helper import ReturnJSON
-from boserver.app_config_load import OAUTH2_PROVIDERS, OAUTH_GOOGLE_CONF_URL
+from backend.dbserver.app_orm import session, TableUser, TableUserDetails, orm_to_dict_v2
+from backend.dbserver.flask_app import oauth
+from backend.dbserver.json_helper import ReturnJSON
+from backend.dbserver.app_config_load import OAUTH2_PROVIDERS, OAUTH_GOOGLE_CONF_URL
 
 
 class AuthHandler:
@@ -24,7 +24,7 @@ class AuthHandler:
     def login(self, payload):
         user_name = payload['user_name']
         password = payload['password']
-        user_rec = self.session.query(TableUser).filter(TableUser.user_name == user_name).first()
+        user_rec = self.session.query(TableUser).filter(TableUser.user_name == user_name, TableUser.status == 1).first()
         if not user_rec:
             return {'errCode': 1, 'msg': 'Invalid User Name'}
         if user_rec.password != password:

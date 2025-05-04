@@ -1,0 +1,6 @@
+from backend.service_handler.auth_handler import AuthHandler
+from backend.service_handler.qr_handler import QrHandler
+from backend.service_handler.url_handler import UrlHandler
+from backend.service_handler.captcha_handler import CaptchaHandler
+from backend.service_handler.user_handler import UserHandler
+from backend.service_handler.email_handler import EmailHandler

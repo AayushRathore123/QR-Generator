@@ -1,6 +1,6 @@
-from boserver.app_orm import session, TableUser, TableUserDetails
-from boserver.json_helper import ReturnJSON
-from service_handler.qr_exceptions import RecordNotFound
+from backend.dbserver.app_orm import session, TableUser, TableUserDetails
+from backend.dbserver.json_helper import ReturnJSON
+from backend.service_handler.qr_exceptions import RecordNotFound
 
 
 class User:
@@ -12,11 +12,22 @@ class User:
             self.dataset_rec = self._get_rec_by_id(self.dataset_id)
 
     def _get_rec_by_id(self, user_id):
+        """
+            To get rec from User_Details table
+        """
         rec = self.session.query(TableUserDetails).filter(TableUserDetails.this_user_details2user == user_id,
                                                               TableUserDetails.status == 1).first()
         if not rec:
             raise RecordNotFound(self.dataset_id, 'TableUserDetails')
         return rec
+
+    def get_user_rec(self, user_id):
+        """
+            To get rec from User table
+        """
+        user_rec = self.session.query(TableUser).filter(TableUser.id==user_id).first()
+        self.dataset_rec = user_rec
+        return user_rec
 
     def save(self):
         try:
@@ -36,8 +47,3 @@ class User:
             setattr(model_obj, k, v)
         self.session.flush()
         return model_obj
-
-    def get_user_rec(self, user_id):
-        user_rec = self.session.query(TableUser).filter(TableUser.id==user_id).first()
-        self.dataset_rec = user_rec
-        return user_rec

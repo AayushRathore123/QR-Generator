@@ -7,7 +7,7 @@ from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
 import flask_restful as restful
 from jwt import ExpiredSignatureError, DecodeError, InvalidTokenError, InvalidIssuerError, InvalidAudienceError
 import json
-from boserver.flask_app import app
+from backend.dbserver.flask_app import app
 
 TOKEN_NOT_PRESENT = ['/login', '/register', '/foo', '/url_shortener/create', '/shortify', '/captcha_code/get',
                      '/captcha_code/validate', '/oauth/login', '/oauth2callback']
