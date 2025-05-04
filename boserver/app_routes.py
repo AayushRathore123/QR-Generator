@@ -14,12 +14,14 @@ api.add_resource(Register, '/register')
 api.add_resource(GetUserDetails, '/user_details/get')
 api.add_resource(UpdateUserDetails, '/user_details/update')
 api.add_resource(UpdateUserPassword, '/user/update/password')
+api.add_resource(RemoveUserAccount, '/user/remove/account')
 
 # QR CRUD API
 api.add_resource(CreateQr, '/qr_code/create')
 api.add_resource(UpdateQr, '/qr_code/update')
 api.add_resource(RemoveQr, '/qr_code/remove')
 api.add_resource(GetAllQr, '/qr_code/get_all')
+api.add_resource(RemoveAllQr, '/qr_code/remove_all')
 
 # URL Shortener API
 api.add_resource(CreateShortUrl, '/url_shortener/create')
