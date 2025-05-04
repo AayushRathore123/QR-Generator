@@ -118,12 +118,19 @@ export class UserProfileComponent {
 
   confirmDelete() {
     const user_id= this._authService.getUserId();
-    this._authService.deleteUser(user_id).subscribe(
-      (res)=>{
-
-      },
-      (err)=>{
-
+    let jsonData={
+      'user_id': user_id
+    }
+    this._authService.deleteUser(jsonData).subscribe(
+      (res:any)=>{
+        if(res && res.errCode ===0){
+          this._authService.logout();
+          this._toastrService.success(res.msg,'Success');
+          this.router.navigate(['/layout/home']);
+        }
+        else{
+          this._toastrService.error(res.msg,'Error')
+        }
       }
     )
     this.closeDeleteModal();
@@ -150,7 +157,7 @@ export class UserProfileComponent {
       this._toastrService.error("Please fill all required fields properly.", 'Error');
       return;
     }
-    if(this.changePasswordForm.value.currentPassword != this.changePasswordForm.value.confirmPassword){
+    if(this.changePasswordForm.value.newPassword != this.changePasswordForm.value.confirmPassword){
       this._toastrService.error("Passwords don't match.", 'Error');
       return;
     }

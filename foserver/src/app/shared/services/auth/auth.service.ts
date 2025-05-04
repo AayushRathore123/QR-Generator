@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, map, Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../../environment/environment";
+import { ToastrService } from "ngx-toastr";
 @Injectable({
   providedIn: "root",
 })
@@ -12,15 +13,17 @@ export class AuthService {
   private getDataURL =environment.apiUrl+'user_details/get';
   private updateDataURL = environment.apiUrl+'user_details/update';
   private changeUserPasswordURL = environment.apiUrl+'user/update/password';
-  private deleteUserURL = environment.apiUrl+'delete';
+  private deleteUserURL = environment.apiUrl+'user/remove/account';
 
   private userSubject = new BehaviorSubject<any>(null); 
   user = this.userSubject.asObservable();
-  private loggedInSubject = new BehaviorSubject<boolean>(this.isAuthenticatedUser());
-  isLoggedIn$ = this.loggedInSubject.asObservable();
+  private loggedInSubject: BehaviorSubject<boolean>;
+  isLoggedIn$!: Observable<boolean>;
 
-
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toastrService:ToastrService) {
+    this.loggedInSubject = new BehaviorSubject<boolean>(this.isAuthenticatedUser());
+    this.isLoggedIn$ = this.loggedInSubject.asObservable();
+  }
 
   register(jsonData: any): Observable<any> {
     return this.http.post<any>(this.registerURL, jsonData).pipe(map((data) => {
@@ -53,6 +56,7 @@ export class AuthService {
     const expiry = Number(localStorage.getItem("expiry"));
     const currentTime = Math.floor(Date.now() / 1000);
     if (!token || currentTime > expiry) {
+    // this.toastrService.error('Session Expired','Error')
       return false;
     }
     return true;
@@ -95,8 +99,6 @@ export class AuthService {
   }
 
   deleteUser(user_id:any){
-    const url = `${this.deleteUserURL}?user_id=${user_id}`;  
-    this.logout();
-    return this.http.get(url); 
+    return this.http.post(this.deleteUserURL,user_id); 
   }
 }
