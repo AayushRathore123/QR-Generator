@@ -24,7 +24,7 @@ class AuthHandler:
     def login(self, payload):
         user_name = payload['user_name']
         password = payload['password']
-        user_rec = self.session.query(TableUser).filter(TableUser.user_name == user_name).first()
+        user_rec = self.session.query(TableUser).filter(TableUser.user_name == user_name, TableUser.status == 1).first()
         if not user_rec:
             return {'errCode': 1, 'msg': 'Invalid User Name'}
         if user_rec.password != password:
