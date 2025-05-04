@@ -38,8 +38,10 @@
 4. python setup.py develop
 5. pip install -r requirements.txt
 
-`Go inside boserver directory then run these commands`
+    `Go inside boserver directory then run these commands`
+
 6. Create config.py file inside boserver directory -
+    
     ```
     class Config(object):
         DEBUG = False
