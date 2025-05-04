@@ -118,12 +118,18 @@ export class UserProfileComponent {
 
   confirmDelete() {
     const user_id= this._authService.getUserId();
-    this._authService.deleteUser(user_id).subscribe(
-      (res)=>{
-
-      },
-      (err)=>{
-
+    let jsonData={
+      'user_id': user_id
+    }
+    this._authService.deleteUser(jsonData).subscribe(
+      (res:any)=>{
+        if(res && res.errCode ===0){
+          this._authService.logout();
+          this._toastrService.success(res.msg,'Success');
+        }
+        else{
+          this._toastrService.error(res.msg,'Error')
+        }
       }
     )
     this.closeDeleteModal();
