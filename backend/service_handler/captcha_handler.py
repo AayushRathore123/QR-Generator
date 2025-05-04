@@ -1,11 +1,11 @@
 import string
 import random
 import uuid
-from boserver.app_config_load import CAPTCHA_IMG_PATH, CAPTCHA_LENGTH
-from boserver.flask_app import redis_cache_obj
-from boserver.json_helper import ReturnJSON
+from backend.dbserver.app_config_load import CAPTCHA_IMG_PATH, CAPTCHA_LENGTH
+from backend.dbserver.flask_app import redis_cache_obj
+from backend.dbserver.json_helper import ReturnJSON
 from PIL import Image, ImageDraw, ImageFont
-from boserver.rediscacher.redis_cache_statics import CAPTCHA_CACHING_KEY_IDENT
+from backend.dbserver.rediscacher.redis_cache_statics import CAPTCHA_CACHING_KEY_IDENT
 
 
 class CaptchaHandler:

@@ -1,7 +1,7 @@
-from boserver.app_orm import orm_to_dict_v2
-from boserver.json_helper import ReturnJSON
-from coreclasses.user import User
-from service_handler.qr_handler import QrHandler
+from backend.dbserver.app_orm import orm_to_dict_v2
+from backend.dbserver.json_helper import ReturnJSON
+from backend.coreclasses.user import User
+from backend.service_handler.qr_handler import QrHandler
 
 
 class UserHandler:
