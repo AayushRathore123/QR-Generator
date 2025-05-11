@@ -88,18 +88,18 @@ handleDeleteCancel() {
   this.deleteTarget = null;
 }
 
-deleteQR() {
-  if (!this.deleteTarget) return;
+// deleteQR() {
+//   if (!this.deleteTarget) return;
 
-  const payload = { qr_id: this.deleteTarget.id };
+//   const payload = { qr_id: this.deleteTarget.id };
 
-  this._getDataService.deleteQR(payload).subscribe((response: any) => {
-    if (response.errCode === 0) {
-      this.qrcodes = this.qrcodes.filter(q => q.id !== this.deleteTarget.id);
-      this.deleteTarget = null;
-    }
-  });
-}
+//   this._getDataService.deleteQR(payload).subscribe((response: any) => {
+//     if (response.errCode === 0) {
+//       this.qrcodes = this.qrcodes.filter(q => q.id !== this.deleteTarget.id);
+//       this.deleteTarget = null;
+//     }
+//   });
+// }
 
   getQrData() {
   this.isLoader=true
@@ -124,6 +124,7 @@ deleteQR() {
                 };
               }
             return {
+              id:item.id,
               description: item.description,
               name: item.name,
               type: item.type.includes('wifi') ? 'wifi' : 'link',
