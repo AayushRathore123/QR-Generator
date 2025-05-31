@@ -57,7 +57,7 @@
     
         CAPTCHA_LENGTH = 6
         CAPTCHA_EXPIRY = 300
-        CAPTCHA_IMG_PATH = "D:/Projects/QR Generator/captcha_code/"
+        CAPTCHA_IMG_PATH = "D:/Projects/QR Generator/backend/captcha_code/"
     
         REDIS_HOST = 'localhost'
         REDIS_PWD = 'redis'
