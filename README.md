@@ -86,7 +86,11 @@
    ```
    Inside QR Generator, create folder captcha_code and add folder path in this CAPTCHA_IMG_PATH
    ```
-7. To start backend server - python app.py
+7. To start backend server 
+   1. Using Python directly: python app.py
+   2. Using uWSGI (command line): uwsgi --http localhost:5011 --wsgi-file app.py --callable app
+   3. Using uWSGI with a config file: uwsgi --ini qr_generator.ini
+   
 
      
 ### Frontend
