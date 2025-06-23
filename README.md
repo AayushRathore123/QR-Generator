@@ -57,7 +57,7 @@
     
         CAPTCHA_LENGTH = 6
         CAPTCHA_EXPIRY = 300
-        CAPTCHA_IMG_PATH = "D:/Projects/QR Generator/captcha_code/"
+        CAPTCHA_IMG_PATH = "D:/Projects/QR Generator/backend/captcha_code/"
     
         REDIS_HOST = 'localhost'
         REDIS_PWD = 'redis'
@@ -86,8 +86,16 @@
    ```
    Inside QR Generator, create folder captcha_code and add folder path in this CAPTCHA_IMG_PATH
    ```
-7. To start backend server - python app.py
-
+7. To start backend server, multiple ways -  
+   1. Using Python directly: python app.py
+   2. Using uWSGI (command line): uwsgi --http localhost:5011 --wsgi-file app.py --callable app
+   3. Using uWSGI with a config file: uwsgi --ini qr_generator.ini
+   
+   ```
+   pip install uwsgi, for using 2nd and 3rd command  
+   Note: `uwsgi` may not install natively on Windows. 
+   To use it on Windows, consider installing `uwsgi` via Docker or within a WSL environment.
+   ```
      
 ### Frontend
 
@@ -123,6 +131,12 @@
      ng serve
      ```
 
+### Database:
+- To export database from Neon DB 
+- Firstly download PostgreSQL Installer, then run this command
+```bash
+"C:\Program Files\PostgreSQL\15\bin\pg_dump.exe" --schema=public --schema-only --no-privileges --verbose "postgresql://DB_USERNAME:DB_PWD@DB_HOST/DB_NAME" > qr_generator.sql
+```
 
 ### References:
 

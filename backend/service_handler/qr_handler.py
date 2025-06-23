@@ -40,7 +40,7 @@ class QrHandler:
         return saved_data
 
     def get_all_qr(self, user_id):
-        cols_to_get = ["name", "description", "data", "type", "create_datetime"]
+        cols_to_get = ["id", "name", "description", "data", "type", "create_datetime"]
         table_cols = [getattr(TableQrCodes, cols) for cols in cols_to_get]
         user_qr_recs = self.session.query(*table_cols).filter(TableQrCodes.this_qr2user == user_id,
                                                               TableQrCodes.status == 1).all()

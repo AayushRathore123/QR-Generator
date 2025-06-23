@@ -1,3 +1,4 @@
+import base64
 import string
 import random
 import uuid
@@ -44,13 +45,21 @@ class CaptchaHandler:
         img.save(captcha_img_path)
         return captcha_uuid, captcha_img_path
 
+    @staticmethod
+    def get_captcha_img_uri(img_path):
+        with open(img_path, 'rb') as img_file:
+            encoded_str = base64.b64encode(img_file.read()).decode('utf-8')
+        image_data_uri =  f"data:image/png;base64,{encoded_str}"
+        return image_data_uri
+
     def get_captcha_code(self):
         captcha_code = self.generate_captcha_code()
         captcha_uuid, captcha_img = self.generate_captcha_img(captcha_code)
         ident = CAPTCHA_CACHING_KEY_IDENT + captcha_uuid
         redis_cache_obj.set_cache_data(ident, captcha_code)
+        image_data_uri = self.get_captcha_img_uri(captcha_img)
         self.ret_json.set_success_msg("Captcha generated Successfully")
-        self.ret_json.update({"datarec": {"captcha_img": captcha_img, "captcha_id":captcha_uuid }})
+        self.ret_json.update({"datarec": {"captcha_img": image_data_uri, "captcha_id":captcha_uuid }})
         return self.ret_json
 
     def validate_captcha_code(self, payload):
