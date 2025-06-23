@@ -46,8 +46,41 @@
           </div>
         </div>
 
+        <div class="form-group captcha-box" style="height: 70px;">
+          <div class="captcha-row">
+            <ng-container *ngIf="captchaLoading; else captchaImg">
+              <div class="captcha-loader"></div>
+            </ng-container>
+
+            <ng-template #captchaImg>
+              <img
+                [src]="'data:image/png;base64,' + captcha"
+                alt="Captcha"
+                class="captcha-img"
+              />
+            </ng-template>
+
+            <button
+              type="button"
+              class="refresh-captcha"
+              (click)="getCaptcha()"
+              title="Refresh Captcha"
+            >
+              &#x21bb;
+            </button>
+
+            <input
+              type="text"
+              id="captcha"
+              class="captcha-input"
+              formControlName="captchaInput"
+              placeholder="Enter code"
+            />
+          </div>
+        </div>
+
         <div class="form-actions">
-          <button type="submit" (click)="onSubmit()">Login</button>
+          <button type="submit" (click)="validateCaptcha()">Login</button>
           <p>
             Don't have an account?
             <a href="/register" >Register</a>
