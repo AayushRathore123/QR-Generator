@@ -3,7 +3,8 @@ from flask import url_for
 from backend.dbserver.app_orm import session, TableUser, TableUserDetails, orm_to_dict_v2
 from backend.dbserver.flask_app import oauth
 from backend.dbserver.json_helper import ReturnJSON
-from backend.dbserver.app_config_load import OAUTH2_PROVIDERS, OAUTH_GOOGLE_CONF_URL
+from backend.dbserver.app_config_load import (OAUTH2_GOOGLE_PROVIDERS_CLIENT_ID, OAUTH2_GOOGLE_PROVIDERS_CLIENT_SECRET,
+                                              OAUTH_GOOGLE_CONF_URL)
 
 
 class AuthHandler:
@@ -72,8 +73,8 @@ class AuthHandler:
 
         oauth.register(
             name='google',  # giving name this provider as 'google'
-            client_id=OAUTH2_PROVIDERS["google"]["client_id"],
-            client_secret=OAUTH2_PROVIDERS["google"]["client_secret"],
+            client_id=OAUTH2_GOOGLE_PROVIDERS_CLIENT_ID,
+            client_secret=OAUTH2_GOOGLE_PROVIDERS_CLIENT_SECRET,
             server_metadata_url=OAUTH_GOOGLE_CONF_URL,
             client_kwargs={
                 'scope': 'openid email profile'
