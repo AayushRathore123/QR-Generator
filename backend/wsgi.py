@@ -1,4 +1,4 @@
-from backend.dbserver.app import app
+from backend.app import app
 
 # This file serves as the WSGI entry point for uWSGI or other WSGI servers.
 # While the app can be run directly from app.py, i.e. (uwsgi --http localhost:5011 --wsgi-file app.py --callable app)
