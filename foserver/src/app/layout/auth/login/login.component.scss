@@ -122,10 +122,11 @@ p{
 }
 
 .captcha-img {
-  height: 45px;
-  width: 100px;
+  height: 50px;
+  width: 150px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  object-fit: contain;  
 }
 
 .refresh-captcha {
