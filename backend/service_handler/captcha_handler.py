@@ -2,11 +2,11 @@ import base64
 import string
 import random
 import uuid
-from backend.dbserver.app_config_load import CAPTCHA_IMG_PATH, CAPTCHA_LENGTH
-from backend.dbserver.flask_app import redis_cache_obj
-from backend.dbserver.json_helper import ReturnJSON
+from dbserver.app_config_load import CAPTCHA_IMG_PATH, CAPTCHA_LENGTH
+from dbserver.flask_app import redis_cache_obj
+from dbserver.json_helper import ReturnJSON
 from PIL import Image, ImageDraw, ImageFont
-from backend.dbserver.rediscacher.redis_cache_statics import CAPTCHA_CACHING_KEY_IDENT
+from dbserver.rediscacher.redis_cache_statics import CAPTCHA_CACHING_KEY_IDENT
 
 
 class CaptchaHandler:

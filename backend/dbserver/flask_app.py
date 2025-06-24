@@ -2,8 +2,8 @@ from flask import Flask
 from flask_restful import Api
 from flask_cors import CORS
 from authlib.integrations.flask_client import OAuth
-from backend.dbserver.app_config_load import REDIS_HOST, REDIS_PORT, REDIS_DB, REDIS_PWD, SECRET_KEY
-from backend.dbserver.rediscacher.redis_cache_core import RedisCacheCore
+from dbserver.app_config_load import REDIS_HOST, REDIS_PORT, REDIS_DB, REDIS_PWD, SECRET_KEY
+from dbserver.rediscacher.redis_cache_core import RedisCacheCore
 
 
 app = Flask(__name__)

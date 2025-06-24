@@ -1,9 +1,9 @@
 from datetime import datetime
 from flask import url_for
-from backend.dbserver.app_orm import session, TableUser, TableUserDetails, orm_to_dict_v2
-from backend.dbserver.flask_app import oauth
-from backend.dbserver.json_helper import ReturnJSON
-from backend.dbserver.app_config_load import (OAUTH2_GOOGLE_PROVIDERS_CLIENT_ID, OAUTH2_GOOGLE_PROVIDERS_CLIENT_SECRET,
+from dbserver.app_orm import session, TableUser, TableUserDetails, orm_to_dict_v2
+from dbserver.flask_app import oauth
+from dbserver.json_helper import ReturnJSON
+from dbserver.app_config_load import (OAUTH2_GOOGLE_PROVIDERS_CLIENT_ID, OAUTH2_GOOGLE_PROVIDERS_CLIENT_SECRET,
                                               OAUTH_GOOGLE_CONF_URL)
 
 

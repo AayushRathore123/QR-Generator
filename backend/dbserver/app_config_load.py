@@ -1,4 +1,4 @@
-# from backend.dbserver.flask_app import app
+# from dbserver.flask_app import app
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -30,8 +30,8 @@ OAUTH2_GOOGLE_PROVIDERS_CLIENT_SECRET = app.config["OAUTH2_GOOGLE_PROVIDERS_CLIE
 OAUTH_GOOGLE_CONF_URL = app.config["OAUTH_GOOGLE_CONF_URL"]
 """
 # Note: os.getenv() always returns strings
-APP_HOST = os.getenv("HOST")
-APP_PORT = os.getenv("PORT")
+APP_HOST = os.environ.get("APP_HOST", "0.0.0.0")
+APP_PORT = int(os.environ.get("APP_PORT", 5011))
 
 DB_USERNAME = os.getenv("DB_USERNAME")
 DB_PWD = os.getenv("DB_PWD")
