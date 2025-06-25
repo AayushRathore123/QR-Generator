@@ -1,6 +1,6 @@
-from backend.dbserver.app_orm import session, TableQrCodes
-from backend.dbserver.json_helper import ReturnJSON
-from backend.service_handler.qr_exceptions import RecordNotFound
+from dbserver.app_orm import session, TableQrCodes
+from dbserver.json_helper import ReturnJSON
+from service_handler.qr_exceptions import RecordNotFound
 
 
 class Qr:

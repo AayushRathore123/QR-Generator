@@ -1,5 +1,5 @@
-from backend.dbserver.app_orm import orm_to_dict_v2
-from backend.coreclasses.url import Url
+from dbserver.app_orm import orm_to_dict_v2
+from coreclasses.url import Url
 from flask import redirect
 
 

@@ -5,7 +5,7 @@ from sqlalchemy import Column, Integer, DateTime, func
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import sessionmaker
 
-from backend.dbserver.app_config_load import DB_USERNAME, DB_PWD, DB_HOST, DB_NAME
+from dbserver.app_config_load import DB_USERNAME, DB_PWD, DB_HOST, DB_NAME
 import sqlalchemy as db
 
 
