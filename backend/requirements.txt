@@ -28,6 +28,7 @@ pytz==2025.1
 redis==5.2.1
 requests==2.32.3
 six==1.17.0
+setuptools>=42
 SQLAlchemy==2.0.38
 typing_extensions==4.12.2
 urllib3==2.4.0
