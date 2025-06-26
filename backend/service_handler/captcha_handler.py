@@ -1,17 +1,29 @@
 import base64
+import shutil
 import string
 import random
 import uuid
-from backend.dbserver.app_config_load import CAPTCHA_IMG_PATH, CAPTCHA_LENGTH
-from backend.dbserver.flask_app import redis_cache_obj
-from backend.dbserver.json_helper import ReturnJSON
+from pathlib import Path
+import os
+from dbserver.app_config_load import CAPTCHA_LENGTH
+from dbserver.flask_app import redis_cache_obj
+from dbserver.json_helper import ReturnJSON
 from PIL import Image, ImageDraw, ImageFont
-from backend.dbserver.rediscacher.redis_cache_statics import CAPTCHA_CACHING_KEY_IDENT
+from dbserver.rediscacher.redis_cache_statics import CAPTCHA_CACHING_KEY_IDENT
 
 
 class CaptchaHandler:
     def __init__(self):
         self.ret_json = ReturnJSON()
+        self.captcha_img_path = Path.cwd().parent / 'captcha_image'
+
+    def clear_all_captcha_and_generate_directory(self):
+        if os.path.exists(self.captcha_img_path):
+            try:
+                shutil.rmtree(self.captcha_img_path)
+            except OSError as e:
+                self.ret_json.set_error_msg(1, str(e))
+        os.makedirs(self.captcha_img_path, exist_ok=True)
 
     @staticmethod
     def generate_captcha_code():
@@ -19,12 +31,11 @@ class CaptchaHandler:
         captcha_code = ''.join(random.choice(captcha_chars) for _ in range(CAPTCHA_LENGTH))
         return captcha_code
 
-    @staticmethod
-    def generate_captcha_img(captcha_code):
+    def generate_captcha_img(self, captcha_code):
         img = Image.new(mode="RGB", size=(300,200), color=(255, 255, 255))
         draw = ImageDraw.Draw(img)
         try:
-            font = ImageFont.truetype('arial.ttf', 36)
+            font = ImageFont.truetype('arial.ttf', 70)
         except IOError:
             font = ImageFont.load_default()
             print("Default font used; arial.ttf not found.")
@@ -41,7 +52,7 @@ class CaptchaHandler:
         draw.text((x, y), captcha_code, fill=(0, 0, 0), font=font)
 
         captcha_uuid = str(uuid.uuid4())
-        captcha_img_path = CAPTCHA_IMG_PATH + captcha_uuid + ".png"
+        captcha_img_path = self.captcha_img_path / f"{captcha_uuid}.png"
         img.save(captcha_img_path)
         return captcha_uuid, captcha_img_path
 
@@ -53,6 +64,7 @@ class CaptchaHandler:
         return image_data_uri
 
     def get_captcha_code(self):
+        self.clear_all_captcha_and_generate_directory()
         captcha_code = self.generate_captcha_code()
         captcha_uuid, captcha_img = self.generate_captcha_img(captcha_code)
         ident = CAPTCHA_CACHING_KEY_IDENT + captcha_uuid

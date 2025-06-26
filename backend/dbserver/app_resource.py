@@ -1,7 +1,7 @@
 from flask import make_response
 from flask_jwt_extended import create_access_token
-from backend.dbserver.resource_decorator import *
-from backend.service_handler.service_handler_imports import *
+from dbserver.resource_decorator import *
+from service_handler.service_handler_imports import *
 
 
 # Method 2 - To make API Calls
