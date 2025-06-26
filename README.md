@@ -101,12 +101,12 @@
 
 *   nvm install 20.11.1
 *   nvm use 20.11.1
-*   npm install @angular/cli@19.2.1 (Inside foserver)
+*   npm install @angular/cli@19.2.1 (Inside frontend)
 
 
   1. Navigate to the frontend folder:
      ```bash
-     cd foserver
+     cd frontend
      ```
   
   2. The `src/environments/` folder is ignored via `.gitignore`. You must create the `environment.ts` file manually.  
