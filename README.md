@@ -109,7 +109,7 @@
      cd foserver
      ```
   
-  2. The `src/environment/` folder is ignored via `.gitignore`. You must create the `environment.ts` file manually.  
+  2. The `src/environments/` folder is ignored via `.gitignore`. You must create the `environment.ts` file manually.  
      Sample `environment.ts` file:
      ```ts
      export const environment = {
@@ -119,7 +119,7 @@
      };
      ```
   
-     Save this file at `src/environment/environment.ts`
+     Save this file at `src/environments/environment.ts`
   
   3. Install Angular dependencies:
      ```bash
