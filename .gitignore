@@ -7,10 +7,12 @@ package-lock.json
 .angular/
 .angular/cache/
 .angular/cache/19.2.1/
-backend/dbserver/config.py
+backend/config.py
+backend/.env
 neon_user_pwd_qr_generator_db.txt
 qr_generator.egg-info/
 *.pyc
 __pycache__/
-foserver/src/environments/
+src/environment
 backend/captcha_code/
+backend/captcha_image/

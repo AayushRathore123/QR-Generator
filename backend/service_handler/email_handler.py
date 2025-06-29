@@ -1,8 +1,8 @@
 import smtplib
 from email.mime.text import MIMEText
-from backend.dbserver.json_helper import ReturnJSON
-from backend.dbserver.app_config_load import EMAIL_TO, EMAIL_PASSWORD, SMTP_PORT, SMTP_SERVER, EMAIL_SUBJECT
-from backend.service_handler.qr_exceptions import LoginMailError
+from dbserver.json_helper import ReturnJSON
+from dbserver.app_config_load import EMAIL_TO, EMAIL_PASSWORD, SMTP_PORT, SMTP_SERVER, EMAIL_SUBJECT
+from service_handler.qr_exceptions import LoginMailError
 
 
 class EmailHandler:

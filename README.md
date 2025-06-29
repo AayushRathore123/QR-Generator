@@ -86,14 +86,15 @@
    ```
    Inside QR Generator, create folder captcha_code and add folder path in this CAPTCHA_IMG_PATH
    ```
-7. To start backend server, multiple ways -  
-   1. Using Python directly: python app.py
-   2. Using uWSGI (command line): uwsgi --http localhost:5011 --wsgi-file app.py --callable app
-   3. Using uWSGI with a config file: uwsgi --ini qr_generator.ini
+7. To start backend server, multiple ways  
+   1. Using Python directly: "python app.py"
+   2. Using uWSGI (command line): "uwsgi --http localhost:5011 --wsgi-file app.py --callable app"
+   3. Using uWSGI with a config file: "uwsgi --ini qr_generator.ini"
+   4. Using Gunicorn: "gunicorn -b localhost:5011 app:app --access-logfile -"
    
    ```
-   pip install uwsgi, for using 2nd and 3rd command  
-   Note: `uwsgi` may not install natively on Windows. 
+   pip install uwsgi, gunicorn, for using 2nd, 3rd and 4th command  
+   Note: `uwsgi` and `gunicorn` may not install natively on Windows. 
    To use it on Windows, consider installing `uwsgi` via Docker or within a WSL environment.
    ```
      
@@ -109,7 +110,7 @@
      cd foserver
      ```
   
-  2. The `src/environments/` folder is ignored via `.gitignore`. You must create the `environment.ts` file manually.  
+  2. The `src/environment/` folder is ignored via `.gitignore`. You must create the `environment.ts` file manually.  
      Sample `environment.ts` file:
      ```ts
      export const environment = {
@@ -119,7 +120,7 @@
      };
      ```
   
-     Save this file at `src/environments/environment.ts`
+     Save this file at `src/environment/environment.ts`
   
   3. Install Angular dependencies:
      ```bash
