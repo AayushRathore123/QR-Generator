@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required],
       captchaInput: ['', Validators.required]
     });
-    // this.getCaptcha();
+    this.getCaptcha();
   }
 
   togglePassword(flag:boolean): void {

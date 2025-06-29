@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, map, Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
-import { environment } from "../../../../environments/environment";
+import { environment } from "../../../../environment/environment";
 import { ToastrService } from "ngx-toastr";
 @Injectable({
   providedIn: "root",
