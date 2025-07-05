@@ -14,6 +14,7 @@ export class AuthService {
   private updateDataURL = environment.apiUrl+'user_details/update';
   private changeUserPasswordURL = environment.apiUrl+'user/update/password';
   private deleteUserURL = environment.apiUrl+'user/remove/account';
+  public oauthLoginURL = environment.apiUrl+'/oauth/login';
 
   private userSubject = new BehaviorSubject<any>(null); 
   user = this.userSubject.asObservable();
