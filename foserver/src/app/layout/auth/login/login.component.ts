@@ -118,5 +118,9 @@ export class LoginComponent implements OnInit {
       }
     )
   }
+  
+  loginWithGoogle() {
+    window.location.href = this.authService.oauthLoginURL;
+  }
 }
 
