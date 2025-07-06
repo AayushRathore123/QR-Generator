@@ -98,8 +98,9 @@ export class RegisterComponent {
       this._authService.register(jsonData).subscribe(resp => {
         if (resp.errCode === 0) {
           this.toastr.success(resp.msg, 'Success');
-          this.toastr.success('Please log in to continue.', 'Success');
-          this.router.navigate(['/login']);
+          // this.toastr.success('Please log in to continue.', 'Success');
+          // this.router.navigate(['/login']);
+          this.router.navigate(['/layout/home']);
         }
         else {
           this.toastr.error(resp.msg, 'Error');

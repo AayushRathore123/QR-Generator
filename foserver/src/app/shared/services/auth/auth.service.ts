@@ -28,6 +28,9 @@ export class AuthService {
 
   register(jsonData: any): Observable<any> {
     return this.http.post<any>(this.registerURL, jsonData).pipe(map((data) => {
+      if(data.errCode==0){
+        this.setSessionFromLoginResponse(data);
+      }
       return data;
     }));
   }
