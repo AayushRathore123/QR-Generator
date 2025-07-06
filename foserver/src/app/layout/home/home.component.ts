@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component,ElementRef, ViewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import {
   FormBuilder,
   FormGroup,
@@ -33,10 +34,10 @@ export class HomeComponent {
   qrCodeDownloadLink: SafeUrl = '';
   showNamePrompt = false;
   showPassword = false;
-  
+
   @ViewChild('qrCanvas') qrCanvas!:ElementRef;
   constructor(private fb: FormBuilder, private sanitizer: DomSanitizer, private authService:AuthService, private toastr: ToastrService
-  , private router:Router, private data: DataService, private encryptDecrypt:EncryptDecryptService) {
+  , private router:Router, private data: DataService, private encryptDecrypt:EncryptDecryptService, private route: ActivatedRoute) {
     this.linkForm = this.fb.group({
       url: ['', [Validators.required]],
     });
@@ -48,12 +49,34 @@ export class HomeComponent {
     });
   }
 
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      const token = params['token'];
+      const userId = params['userId'];
+      const username = params['username'];
+
+      if (token && userId && username) {
+        const data = { access_token: token, user_id: userId, user_name: username};
+        this.authService.setSessionFromLoginResponse(data);
+
+        //Redirect to remove query params from URL
+        this.router.navigate([], {
+          relativeTo: this.route,
+          queryParams: {},
+          replaceUrl: true
+        });
+
+        this.toastr.success('Login successful via Google!', 'Success');
+      }
+    });
+  }
+
   toggleQrType(event:any) {
     const checked = event.target.checked;
     this.isLinkQr = checked;
     this.isWifiQr = !checked;
     this.resetQrCodesAndForms();
-    
+
 }
 
   onClickLinkQr() {
@@ -75,9 +98,9 @@ export class HomeComponent {
     this.wifiForm.reset({
       ssid: '',
       password: '',
-      authType: 'WPA/WPA2' 
+      authType: 'WPA/WPA2'
     });
-  
+
     this.linkForm.reset({
       url: ''
     });
@@ -91,7 +114,7 @@ export class HomeComponent {
       passwordControl?.clearValidators();
       passwordControl?.setValue('');
     }
-  
+
     passwordControl?.updateValueAndValidity();
   this.wifiForm.patchValue({
     ssid: this.wifiForm.value.ssid.trim(),
@@ -136,7 +159,7 @@ export class HomeComponent {
       const blobData = this.convertBase64ToBlob(dataUrl);
       const blob = new Blob([blobData], { type: 'image/png' });
       const url = window.URL.createObjectURL(blob);
-  
+
       const link = document.createElement('a');
       link.href = url;
       link.download = 'QRCode.png';
@@ -196,7 +219,7 @@ export class HomeComponent {
       }
     );
     this.router.navigate(['/layout/home']);  }
-  
+
   onPromptCancel() {
     this.showNamePrompt = false;
   }

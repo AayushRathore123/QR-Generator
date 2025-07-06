@@ -32,21 +32,29 @@ export class AuthService {
     }));
   }
 
+  setSessionFromLoginResponse(data: any): void {
+    localStorage.setItem('Token', data.access_token);
+
+    const payloadBase64 = data.access_token.split('.')[1];
+    const decodedPayload = JSON.parse(atob(payloadBase64));
+    const subData = JSON.parse(decodedPayload.sub);
+
+    const userId = data.user_id;
+    const userName = data.user_name;
+    const exp = decodedPayload.exp;
+
+    localStorage.setItem('userId', userId);
+    localStorage.setItem('username', userName);
+    localStorage.setItem('expiry', exp);
+
+    this.userSubject.next(data.data_rec ?? subData);
+    this.loggedInSubject.next(true);
+  }
+
   login(jsonData:any): Observable<any>{
     return this.http.post<any>(this.loginURL,jsonData).pipe(map((data) => {
       if(data.errCode==0){
-        localStorage.setItem('Token', data.access_token);
-        const payloadBase64 = data.access_token.split('.')[1];
-        const decodedPayload = JSON.parse(atob(payloadBase64));
-        const subData = JSON.parse(decodedPayload.sub);
-        const userId = data.user_id;
-        const userName = data.user_name;
-        const exp = decodedPayload.exp;
-        localStorage.setItem('userId',userId);
-        localStorage.setItem('username',userName);
-        localStorage.setItem('expiry', exp);
-        this.userSubject.next(data.data_rec); 
-        this.loggedInSubject.next(true);
+        this.setSessionFromLoginResponse(data);
       }
       return data;
     }));
