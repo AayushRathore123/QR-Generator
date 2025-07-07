@@ -1,5 +1,3 @@
-from flask import make_response
-from flask_jwt_extended import create_access_token
 from dbserver.resource_decorator import *
 from service_handler.service_handler_imports import *
 
@@ -22,18 +20,7 @@ class Login(Resource):
     def post():
         payload = request.get_json()
         obj = AuthHandler()
-        user_resp = obj.login(payload)
-        if user_resp.get('errCode')!=0:
-            return user_resp
-        user_data = user_resp['datarec']
-        access_token = create_access_token(identity=json.dumps({"user_name": user_data["user_name"],
-                                                     "user_id":user_data["id"]}))
-        # Why make_response
-        auth_ret = {"errCode": 0, "msg": "Login Successfully", "access_token": access_token,
-                    "user_name": user_data["user_name"], "user_id": user_data["id"]}
-        resp = make_response(json.dumps(auth_ret))
-        resp.headers.extend({"token": access_token})
-        return resp
+        return obj.login(payload)
 
 
 class Register(Resource):

@@ -32,6 +32,7 @@ OAUTH_GOOGLE_CONF_URL = app.config["OAUTH_GOOGLE_CONF_URL"]
 # Note: os.getenv() always returns strings
 APP_HOST = os.environ.get("APP_HOST", "0.0.0.0")
 APP_PORT = int(os.environ.get("APP_PORT", 5011))
+FRONTEND_OAUTH_CALLBACK_URL = os.environ.get("FRONTEND_OAUTH_CALLBACK_URL")
 
 DB_USERNAME = os.getenv("DB_USERNAME")
 DB_PWD = os.getenv("DB_PWD")
