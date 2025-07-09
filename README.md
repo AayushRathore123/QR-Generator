@@ -1,5 +1,6 @@
-### Functional Requirements:
-   
+# QR Generator
+   This project is a web-based application built using Angular for the frontend and Flask (Python) for the backend, with PostgreSQL as the database. QR Generator enables users to create, manage, and save QR codes, as well as shorten URLs, all through a clean and user-friendly interface.
+
     User Account & Authentication
     1. Users can register for an account.
     2. Users can log in and log out securely.
@@ -21,8 +22,10 @@
     6. Users can shorten URLs
     7. "Contact Us" form is available for queries and feedback.
 
+## Screen Recording (Full Working of Project)
+https://github.com/user-attachments/assets/66080c6b-4eaa-4055-a027-456c686fc68e
 
-### Technology Stack: 
+## Technology Stack: 
 
     1. Frontend: Angular CLI 19.2.1, Node.js 20.11.1 (npm 10.8.0)
     2. Backend: Python 3.11 with Flask
@@ -98,7 +101,37 @@
 "C:\Program Files\PostgreSQL\15\bin\pg_dump.exe" --schema=public --schema-only --no-privileges --verbose "postgresql://DB_USERNAME:DB_PWD@DB_HOST/DB_NAME" > qr_generator.sql
 ```
 
-### References:
+## Screenshots
+
+Login Page
+![image](https://github.com/user-attachments/assets/2681dd23-0f4b-44ca-906a-f67ff8263ff9)
+
+Register Page
+![image](https://github.com/user-attachments/assets/bedbd0fd-693d-44dc-a79f-9c8db11e9b8a)
+
+QR Generator Page
+![image](https://github.com/user-attachments/assets/1889ec96-3a90-4948-8e1f-cb1d11a4c724)
+
+To generate QR codes from links
+![image](https://github.com/user-attachments/assets/1b1d8d79-f9e1-4da9-9098-03f4f0ee2009)
+
+URL Shortener Page
+![image](https://github.com/user-attachments/assets/dab6079f-7bf2-49a9-b62d-85adde6b0f9f)
+
+QR Dashboard Page
+![image](https://github.com/user-attachments/assets/b9490538-773e-49a7-af02-21dfbcf0f3a5)
+
+User Profile Page
+![image](https://github.com/user-attachments/assets/a05f3aba-a496-4ff6-98ed-f485c2dd1752)
+
+Change Password
+![image](https://github.com/user-attachments/assets/d560c4aa-147d-4058-8866-c3a39c4dcdfc)
+
+Contact Us Page
+![image](https://github.com/user-attachments/assets/e22c5636-6ebd-4243-aab8-600e52e2b197)
+
+
+## References:
 
 1. For Git/GitHub – 
    1. https://youtu.be/cn8l5bXhTBM?si=5VbjlfbdbAwmSDUO
@@ -156,13 +189,14 @@
 
 
 
-Setup & Flow of Email Sending
+## Setup & Flow of some Features
+### Email Sending
 1. At payload, getting email, name and msg
 2. Add your email and app generated password by Gmail on Config.py file
 3. At SMTP server, login with email and password 
 4. Send email to the user you want to send
 
-Flow of URL Shortener
+### URL Shortener
 1. At payload - long_url
 2. If url exist in DB, then fetch and return it
 3. Generate uuid and convert uuid to unique numeric_id i.e. of 128-bit (32 hex digits). 
@@ -170,14 +204,14 @@ Flow of URL Shortener
 5. Return short url
 6. 2nd API called - When user click on short_url then api called which retrieve long_url and redirect it
 
-Flow of Captcha Generation
+### Captcha Generation
 1. Add captcha details in config file
 2. Generate captcha code with random char 
 3. Using generated captcha code, create image and store that uuid with captcha code in redis 
 4. Return uuid and captcha image in response
 5. 2nd API called - When user input captcha and submit then using uuid retrieve captcha code and check inputted and store captcha code
 
-OAuth setup & FLow
+### OAuth
 1. Create client id & client secret key and add it to config file 
 2. Register the Oauth provider 
 3. Function - it sends the user to Google Login Page, after user logs in, Google will send back user to app(to 2nd API /oauth2callback) with an authorization code
