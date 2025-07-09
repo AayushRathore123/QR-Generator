@@ -115,8 +115,9 @@ ALTER TABLE public.url_shortener ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTIT
 CREATE TABLE public."user" (
     id integer NOT NULL,
     user_name character varying(100) NOT NULL,
-    password character varying(200) NOT NULL,
+    password character varying(200),
     status smallint NOT NULL,
+    auth_provider character varying(200),
     create_datetime timestamp without time zone NOT NULL,
     lastchange_datetime timestamp without time zone NOT NULL,
     lastlogin_datetime timestamp without time zone

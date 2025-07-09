@@ -9,22 +9,22 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li *ngIf="!isLoggedIn" class="nav-item">
-            <a class="nav-link" routerLink="/login">Login</a>
+            <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+          </li>
+          <li  *ngIf="!isLoggedIn" class="nav-item">
+            <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>  
           </li>
           <li class="nav-item">
-            <a class="nav-link" *ngIf="!isLoggedIn" routerLink="/register">Register</a>  
+            <a class="nav-link" routerLink="/layout/home" routerLinkActive="active">QR Generator</a>  
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/layout/home">QR Generator</a>  
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/layout/url-shortner">Url Shortener</a>  
+            <a class="nav-link" routerLink="/layout/url-shortner" routerLinkActive="active">Url Shortener</a>  
           </li>
           <li *ngIf="isLoggedIn" class="nav-item">
-            <a class="nav-link" routerLink="/layout/dashboard">QR Dashboard</a> 
+            <a class="nav-link" routerLink="/layout/dashboard" routerLinkActive="active">QR Dashboard</a> 
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/layout/contactus">Contact Us</a> 
+            <a class="nav-link" routerLink="/layout/contactus" routerLinkActive="active">Contact Us</a> 
           </li>
         </ul>
   

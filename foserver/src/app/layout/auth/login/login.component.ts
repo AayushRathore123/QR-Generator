@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required],
       // captchaInput: ['', Validators.required]
     });
-    this.getCaptcha();
+    // this.getCaptcha();
   }
 
   togglePassword(flag:boolean): void {
@@ -100,7 +100,12 @@ export class LoginComponent implements OnInit {
     )
   }
 
-  validateCaptcha(){
+  validateCaptchaAndLogin(){
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
+
     let jsonData ={
       "input_captcha": this.loginForm.get('captchaInput')?.value,
       "captcha_id": this.captcha_id
@@ -117,6 +122,10 @@ export class LoginComponent implements OnInit {
         }
       }
     )
+  }
+
+  loginWithGoogle() {
+    window.location.href = this.authService.oauthLoginURL;
   }
 }
 

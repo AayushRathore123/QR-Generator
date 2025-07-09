@@ -14,6 +14,7 @@ export class AuthService {
   private updateDataURL = environment.apiUrl+'user_details/update';
   private changeUserPasswordURL = environment.apiUrl+'user/update/password';
   private deleteUserURL = environment.apiUrl+'user/remove/account';
+  public oauthLoginURL = environment.apiUrl+'/oauth/login';
 
   private userSubject = new BehaviorSubject<any>(null); 
   user = this.userSubject.asObservable();
@@ -27,25 +28,36 @@ export class AuthService {
 
   register(jsonData: any): Observable<any> {
     return this.http.post<any>(this.registerURL, jsonData).pipe(map((data) => {
+      if(data.errCode==0){
+        this.setSessionFromLoginResponse(data);
+      }
       return data;
     }));
+  }
+
+  setSessionFromLoginResponse(data: any): void {
+    localStorage.setItem('Token', data.access_token);
+
+    const payloadBase64 = data.access_token.split('.')[1];
+    const decodedPayload = JSON.parse(atob(payloadBase64));
+    const subData = JSON.parse(decodedPayload.sub);
+
+    const userId = data.user_id;
+    const userName = data.user_name;
+    const exp = decodedPayload.exp;
+
+    localStorage.setItem('userId', userId);
+    localStorage.setItem('username', userName);
+    localStorage.setItem('expiry', exp);
+
+    this.userSubject.next(data.data_rec ?? subData);
+    this.loggedInSubject.next(true);
   }
 
   login(jsonData:any): Observable<any>{
     return this.http.post<any>(this.loginURL,jsonData).pipe(map((data) => {
       if(data.errCode==0){
-        localStorage.setItem('Token', data.access_token);
-        const payloadBase64 = data.access_token.split('.')[1];
-        const decodedPayload = JSON.parse(atob(payloadBase64));
-        const subData = JSON.parse(decodedPayload.sub);
-        const userId = data.user_id;
-        const userName = data.user_name;
-        const exp = decodedPayload.exp;
-        localStorage.setItem('userId',userId);
-        localStorage.setItem('username',userName);
-        localStorage.setItem('expiry', exp);
-        this.userSubject.next(data.data_rec); 
-        this.loggedInSubject.next(true);
+        this.setSessionFromLoginResponse(data);
       }
       return data;
     }));

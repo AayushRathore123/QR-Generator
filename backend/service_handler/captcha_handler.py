@@ -82,7 +82,7 @@ class CaptchaHandler:
         captcha_code = redis_cache_obj.get_cache_data(ident)
 
         if not captcha_code:
-            self.ret_json.set_error_msg(1, "CAPTCHA not found or expired")
+            self.ret_json.set_error_msg(1, "CAPTCHA not found or expired. Please Refresh Captcha")
         elif input_captcha == captcha_code:
             self.ret_json.set_success_msg("Captcha verification passed")
         else:

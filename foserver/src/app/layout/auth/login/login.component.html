@@ -73,14 +73,23 @@
               type="text"
               id="captcha"
               class="captcha-input"
+              [class.invalid]="loginForm.get('captchaInput')?.invalid && loginForm.get('captchaInput')?.touched"
               formControlName="captchaInput"
               placeholder="Enter code"
             />
+            <div *ngIf="loginForm.get('captchaInput')?.invalid && loginForm.get('captchaInput')?.touched">
+              <small *ngIf="loginForm.get('captchaInput')?.errors?.['required']">Captcha is required.</small>
+            </div>
           </div>
-        </div>
- -->
+        </div>-->
+        <p align="center">
+          <button (click)="loginWithGoogle()" style="border: none; background: none;">
+            <img src="https://img.shields.io/badge/Google-Connect-brightgreen?style=for-the-badge&labelColor=black&logo=google" />
+          </button>
+        </p>
         <div class="form-actions">
-          <button type="submit" (click)="onSubmit()">Login</button>
+<!--            <button type="submit" (click)="validateCaptchaAndLogin()">Login</button>-->
+           <button type="submit" (click)="onSubmit()">Login</button>
           <p>
             Don't have an account?
             <a href="/register" >Register</a>

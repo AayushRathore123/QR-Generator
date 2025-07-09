@@ -1,21 +1,25 @@
 ### Functional Requirements:
-
+   
+    User Account & Authentication
     1. Users can register for an account.
     2. Users can log in and log out securely.
-    3. Users can generate QR codes using: 
+    3. Users can sign up via Google authentication.
+    4. CAPTCHA must be entered before login. (Code commented)
+    5. User profile page is provided to edit details.
+    6. Users can delete their account at any time.
+    7. Users can change their password.
+
+
+    QR Code and URL shortener Features
+    1. Users can generate QR codes using: 
         o A link (URL-based QR generation).
         o Wi-Fi credentials (SSID & Password).
-    4. New users can generate QR codes without logging in.
-    5. Users must log in to save their generated QR codes.
-    6. Users can download the generated QR codes.
-    7. A user dashboard displays saved QR codes.
-    8. Users can save QR codes to their dashboard for future use.
-
-
-### Non-Functional Requirements:
-
-    1. Authentication using JWT tokens.
-    2. Authorization for accessing saved QR codes and user-specific features.
+    2. New users can generate QR codes without logging in.
+    3. Users must log in to save their generated QR codes.
+    4. A user dashboard displays saved QR codes.
+    5. Users can edit, remove, and download already saved QR codes.
+    6. Users can shorten URLs
+    7. "Contact Us" form is available for queries and feedback.
 
 
 ### Technology Stack: 
@@ -35,57 +39,12 @@
          - In PowerShell - venv\Scripts\Activate.ps1
    2. For Linux and MacOS
          - source venv/bin/activate
+
+`Go inside backend directory then run these commands`
+
 4. python setup.py develop
 5. pip install -r requirements.txt
-
-    `Go inside boserver directory then run these commands`
-
-6. Create config.py file inside boserver directory -
-    
-    ```
-    class Config(object):
-        DEBUG = False
-        HOST = 'localhost'
-        PORT = 5011
-        
-        DB_NAME = 'qr_generator'
-        DB_USERNAME = 'test'
-        DB_HOST = 'localhost'
-        DB_PWD = '12345678'
-    
-        JWT_SECRET_KEY = '1234567812345678'
-    
-        CAPTCHA_LENGTH = 6
-        CAPTCHA_EXPIRY = 300
-        CAPTCHA_IMG_PATH = "D:/Projects/QR Generator/backend/captcha_code/"
-    
-        REDIS_HOST = 'localhost'
-        REDIS_PWD = 'redis'
-        REDIS_DB = 0
-        REDIS_PORT = 6379
-   
-        # Generate Google app password - https://support.google.com/mail/answer/185833?hl=en
-        EMAIL_TO = 'raayush1101@gmail.com'
-        EMAIL_PASSWORD = 'aaaa bbbb cccc dddd'
-        SMTP_SERVER = 'smtp.gmail.com'
-        SMTP_PORT = 587
-        EMAIL_SUBJECT = 'QR Generator Query/Feedback'
-         
-        # Generate using os.urandom(24)
-        SECRET_KEY = '__your_screte_key__'   
-   
-        OAUTH_GOOGLE_CONF_URL = 'https://accounts.google.com/.well-known/openid-configuration'
-        OAUTH2_PROVIDERS = {
-              "google": {
-                  "client_id": "__your_client__id",
-                  "client_secret": "__your_client_secret__"
-              }
-        }
-    ```
-   
-   ```
-   Inside QR Generator, create folder captcha_code and add folder path in this CAPTCHA_IMG_PATH
-   ```
+6. Rename **.env.template** to **.env**
 7. To start backend server, multiple ways  
    1. Using Python directly: "python app.py"
    2. Using uWSGI (command line): "uwsgi --http localhost:5011 --wsgi-file app.py --callable app"
